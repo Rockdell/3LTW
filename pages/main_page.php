@@ -1,4 +1,4 @@
-<?php include_once("../templates/common/header.php"); ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT']."/templates/common/header.php"); ?>
 <header>
     <div id="top_bar">
         <img src="/img/logo.png" />
@@ -10,4 +10,4 @@
     <?php include_once(POSTS); ?>
 </main>
 
-<?php include_once("../templates/common/footer.php"); ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT']."/templates/common/footer.php"); ?>
