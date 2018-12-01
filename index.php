@@ -1,1 +1,3 @@
-<?php include_once("pages/start_page.php") ?>
+<?php
+    include_once("pages/start_page.php");
+?>

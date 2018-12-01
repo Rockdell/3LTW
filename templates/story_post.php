@@ -1,8 +1,8 @@
 <article>
     <header>
-        Post title
+        <h1><?=$post['title']?></h1>
     </header>
     <p>
-        Post text
+        <?=$post['content']?>
     </p>
 </article>

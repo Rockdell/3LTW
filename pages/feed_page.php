@@ -1,5 +1,13 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT']."/templates/common/header.php") ?>
+<?php
+    include_once($_SERVER['DOCUMENT_ROOT']."/templates/common/header.php");
 
-<?php include_once($_SERVER['DOCUMENT_ROOT']."/templates/story_post.php") ?>
+    include_once($_SERVER['DOCUMENT_ROOT']."/database/connection.php");
+    include_once($_SERVER['DOCUMENT_ROOT']."/database/post.php");
+    $posts = getAllPosts();
 
-<?php include_once($_SERVER['DOCUMENT_ROOT']."/templates/common/footer.php") ?>
+    foreach($posts as $post) {
+        include_once($_SERVER['DOCUMENT_ROOT']."/templates/story_post.php");
+    }
+
+    include_once($_SERVER['DOCUMENT_ROOT']."/templates/common/footer.php");
+?>
