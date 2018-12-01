@@ -5,6 +5,19 @@
     <img src="/img/logo.png" />
     <p>Redditer</p>
 </header>
+<section>
+    <h1> Posts </h1>
+    <?php
+        foreach($posts as $post) {
+            ?>
+            <article>
+                <h3> <?=$post['title']?> </h3>
+                <p> <?=$post['content']?> </p>
+            </article>
+            <?php
+        }
+    ?>
+</section>
 <aside>
     SidePanel
     <ul>

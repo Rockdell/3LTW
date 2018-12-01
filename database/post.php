@@ -1,8 +1,8 @@
 <?php
-	function getAllPosts() {
-		global $dbh;
-		$stmt = $dbh->prepare("SELECT * FROM post ORDER BY postDate");
-		$stmt->execute();
-		return $stmt->fetchAll();
-	}
+  function getAllPosts() {
+    global $dbh;
+    $stmt = $dbh->prepare("SELECT * FROM post");
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
 ?>
