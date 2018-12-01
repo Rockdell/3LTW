@@ -6,7 +6,7 @@
     $posts = getAllPosts();
 
     foreach($posts as $post) {
-        include_once($_SERVER['DOCUMENT_ROOT']."/templates/story_post.php");
+		include($_SERVER['DOCUMENT_ROOT']."/templates/story_post.php");
     }
 
     include_once($_SERVER['DOCUMENT_ROOT']."/templates/common/footer.php");
