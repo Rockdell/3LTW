@@ -44,6 +44,7 @@ CREATE TABLE ChildComment (
     PRIMARY KEY (commentFather, commentSon)
 );
 
-INSERT INTO User VALUES (1, 'Rockdell', 'youwish', 'test@gmail.com', 'This is bio', NULL, 999);
+-- Rockdell:vidal
+INSERT INTO User VALUES (1, 'Rockdell', '7C8045A66FCB89D3099F8FAFF3E8058D788982A2D3CB88DB73B3AADA9F32FD8C', 'test@gmail.com', 'This is bio', NULL, 999);
 INSERT INTO Post VALUES (1, 1, 'First Post!', 'Hello there, glad to be your first post! :D', datetime('now', 'localtime'), 420);
 INSERT INTO Post VALUES (2, 1, 'Second Post!', 'Oh Hi Mark, glad to be your second post! xD', datetime('now', 'localtime'), 1);
