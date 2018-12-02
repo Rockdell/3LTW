@@ -6,7 +6,7 @@
 <div id='post' class='page'>
     <?php
         include_once($_SERVER['DOCUMENT_ROOT'].'/database/post.php');
-        $post = getPostById($_GET['id'])[0];
+        $post = getPostById($_GET['id']);
 
         include($_SERVER['DOCUMENT_ROOT'].'/templates/components/story-post.php');
     ?>

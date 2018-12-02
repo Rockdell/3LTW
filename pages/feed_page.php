@@ -9,6 +9,7 @@
 	<div id='list-posts'>
 		<?php 
 			include_once($_SERVER['DOCUMENT_ROOT'].'/database/post.php');
+			include_once($_SERVER['DOCUMENT_ROOT'].'/database/comment.php');
 			$posts = getAllPosts('p', 'd');
 			foreach($posts as $post) { 
 				include($_SERVER['DOCUMENT_ROOT'].'/templates/components/story-post.php'); 

@@ -43,7 +43,7 @@ function getPostById($postID) {
 	try {
 		$stmt = $dbh->prepare("SELECT *	FROM Post WHERE postID = ?");
 		$stmt->execute(array($postID));
-		return $stmt->fetchAll();
+		return $stmt->fetch();
 	} catch(PDOException $e) {
 		echo $e->getMessage();
 		return null;

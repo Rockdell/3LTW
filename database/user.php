@@ -14,7 +14,7 @@ function getUserById($userID) {
 	try {
 		$stmt = $dbh->prepare("SELECT *	FROM User WHERE userID = ?");
 		$stmt->execute(array($userID));
-		return $stmt->fetchAll();
+		return $stmt->fetch();
 	} catch(PDOException $e) {
 		echo $e->getMessage();
 		return null;

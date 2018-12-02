@@ -6,7 +6,7 @@ function getCommentById($commentID) {
 	try {
 		$stmt = $dbh->prepare("SELECT *	FROM Comment WHERE commentID = ?");
 		$stmt->execute(array($commentID));
-		return $stmt->fetchAll();
+		return $stmt->fetch();
 	} catch(PDOException $e) {
 		echo $e->getMessage();
 		return null;
@@ -26,17 +26,49 @@ function addComment($userID, $content) {
 	}
 }
 
-/* Creates a new comment and binds it to a post */
+/* Creates a new comment and binds it to a post
+* Returns the new comment's ID, if there's an error it will return -1
+*/
 function bindCommentToPost($postID, $userID, $content) {
     global $dbh;
 	try {
         $newCommentID = addComment($userID, $content);
 		$stmt = $dbh->prepare("INSERT INTO PostComment VALUES (?,?)");
 		$stmt->execute(array($postID, $newCommentID));
+		return $newCommentID;
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return -1;
+	}
+}
+
+/* Creates a new comment, binds it to a post and a father-relation with another comment */
+function bindCommentToComment($postID, $userID, $content, $fatherCommentID) {
+    global $dbh;
+	try {
+		if (($childCommentID = bindCommentToPost($postID, $userID, $content)) == -1) {
+			echo "Error in bindCommentToPost (called in bindCommentToComment)";
+			return -1;
+		}
+		$stmt = $dbh->prepare("INSERT INTO ChildComment VALUES (?,?)");
+		$stmt->execute(array($fatherCommentID, $childCommentID));
 		return 1;
 	} catch(PDOException $e) {
 		echo $e->getMessage();
 		return -1;
+	}
+}
+
+/* Returns all child comments of a comment */
+function getChildComments($fatherCommentID) {
+	global $dbh;
+	try {
+		$stmt = $dbh->prepare("SELECT commentSon FROM ChildComment WHERE fatherComment = ?");
+		$stmt->execute(array($fatherCommentID));
+		return $stmt->fetchAll();
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return null;
 	}
 }
 
@@ -67,7 +99,7 @@ function commentVote($commentID, $userID, $vote) {
 }
 
 /* Removes a vote of a User on a Comment */
-function removePostVote($commentID, $userID) {
+function removeCommentVote($commentID, $userID) {
 	global $dbh;
 	try {
 		$stmt = $dbh->prepare("DELETE FROM CommentVote WHERE commentID = ? AND userID = ?");
@@ -78,5 +110,7 @@ function removePostVote($commentID, $userID) {
 		return -1;
 	}
 }
+
+
 
 ?>
