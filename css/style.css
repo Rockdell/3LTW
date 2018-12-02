@@ -1,15 +1,73 @@
 body {
-	background-image: url('/img/background2.png');
-	background-attachment: fixed;
+	background-color: #8baabf;
+	font-family: 'Open Sans', sans-serif;
+	
+	display: grid;
+	grid-template-columns: 25% auto 25%;
+	grid-template-areas: "header header user-bar" "side-bar main ." "side-bar main ." ". main ." "footer footer footer";	
+	grid-gap: 0.5em 0.5em;
 }
 
-div#logo {
-	border-style: dotted;
+#top-bar {
+	grid-area: header;
 }
 
+#bottom-bar {
+	grid-area: footer;
+}
 
+#user-bar {
+	grid-area: user-bar;
+/* 
+	max-height: 10em; */
+}
 
+#side-bar {
+	grid-area: side-bar;
 
+	overflow: hidden;
+	/* max-height: 10em; */
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+#side-bar > #search {
+	align-self: center;
+}
+
+#side-bar > #list {
+	align-self: center;
+}
+
+#list-posts {
+	grid-area: main;
+	overflow: auto;
+}
+
+#list-posts > #story-post {
+	align-self: center;
+}
+
+#list-posts > #story-post:hover {
+	box-shadow: 0px 5px 20px 0px #2e3940;
+}
+
+/* Side-bar  */
+.container {
+	background-color: #ffffff;
+	margin: 0.5em;
+	padding: 5px;
+	border: medium solid #2e3940;
+	border-radius: 5px;
+}
+
+/* Links */
+a {
+	color: black;
+	text-decoration: none;
+}
 
 /* 
 body {
