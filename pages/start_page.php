@@ -1,7 +1,9 @@
 <?php 
+    require_once($_SERVER['DOCUMENT_ROOT'].'/includes/init.php');
     include_once($_SERVER['DOCUMENT_ROOT'].'/templates/common/header.php');
 
-    $_SESSION['username'] = 'Rockdell';
+    // Temporary login
+    setCurrentUser('Rockdell');
 
     if (isset($_SESSION['username'])) {
         header('Location: /pages/feed_page.php');

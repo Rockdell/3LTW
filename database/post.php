@@ -1,7 +1,5 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/includes/init.php');
-
 /* Returns posts ordered accordingly
 * $cat - Category that is ordered by (p->points, d->date, c->number of comments)
 * $order - Order of the result (a->ascendant, d->descendant)

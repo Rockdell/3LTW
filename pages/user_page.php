@@ -1,5 +1,9 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/template/common/header') ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/includes/init.php') ?>
 
-<h1>User page</h1>
+<div id='user' class='page'>
+    <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/common/header.php') ?>
 
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/template/common/footer') ?>
+
+
+    <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/common/footer.php') ?>
+</div>

@@ -1,5 +1,4 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/includes/init.php');
 
 /* Checks if the Login information is correct */
 function isLoginCorrect($username, $password) {

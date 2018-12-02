@@ -1,5 +1,4 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/includes/init.php');
 
 /* Returns the comment with the given ID */
 function getCommentById($commentID) {
