@@ -84,7 +84,7 @@ INSERT INTO User VALUES ('kick0ut', 'Miguel Teixeira', '657EAA9E4FC3CCCB0CB352EB
 
 INSERT INTO Post VALUES (1, 'Rockdell', 'First Post!', 'Hello there, glad to be your first post! :D', datetime('now', 'localtime'), 420);
 INSERT INTO Post VALUES (2, 'kick0ut', 'Second Post!', 'Oh Hi Mark, glad to be your second post! xD', '2018-01-30 23:42:18', 1);
-INSERT INTO Post VALUES (3, 'Rockdell', 'Third Post!', 'IDK', '1998-11-30 23:42:18', 999);
+INSERT INTO Post VALUES (3, 'Rockdell', 'Third Post!', 'IDK This is supposed to be a realllllllllllllllllllllllllllllllllllllly big post ahahahahahahahahhahahahahahahhahahahahahahahha', '1998-11-30 23:42:18', 999);
 
 INSERT INTO Comment VALUES (1, 'kick0ut', "This is a comment!", '2018-12-10 23:42:18', 3);
 INSERT INTO Comment VALUES (2, 'Rockdell', "Oh another one!", '2018-12-10 23:42:17', 100);

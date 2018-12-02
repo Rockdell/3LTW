@@ -6,23 +6,9 @@ body {
 	grid-template-areas: "header" "main" "footer";
 }
 
-/* Header */
-
 header {
-	display: grid;
-	grid-auto-columns: 80% auto;
-	grid-template-areas: "logo user";
-}
-
-header#top-bar {
 	grid-area: header;
 }
-
-header#user-bar {
-	grid-area: user;
-}
-
-/* Footer */
 
 footer {
 	grid-area: footer;
@@ -31,10 +17,28 @@ footer {
 /* Feed page */
 #feed {
 	grid-area: main;
+
 	grid-template-columns: 25% auto 25%;
-	grid-template-areas: "side-bar main ." "side-bar main ." ". main .";	
+	grid-template-areas: "side-bar main ." ". main .";	
 }
 
+/* Post page */
+#post {
+	grid-area: main;
+
+	grid-template-columns: 25% auto 25%;
+	grid-template-areas: ". main .";
+}
+
+/* User page */
+#user {
+	grid-area: main;
+
+	grid-template-columns: 25% auto 25%;
+	grid-template-areas: "side-bar main ." ". main .";
+}
+
+/* Feed components */
 #feed #side-bar {
 	grid-area: side-bar;
 
@@ -47,26 +51,18 @@ footer {
 
 #feed #list-posts {
 	grid-area: main;
-	overflow: auto;
 }
 
-/* User page */
-#user {
-	grid-template-columns: 25% auto 25%;
-	grid-template-areas: "header header user-bar" "side-bar main ." "side-bar main ." ". main ." "footer footer footer";
-}
-
-/* Post page */
-#post {
-	grid-template-columns: 25% auto 25%;
-	grid-template-areas: "header header header" ". main ." "footer footer footer";
-}
-
-#post > #story-post {
+/* Post components */
+#post #story-post {
 	grid-area: main;
 }
 
-/* -- */
+/* Other stuff organize later */
+
+#story-post {
+	word-wrap: break-word;
+}
 
 #side-bar > #search {
 	align-self: center;
