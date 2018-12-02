@@ -3,6 +3,7 @@
         <header>
             <h3><?=$post['title']?></h3>
         </header>
-        <p><?=$post['content']?></p>
+        <p><?=$post['content']?></p> <br> <?=$post['postDate']?>
+        <p> <?=$post['points']?> </p>
     </a>
 </article>
