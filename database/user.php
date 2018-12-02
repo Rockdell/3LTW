@@ -23,11 +23,11 @@ function getUserById($userID) {
 }
 
 /* Add a new User */
-function addUser($username, $password, $email) {
+function addUser($userID, $username, $password, $email) {
 	global $dbh;
 	try {
-		$stmt = $dbh->prepare("INSERT INTO User (username,pass,mail) VALUES (?,?,?)");
-		$stmt->execute(array($username, hash('sha256', $password), $email));
+		$stmt = $dbh->prepare("INSERT INTO User (userID,username,pass,mail) VALUES (?,?,?,?)");
+		$stmt->execute(array($userID, $username, hash('sha256', $password), $email));
 		return 1;
 	} catch(PDOException $e) {
 		echo $e->getMessage();

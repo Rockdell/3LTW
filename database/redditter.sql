@@ -76,19 +76,19 @@ BEGIN
 END;
 
 -- Rockdell:vidal
-INSERT INTO User VALUES ('Pedro Pinho', 'Rockdell', '7C8045A66FCB89D3099F8FAFF3E8058D788982A2D3CB88DB73B3AADA9F32FD8C', 'xavi@gmail.com', 'This is bio', NULL);
+INSERT INTO User VALUES ('Rockdell', 'Pedro Pinho', '7C8045A66FCB89D3099F8FAFF3E8058D788982A2D3CB88DB73B3AADA9F32FD8C', 'xavi@gmail.com', 'This is bio', NULL);
 
 -- kick0ut:ltwftw
-INSERT INTO User VALUES ('Miguel Teixeira', 'kick0ut', '657EAA9E4FC3CCCB0CB352EBA782F0AE6D7EA8C73688A44421C95C9C9533582E', 'miguel@gmail.com', 'Je suis très jolie', NULL);
+INSERT INTO User VALUES ('kick0ut', 'Miguel Teixeira', '657EAA9E4FC3CCCB0CB352EBA782F0AE6D7EA8C73688A44421C95C9C9533582E', 'miguel@gmail.com', 'Je suis très jolie', NULL);
 
 
-INSERT INTO Post VALUES (1, 'Pedro Pinho', 'First Post!', 'Hello there, glad to be your first post! :D', datetime('now', 'localtime'), 420);
-INSERT INTO Post VALUES (2, 'Miguel Teixeira', 'Second Post!', 'Oh Hi Mark, glad to be your second post! xD', '2018-01-30 23:42:18', 1);
-INSERT INTO Post VALUES (3, 'Pedro Pinho', 'Third Post!', 'IDK', '1998-11-30 23:42:18', 999);
+INSERT INTO Post VALUES (1, 'Rockdell', 'First Post!', 'Hello there, glad to be your first post! :D', datetime('now', 'localtime'), 420);
+INSERT INTO Post VALUES (2, 'kick0ut', 'Second Post!', 'Oh Hi Mark, glad to be your second post! xD', '2018-01-30 23:42:18', 1);
+INSERT INTO Post VALUES (3, 'Rockdell', 'Third Post!', 'IDK', '1998-11-30 23:42:18', 999);
 
-INSERT INTO Comment VALUES (1, 'Miguel Teixeira', "This is a comment!", '2018-12-10 23:42:18', 3);
-INSERT INTO Comment VALUES (2, 'Pedro Pinho', "Oh another one!", '2018-12-10 23:42:17', 100);
-INSERT INTO Comment VALUES (3, 'Pedro Pinho', "Okie", '2018-02-10 23:42:18', 384);
+INSERT INTO Comment VALUES (1, 'kick0ut', "This is a comment!", '2018-12-10 23:42:18', 3);
+INSERT INTO Comment VALUES (2, 'Rockdell', "Oh another one!", '2018-12-10 23:42:17', 100);
+INSERT INTO Comment VALUES (3, 'Rockdell', "Okie", '2018-02-10 23:42:18', 384);
 
 INSERT INTO PostComment VALUES (1,1);
 INSERT INTO PostComment VALUES (1,2);
