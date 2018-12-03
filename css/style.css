@@ -3,16 +3,19 @@ body {
 	font-family: 'Open Sans', sans-serif;
 
 	display: grid;
+	grid-gap: 0.5rem 0.5rem;
 	grid-template-areas: "header" "main" "footer";
 }
 
 header {
 	grid-area: header;
+
 	top: 0;
 }
 
 footer {
 	grid-area: footer;
+	
 	bottom: 0;
 	text-align: center;
 }
@@ -21,52 +24,47 @@ footer {
 .profile {
 	grid-area: main;
 
-	display: grid;
-	grid-gap: 0.5rem 0.5rem;
-	grid-auto-columns: 25% auto 25%;
-	grid-template-areas: "personal posts .";
-}
-
-.profile .profile-bar {
-	grid-area: personal;
-
-	display: grid;
-	grid-gap: 0.5rem 0.5rem;
-	grid-auto-rows: 0.5fr 6fr 1fr;
-	grid-template-areas: "." "user-info" "user-settings";
-}
-
-.profile-bar #user-info {
-	grid-area: user-info;
-}
-
-.profile-bar #user-settings {
-	grid-area: user-settings;
-}
-
-.profile #posts {
-	grid-area: posts;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 /* Component profile-bar */
 body .profile-bar {
-	display: block;
 	background: #ffadad;
 	text-align: center;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+	min-width: 25%;
+	max-height: 400px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 }
 
-.profile-bar h1 {
+.profile-bar #user-info {
 	font-weight: bold;
 	color: #444;
 }
 
-.profile-bar p {
+.profile-bar #user-bio {
 	padding: 0 30px;
 	color: #888;
 }
 
-.profile-bar button {
+/* Component search-bar */
+body .search-bar {
+	background: #a0a0a0;
+	text-align: center;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+	min-width: 25%;
+	max-height: 200px;
+}
+
+/* Component button */
+button {
 	position: relative;
 	height: 35px;
 	margin: 10px;
@@ -110,33 +108,21 @@ body .profile-bar {
 
 /* Component story-post */
 body .story-post {
-	display: block;
 	background: #ffffff;
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
-	display: grid;
-	grid-gap: 0.5rem 0.5rem;
-	grid-auto-rows: 1fr 2fr 1fr;
-	grid-template-areas: "title ." "main main" ". info";
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 }
 
 .story-post h1 {
-	grid-area: title;
-
 	font-weight: bold;
 	color: #444;
 }
 
-.story-post #post-content {
-	grid-area: main;
-
-	color: #444;
-}
-
-.profile .story-post #post-info {
-	grid-area: info;
-
+.story-post #post-content, #post-info {
 	color: #444;
 }
 

@@ -7,7 +7,6 @@
 
     $user = getUserById($_GET["user"]);
     $posts = getPostByUser($user["userID"]);
-    // echo "<script>console.log(".json_encode($posts).") </script>";
 ?>
 
 <div class="profile">
@@ -19,6 +18,9 @@
             include($_SERVER["DOCUMENT_ROOT"]."/templates/components/story-post.php");
         } ?>
     </section>
+
+    <?php include($_SERVER["DOCUMENT_ROOT"]."/templates/components/search-bar.php"); ?>
+
 </div>
 
 
