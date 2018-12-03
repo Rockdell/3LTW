@@ -7,7 +7,7 @@
 
     $user = getUserById($_GET["user"]);
     $posts = getPostByUser($user["userID"]);
-    echo "<script>console.log(".json_encode($posts).") </script>";
+    // echo "<script>console.log(".json_encode($posts).") </script>";
 ?>
 
 <div class="profile">

@@ -8,14 +8,16 @@ body {
 
 header {
 	grid-area: header;
+	top: 0;
 }
 
 footer {
 	grid-area: footer;
+	bottom: 0;
+	text-align: center;
 }
 
-/* Profile */
-
+/* Profile page */
 .profile {
 	grid-area: main;
 
@@ -27,47 +29,87 @@ footer {
 
 .profile .profile-bar {
 	grid-area: personal;
+
+	display: grid;
+	grid-auto-rows: auto 15%;
+	grid-template-areas: "user-info" "user-settings";
+}
+
+.profile-bar #user-info {
+	grid-area: user-info;
+}
+
+.profile-bar #user-settings {
+	grid-area: user-settings;
 }
 
 .profile #posts {
 	grid-area: posts;
 }
 
+/* Component profile-bar */
 .profile-bar {
-	display: grid;
-	grid-auto-columns: 1fr 1fr;
-	grid-auto-rows: 1fr 2fr ;
-	grid-template-areas: "picture name" "bio bio" "settings logout";
-}
-
-.profile-bar #profile-picture {
-	grid-area: picture;
-}
-
-.profile-bar #profile-name {
-	grid-area: name;
-	padding: 1em;
-}
-
-.profile-bar #profile-bio {
-	grid-area: bio;
-}
-
-/* Components */
-
-.profile-bar {
+	display: block;
 	background: #ffadad;
-	border-radius: 10px;
-	padding: 10px;
-	margin: 10px;
+	text-align: center;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.story-post {
-	background: #ffffff;
-	border-radius: 2px;
-	padding: 10px;
+.profile-bar h1 {
+	font-weight: bold;
+	color: #444;
+}
+
+.profile-bar p {
+	padding: 0 30px;
+	color: #888;
+}
+
+.profile-bar button {
+	position: relative;
+	height: 35px;
 	margin: 10px;
+
+	font-weight: bold;
+	font-size: 0.90em;
+	letter-spacing: 2px;
+
+	color: #383736;
+	border: 2px #383736 solid;
+	border-radius: 4px;
+	text-transform: uppercase;
+	outline: 0;
+	overflow:hidden;
+	background: none;
+	z-index: 1;
+
+	cursor: pointer;
+	transition: 0.08s ease-in;
+}
+
+.fill:hover {
+  	color: white;
+}
+
+.fill:before {
+  	content: "";
+  	position: absolute;
+  	background: #383736;
+ 	bottom: 0;
+  	left: 0;
+ 	right: 0;
+ 	top: 100%;
+ 	z-index: -1;
+  	transition: 0.08s ease-in;
+}
+
+.fill:hover:before {
+  	top: 0;
+}
+/* Component story-post */
+.story-post {
+	display: block;
+	background: #ffffff;
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -76,10 +118,21 @@ footer {
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+/** Component profile-picture */
 .profile-picture {
 	border-radius: 50%;
 	height: 75px;
 	width: 75px;
+}
+
+.container {
+	display: block;
+
+	border-radius: 2px;
+	padding: 10px;
+	margin: 10px;
+
+	cursor: default;
 }
 
 /* 
