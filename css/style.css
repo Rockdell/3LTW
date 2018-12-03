@@ -31,8 +31,9 @@ footer {
 	grid-area: personal;
 
 	display: grid;
-	grid-auto-rows: auto 15%;
-	grid-template-areas: "user-info" "user-settings";
+	grid-gap: 0.5rem 0.5rem;
+	grid-auto-rows: 0.5fr 6fr 1fr;
+	grid-template-areas: "." "user-info" "user-settings";
 }
 
 .profile-bar #user-info {
@@ -48,7 +49,7 @@ footer {
 }
 
 /* Component profile-bar */
-.profile-bar {
+body .profile-bar {
 	display: block;
 	background: #ffadad;
 	text-align: center;
@@ -74,8 +75,8 @@ footer {
 	font-size: 0.90em;
 	letter-spacing: 2px;
 
-	color: #383736;
-	border: 2px #383736 solid;
+	color: #444;
+	border: 2px #444 solid;
 	border-radius: 4px;
 	text-transform: uppercase;
 	outline: 0;
@@ -94,7 +95,7 @@ footer {
 .fill:before {
   	content: "";
   	position: absolute;
-  	background: #383736;
+  	background: #444;
  	bottom: 0;
   	left: 0;
  	right: 0;
@@ -106,12 +107,37 @@ footer {
 .fill:hover:before {
   	top: 0;
 }
+
 /* Component story-post */
-.story-post {
+body .story-post {
 	display: block;
 	background: #ffffff;
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+	display: grid;
+	grid-gap: 0.5rem 0.5rem;
+	grid-auto-rows: 1fr 2fr 1fr;
+	grid-template-areas: "title ." "main main" ". info";
+}
+
+.story-post h1 {
+	grid-area: title;
+
+	font-weight: bold;
+	color: #444;
+}
+
+.story-post #post-content {
+	grid-area: main;
+
+	color: #444;
+}
+
+.profile .story-post #post-info {
+	grid-area: info;
+
+	color: #444;
 }
 
 .story-post:hover {
@@ -132,6 +158,7 @@ footer {
 	padding: 10px;
 	margin: 10px;
 
+	word-wrap: break-word;
 	cursor: default;
 }
 
