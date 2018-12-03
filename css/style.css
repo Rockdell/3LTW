@@ -1,5 +1,5 @@
 body {
-	background-color: #8baabf;
+	background: #e2e1e0;
 	font-family: 'Open Sans', sans-serif;
 
 	display: grid;
@@ -14,7 +14,75 @@ footer {
 	grid-area: footer;
 }
 
-/* Feed page */
+/* Profile */
+
+.profile {
+	grid-area: main;
+
+	display: grid;
+	grid-gap: 0.5rem 0.5rem;
+	grid-auto-columns: 25% auto 25%;
+	grid-template-areas: "personal posts .";
+}
+
+.profile .profile-bar {
+	grid-area: personal;
+}
+
+.profile #posts {
+	grid-area: posts;
+}
+
+.profile-bar {
+	display: grid;
+	grid-auto-columns: 1fr 1fr;
+	grid-auto-rows: 1fr 2fr ;
+	grid-template-areas: "picture name" "bio bio" "settings logout";
+}
+
+.profile-bar #profile-picture {
+	grid-area: picture;
+}
+
+.profile-bar #profile-name {
+	grid-area: name;
+	padding: 1em;
+}
+
+.profile-bar #profile-bio {
+	grid-area: bio;
+}
+
+/* Components */
+
+.profile-bar {
+	background: #ffadad;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.story-post {
+	background: #ffffff;
+	border-radius: 2px;
+	padding: 10px;
+	margin: 10px;
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.story-post:hover {
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.profile-picture {
+	border-radius: 50%;
+	height: 75px;
+	width: 75px;
+}
+
+/* 
 #feed {
 	grid-area: main;
 
@@ -22,7 +90,6 @@ footer {
 	grid-template-areas: "side-bar main ." ". main .";	
 }
 
-/* Post page */
 #post {
 	grid-area: main;
 
@@ -30,7 +97,6 @@ footer {
 	grid-template-areas: ". main .";
 }
 
-/* User page */
 #user {
 	grid-area: main;
 
@@ -38,7 +104,6 @@ footer {
 	grid-template-areas: "side-bar main ." ". main .";
 }
 
-/* Feed components */
 #feed #side-bar {
 	grid-area: side-bar;
 
@@ -53,12 +118,10 @@ footer {
 	grid-area: main;
 }
 
-/* Post components */
 #post #story-post {
 	grid-area: main;
 }
 
-/* Other stuff organize later */
 
 #story-post {
 	word-wrap: break-word;
@@ -102,4 +165,4 @@ a {
 	padding: 5px;
 	border: medium solid #2e3940;
 	border-radius: 5px;
-}
+} */

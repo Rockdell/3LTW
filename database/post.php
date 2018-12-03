@@ -37,6 +37,18 @@ function getAllPosts($cat, $order) {
 	}
 }
 
+function getPostByUser($userID) {
+	global $dbh;
+	try {
+		$stmt = $dbh->prepare("SELECT * FROM Post Where userID = ?");
+		$stmt->execute(array($userID));
+		return $stmt->fetchAll();
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return null;
+	}
+}
+
 /* Returns the post with the given ID */
 function getPostById($postID) {
 	global $dbh;
