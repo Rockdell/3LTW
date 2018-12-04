@@ -1,4 +1,4 @@
-<article class="story-post container">
+<article class="post container">
     <h1><?=$post["title"]?></h3>
     <section id="post-content">
         <p><?=$post["content"]?></p>
