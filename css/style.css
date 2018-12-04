@@ -220,3 +220,27 @@ button {
 	word-wrap: break-word;
 	cursor: default;
 }
+
+#pp {
+	font-weight: bold;
+	display: inline;
+	position: relative;
+	bottom: 7px;
+}
+
+/* Post CSS */
+i[id^="upvote"] {
+	transition: color 1s;
+}
+
+i[id^="upvote"]:hover {
+	color:green;
+}
+
+i[id^="downvote"] {
+	transition: color 1s;
+}
+
+i[id^="downvote"]:hover {
+	color:red;
+}

@@ -3,7 +3,7 @@
     
     // Temporary login
     setCurrentUser("Rockdell");
-
+    
     header("Location: /pages/profile.php?user=Rockdell");
     
     // if (isset($_SESSION['username'])) {
