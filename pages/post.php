@@ -1,8 +1,10 @@
 <?php 
     require_once($_SERVER['DOCUMENT_ROOT'].'/includes/init.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/database/post.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/database/comment.php');
 
     $post = getPostById($_GET['id']);
+    $comments = getCommentsByPost($post["postID"]);
 
     include_once($_SERVER['DOCUMENT_ROOT'].'/templates/common/header.php');
 ?>

@@ -1,5 +1,18 @@
 <?php
 
+function getCommentsByPost($postID) {
+	global $dbh;
+	try {
+		$stmt = $dbh->prepare(
+			"SELECT * FROM Comment, PostComment WHERE PostComment.postID = ? AND Comment.commentID = PostComment.commentID");
+		$stmt->execute(array($postID));
+		return $stmt->fetchAll();
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return null;
+	}
+}
+
 /* Returns the comment with the given ID */
 function getCommentById($commentID) {
     global $dbh;
