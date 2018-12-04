@@ -229,7 +229,7 @@ button {
 }
 
 /* Post CSS */
-i[id^="upvote"] {
+/* i[id^="upvote"] {
 	transition: color 1s;
 }
 
@@ -243,4 +243,43 @@ i[id^="downvote"] {
 
 i[id^="downvote"]:hover {
 	color:red;
+} */
+
+/* .sort-by ul li input[type=radio]{
+	position: absolute;
+	visibility: hidden;
+} */
+
+/* #post-info input[type=radio] {
+	visibility: hidden;
+} */
+
+#post-info input {
+	margin: 0;
+	padding: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
+
+#post-info label {
+	cursor: pointer;
+	transition: color 1s;
+}
+
+#post-info label[for^="upvote"]:hover {
+	color: green;
+}
+
+#post-info label[for^="downvote"]:hover {
+	color: red;
+}
+
+#post-info input[id^="upvote"]:checked ~ label[for^="upvote"] {
+	color: green;
+}
+
+#post-info input[id^="downvote"]:checked ~ label[for^="downvote"] {
+	color: red;
+}
+

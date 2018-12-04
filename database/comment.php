@@ -1,5 +1,6 @@
 <?php
 
+//TODO DWE IT!
 function getCommentsByPost($postID) {
 	global $dbh;
 	try {
