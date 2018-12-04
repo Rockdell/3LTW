@@ -75,10 +75,6 @@ function signInOrUp() {
 
 // Ajax
 
-function login() {
-
-
-}
 
 function sendAjaxRequest(method, url, data) {
 

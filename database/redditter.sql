@@ -77,7 +77,6 @@ END;
 
 -- Rockdell:vidal
 INSERT INTO User VALUES ('Rockdell', 'Pedro Pinho', '7c8045a66fcb89d3099f8faff3e8058d788982a2d3cb88db73b3aada9f32fd8c', 'xavi@gmail.com', 'This is bio', NULL);
-
 -- kick0ut:ltwftw
 INSERT INTO User VALUES ('kick0ut', 'Miguel Teixeira', '657eaa9e4fc3cccb0cb352eba782f0ae6d7ea8c73688a44421c95c9c9533582e', 'miguel@gmail.com', 'Je suis très jolie', NULL);
 
