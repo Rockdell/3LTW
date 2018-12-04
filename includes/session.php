@@ -8,6 +8,10 @@
             return false;
     }
     
+    function isSameUser($username) {
+        return isLoggedIn() && $_SESSION["username"] === $username;
+    }
+
     function setCurrentUser($username) {
         $_SESSION['username'] = $username;
     }

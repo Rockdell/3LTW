@@ -10,8 +10,12 @@
         <script src="/js/script.js" defer></script>
     </head>
     <body>
-        <header class="top-bar">
+        <header>
             <a href="/pages/feed.php"><img src="/img/logo.png" /></a>
             <?php include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/user-bar.php"); ?>
         </header>
-    
+
+        <?php 
+            if (!isLoggedIn())
+                include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/sign-bar.php"); 
+        ?>

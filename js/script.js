@@ -1,5 +1,3 @@
-console.log("Itsa me!");
-
 function upvoteAction(doc) {
     if (this.checked) {
         //postVote($postID, $userID, 1)
@@ -39,36 +37,66 @@ for (let i = 0; i < downvotes.length; i++) {
     downvotes[i].addEventListener('click', downvoteAction.bind(downvotes[i], document));
 }
 
-// function upvoteAction(doc) {
+function openSignIn() {
 
-//     if (this.style.color === 'green')
-//         this.style.color = '';
-//     else {
-//         let associatedDownvote = doc.getElementById('downvote' + this.id.match(/upvote(\d+)/)[1]);
-//         associatedDownvote.style.color = '';
-//         this.style.color = 'green';
-//     }
-// }
+    let sign_bar = document.getElementsByClassName("sign-bar")[0];
+    sign_bar.style.display = "block";
+    sign_bar.id = "login-open";
 
-// function downvoteAction(doc) {
+    document.getElementById("login").style.display = "flex";
+    document.getElementById("register").style.display = "none";
+}
 
-//     if (this.style.color === 'red')
-//         this.style.color = '';
-//     else {
-//         let associatedDownvote = doc.getElementById('upvote' + this.id.match(/downvote(\d+)/)[1]);
-//         associatedDownvote.style.color = '';
-//         this.style.color = 'red';
-//     }
+function closeSignIn() {
 
-// }
+    let sign_bar = document.getElementsByClassName("sign-bar")[0];
+    sign_bar.style.display = "none";
+    sign_bar.id = "login-open";
 
-// let upvotes = document.querySelectorAll('i[id^="upvote"]');
-// let downvotes = document.querySelectorAll('i[id^="downvote"]');
+    document.getElementById("login").style.display = "flex";
+    document.getElementById("register").style.display = "none";
+}
 
-// for (let i = 0; i < upvotes.length; i++) {
-//     upvotes[i].addEventListener('click', upvoteAction.bind(upvotes[i], document));
-// }
+function signInOrUp() {
 
-// for (let i = 0; i < downvotes.length; i++) {
-//     downvotes[i].addEventListener('click', downvoteAction.bind(downvotes[i], document));
-// }
+    let sign_bar = document.getElementsByClassName("sign-bar")[0];
+
+    if (sign_bar.id === "login-open") {
+        sign_bar.id = "register-open";
+        document.getElementById("login").style.display = "none";
+        document.getElementById("register").style.display = "flex";
+    }
+    else if (sign_bar.id === "register-open") {
+        sign_bar.id = "login-open";
+        document.getElementById("login").style.display = "flex";
+        document.getElementById("register").style.display = "none";
+    }
+}
+
+// Ajax
+
+function login() {
+
+
+}
+
+function sendAjaxRequest(method, url, data) {
+
+    let request = new XMLHttpRequest();
+
+    if (method === "get") {
+        request.open(method, url + encodeForAjax(data) , true);
+        request.send();
+    }
+    else if (method === "post") {
+        request.open("post", url, true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send(encodeForAjax(data));
+    }
+}
+
+function encodeForAjax(data) {
+    return Object.keys(data).map(function(k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(data[k])
+    }).join("&");
+}

@@ -8,7 +8,7 @@
 	include_once($_SERVER["DOCUMENT_ROOT"]."/templates/common/header.php");
 ?>
 
-<div class="page">
+<div id="feed-page" class="page">
 	<?php
 		include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/list-posts.php");
 		include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/search-bar.php");

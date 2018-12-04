@@ -7,11 +7,11 @@
     $comments = getCommentsByPost($_GET['id']);
     $numberComments = getNumberComments($post['postID']);
 
-    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/common/header.php');
+    include_once($_SERVER["DOCUMENT_ROOT"]."/templates/common/header.php");
 ?>
 
-<div id='post' class='page'>
-    <?php include($_SERVER['DOCUMENT_ROOT'].'/templates/components/post.php'); ?>
+<div id="post-page" class="page">
+    <?php include($_SERVER["DOCUMENT_ROOT"]."/templates/components/post.php"); ?>
 </div>
 
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/common/footer.php'); ?>
+<?php include_once($_SERVER["DOCUMENT_ROOT"]."/templates/common/footer.php"); ?>

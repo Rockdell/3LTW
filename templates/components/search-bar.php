@@ -3,7 +3,7 @@
     <section id="search" class="sort-by">
         <h1>Search</h1>
         <input type="search" placeholder="Search posts..."/>
-        <button class="fill" onclick="searchPosts()"> Search </button>
+        <!-- <button class="fill" onclick="searchPosts()"> Search </button> -->
     </section>
 
     <section id="sort" class="sort-by">
@@ -24,7 +24,7 @@
         </ul>
     </section>
 
-    <section id="by" class="sort-by">
+    <section id="order" class="sort-by">
         <h1>Order</h1>
         <ul>
             <li>

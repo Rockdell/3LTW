@@ -1,4 +1,4 @@
-        <footer class="bottom-bar">
+        <footer>
             &copy; 2019 Redditter
         </footer>
     </body>

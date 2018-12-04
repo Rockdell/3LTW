@@ -1,7 +1,12 @@
 <aside class="profile-bar container">
 
     <section id="user-info">
-        <img class="profile-picture" src="/img/users/<?=$user["userID"]?>.png">
+        <?php if (file_exists($_SERVER['DOCUMENT_ROOT']."/img/users/".$user["userID"].".png")) { ?>
+            <img class="profile-picture" src="/img/users/<?=$user["userID"]?>.png"?>
+        <?php } else { ?>
+            <img class="profile-picture" src="/img/users/unknown.png">
+        <?php } ?>
+            
         <h1><?=$user["username"]?></h1>
     </section>
 
@@ -9,10 +14,11 @@
         <p><?=$user["bio"]?></p>
     </section>
 
-    <?php if ($_SESSION["username"] == $user["userID"]) { ?>
     <section id="user-settings">
+    <?php if ($_SESSION["username"] == $user["userID"]) { ?>
         <button class="fill" onclick="openSettings()"> Settings </button>
-    </section>
+        <button type="submit" class="fill"> Logout </button>
     <?php } ?>
+    </section>
 
 </aside>

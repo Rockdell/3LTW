@@ -76,11 +76,10 @@ BEGIN
 END;
 
 -- Rockdell:vidal
-INSERT INTO User VALUES ('Rockdell', 'Pedro Pinho', '7C8045A66FCB89D3099F8FAFF3E8058D788982A2D3CB88DB73B3AADA9F32FD8C', 'xavi@gmail.com', 'This is bio', NULL);
+INSERT INTO User VALUES ('Rockdell', 'Pedro Pinho', '7c8045a66fcb89d3099f8faff3e8058d788982a2d3cb88db73b3aada9f32fd8c', 'xavi@gmail.com', 'This is bio', NULL);
 
 -- kick0ut:ltwftw
-INSERT INTO User VALUES ('kick0ut', 'Miguel Teixeira', '657EAA9E4FC3CCCB0CB352EBA782F0AE6D7EA8C73688A44421C95C9C9533582E', 'miguel@gmail.com', 'Je suis très jolie', NULL);
-
+INSERT INTO User VALUES ('kick0ut', 'Miguel Teixeira', '657eaa9e4fc3cccb0cb352eba782f0ae6d7ea8c73688a44421c95c9c9533582e', 'miguel@gmail.com', 'Je suis très jolie', NULL);
 
 INSERT INTO Post VALUES (1, 'Rockdell', 'First Post!', 'Hello there, glad to be your first post! :D', strftime('%s', 'now'), 420);
 INSERT INTO Post VALUES (2, 'kick0ut', 'Second Post!', 'Oh Hi Mark, glad to be your second post! xD', '1517355738', 1);
