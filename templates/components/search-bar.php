@@ -1,12 +1,13 @@
 <aside class="search-bar container">
 
-    <section id="search">
+    <section id="search" class="sort-by">
+        <h1>Search</h1>
         <input type="search" placeholder="Search posts..."/>
         <button class="fill" onclick="searchPosts()"> Search </button>
     </section>
 
     <section id="sort" class="sort-by">
-        <h1>Sort:</h1>
+        <h1>Sort by</h1>
         <ul>
             <li>
                 <input type="radio" id="points" name="selector1" checked>
@@ -24,7 +25,7 @@
     </section>
 
     <section id="by" class="sort-by">
-        <h1>By:</h1>
+        <h1>Order</h1>
         <ul>
             <li>
                 <input type="radio" id="asc" name="selector2">

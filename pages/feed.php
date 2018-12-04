@@ -9,7 +9,10 @@
 ?>
 
 <div class="page">
-	<?php include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/list-posts.php"); ?>
+	<?php
+		include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/search-bar.php");
+		include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/list-posts.php");
+	?>
 </div>
 
 <?php include_once($_SERVER["DOCUMENT_ROOT"]."/templates/common/footer.php"); ?>
