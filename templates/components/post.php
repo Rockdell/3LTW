@@ -6,11 +6,15 @@
         <section id="post-content">
             <p><?=$post["content"]?></p>
         </section>
+
+        <?php if (isset($comments)) { ?>
         <section id="post-comments">
             <?php foreach($comments as $comment) { ?>
                 <h1><?=$comment["commentID"]?></h1>
             <?php } ?>
         </section>
+        <?php }?>
+        
     </a>
     <section id="post-info">
             <i id="upvote<?=$post["postID"]?>" class="material-icons">thumb_up_alt</i>
