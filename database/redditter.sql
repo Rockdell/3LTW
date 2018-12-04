@@ -89,7 +89,17 @@ INSERT INTO Post VALUES (3, 'Rockdell', 'Third Post!', 'IDK This is supposed to 
 INSERT INTO Comment VALUES (1, 'kick0ut', "This is a comment!", '1515351638', 3);
 INSERT INTO Comment VALUES (2, 'Rockdell', "Oh another one!", '1517355710', 100);
 INSERT INTO Comment VALUES (3, 'Rockdell', "Okie", '1517311738', 384);
+INSERT INTO Comment VALUES (4, 'kick0ut', "t1!", '1515351638', 123);
+INSERT INTO Comment VALUES (5, 'Rockdell', "t2!", '1517355710', 1200);
+INSERT INTO Comment VALUES (6, 'Rockdell', "t3!", '1517311738', 84);
 
 INSERT INTO PostComment VALUES (1,1);
 INSERT INTO PostComment VALUES (1,2);
+INSERT INTO PostComment VALUES (1,4);
+INSERT INTO PostComment VALUES (1,5);
+
 INSERT INTO PostComment VALUES (2,3);
+INSERT INTO PostComment VALUES (2,6);
+
+INSERT INTO ChildComment VALUES (2,4);
+INSERT INTO ChildComment VALUES (4,5);

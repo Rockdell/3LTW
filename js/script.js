@@ -2,18 +2,30 @@ console.log("Itsa me!");
 
 function upvoteAction(doc) {
     if (this.checked) {
+        //postVote($postID, $userID, 1)
+        console.log("up");
+
         let associatedDownvote = doc.getElementById('downvote' + this.id.match(/upvote(\d+)/)[1]);
         console.log(associatedDownvote);
         associatedDownvote.checked = false;
     }
+    else
+        console.log("delete up");
+        //removePostVote($postID, $userID)
 }
 
 function downvoteAction(doc) {
     if (this.checked) {
+        //postVote($postID, $userID, 1)
+        console.log("down");
+        
         let associatedUpvote = doc.getElementById('upvote' + this.id.match(/downvote(\d+)/)[1]);
         console.log(associatedUpvote);
         associatedUpvote.checked = false;
     }
+    else    
+        console.log("delete down");
+        //removePostVote($postID, $userID)
 }
 
 let upvotes = document.querySelectorAll('#post-info input[id^="upvote"]');

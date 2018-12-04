@@ -79,6 +79,14 @@ footer {
 	position: absolute;
 	visibility: hidden;
 }
+
+#sort ul li label i {
+	font-size: 3em;
+}
+
+#by ul li label {
+	font-size: 1em;
+}
   
 .sort-by ul li label {
 	font-weight: bold;
@@ -87,7 +95,7 @@ footer {
 	cursor: pointer;
 	transition: all 0.25s linear;
 }
-  
+
 .sort-by ul li:hover label{
 	color: #FFFFFF;
 }
@@ -109,14 +117,30 @@ footer {
 .post {
 	background: #ffffff;
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	box-shadow: 0 1px 3px rgba(133, 96, 96, 0.12), 0 1px 2px rgba(0,0,0,0.24);
 
 	min-width: 50%;
 	max-width: 700px;
 
-	display: flex;
+	display: grid;
+	grid-template-areas: 'title title title' 'text text text' 'info info date';
+
+	/* display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: space-evenly; */
+}
+
+.post #post_title {
+	grid-area: title;
+}
+
+.post #post-info {
+	grid-area: info;
+	margin-bottom: 0%;
+}
+
+.post #post_date {
+	grid-area: date;
 }
 
 .post h1 {
@@ -221,38 +245,34 @@ button {
 	cursor: default;
 }
 
+
+/* Post CSS */
 #pp {
 	font-weight: bold;
 	display: inline;
 	position: relative;
-	bottom: 7px;
+	left: 0.1em;
+	bottom: 0.5em;
 }
 
-/* Post CSS */
-/* i[id^="upvote"] {
-	transition: color 1s;
+#time_ago {
+	position: relative;
+	bottom: 1.1em;
+	float: right;
 }
 
-i[id^="upvote"]:hover {
-	color:green;
+#nbComments {
+	font-weight: bold;
+	display: inline;
+	position: relative;
+	left: 1em;
+	bottom: 0.5em;
 }
 
-i[id^="downvote"] {
-	transition: color 1s;
+#nbCommentsLink {
+	position: relative;
+	left: 1em;
 }
-
-i[id^="downvote"]:hover {
-	color:red;
-} */
-
-/* .sort-by ul li input[type=radio]{
-	position: absolute;
-	visibility: hidden;
-} */
-
-/* #post-info input[type=radio] {
-	visibility: hidden;
-} */
 
 #post-info input {
 	margin: 0;
@@ -267,12 +287,12 @@ i[id^="downvote"]:hover {
 	transition: color 1s;
 }
 
-#post-info label[for^="upvote"]:hover {
+#post-info label[for^="upvote"]:hover {	
 	color: green;
 }
 
 #post-info label[for^="downvote"]:hover {
-	color: red;
+	color: crimson;
 }
 
 #post-info input[id^="upvote"]:checked ~ label[for^="upvote"] {
@@ -280,6 +300,5 @@ i[id^="downvote"]:hover {
 }
 
 #post-info input[id^="downvote"]:checked ~ label[for^="downvote"] {
-	color: red;
+	color: crimson;
 }
-

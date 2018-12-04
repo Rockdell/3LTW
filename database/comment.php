@@ -1,19 +1,5 @@
 <?php
 
-//TODO DWE IT!
-function getCommentsByPost($postID) {
-	global $dbh;
-	try {
-		$stmt = $dbh->prepare(
-			"SELECT * FROM Comment, PostComment WHERE PostComment.postID = ? AND Comment.commentID = PostComment.commentID");
-		$stmt->execute(array($postID));
-		return $stmt->fetchAll();
-	} catch(PDOException $e) {
-		echo $e->getMessage();
-		return null;
-	}
-}
-
 /* Returns the comment with the given ID */
 function getCommentById($commentID) {
     global $dbh;
@@ -73,11 +59,25 @@ function bindCommentToComment($postID, $userID, $content, $fatherCommentID) {
 	}
 }
 
+/* Returns the "father comments" of a Post with a given ID */
+function getCommentsByPost($postID) {
+	global $dbh;
+	try {
+		$stmt = $dbh->prepare("SELECT * FROM Comment, PostComment WHERE PostComment.postID = ? AND Comment.commentID = PostComment.commentID 
+			AND PostComment.commentID NOT IN (SELECT commentSon FROM ChildComment)");
+		$stmt->execute(array($postID));
+		return $stmt->fetchAll();
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return null;
+	}
+}
+
 /* Returns all child comments of a comment */
 function getChildComments($fatherCommentID) {
 	global $dbh;
 	try {
-		$stmt = $dbh->prepare("SELECT commentSon FROM ChildComment WHERE fatherComment = ?");
+		$stmt = $dbh->prepare("SELECT commentSon FROM ChildComment WHERE commentFather = ?");
 		$stmt->execute(array($fatherCommentID));
 		return $stmt->fetchAll();
 	} catch(PDOException $e) {

@@ -62,6 +62,19 @@ function getPostById($postID) {
 	}
 }
 
+/* Returns the number of comments of a post with the given ID */
+function getNumberComments($postID) {
+	global $dbh;
+	try {
+		$stmt = $dbh->prepare("SELECT count(*) as NbComments FROM PostComment Where postID = ?");
+		$stmt->execute(array($postID));
+		return $stmt->fetch();
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return null;
+	}
+}
+
 /* Add a new Post */
 function addPost($userID, $title, $content) {
 	global $dbh;
