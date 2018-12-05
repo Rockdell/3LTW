@@ -370,10 +370,42 @@ button {
 	color: crimson;
 }
 
+#post-info label[for^="upvote"] i[id^="movingUp"] {
+	animation: jumpUp 0.5s 0s ease;
+}
+
+@keyframes jumpUp {
+	0% {
+		transform: translate(0px, 0px);
+	}
+	50% {
+		transform: translate(0px, -6px);
+	}
+	100% {
+		transform: translate(0px, 0px);
+	}
+}
+
+#post-info label[for^="downvote"] i[id^="movingDown"] {
+	animation: jumpDown 0.5s 0s ease;
+}
+
+@keyframes jumpDown {
+	0% {
+		transform: translate(0px, 0px);
+	}
+	50% {
+		transform: translate(0px, 6px);
+	}
+	100% {
+		transform: translate(0px, 0px);
+	}
+}
+
 #post-info input[id^="upvote"]:checked ~ label[for^="upvote"] {
 	color: green;
 }
 
 #post-info input[id^="downvote"]:checked ~ label[for^="downvote"] {
 	color: crimson;
-}
+}  
