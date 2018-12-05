@@ -75,16 +75,65 @@ function signInOrUp() {
 
 // Ajax
 
-
-function sendAjaxRequest(method, url, data) {
+function login(form) {
 
     let request = new XMLHttpRequest();
 
-    if (method === "get") {
-        request.open(method, url + encodeForAjax(data) , true);
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+
+            if (this.responseText === "success") {
+                location.replace("/pages/feed.php");
+            }
+        }
+    }
+
+    let data = {
+        username: form.username.value,
+        password: form.password.value
+    }
+
+    sendRequest(request, "POST", "/actions/login.php", data);
+}
+
+function check_passwords(form) {
+
+}
+
+function register(form) {
+
+    let request = new XMLHttpRequest();
+
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+
+            if (this.responseText === "success") {
+                location.replace("/pages/feed.php");
+            }
+            else {
+
+            }
+        }
+    }
+
+    let data = {
+        username: form.username.value,
+        email: form.email.value,
+        password: form.password.value,
+        password2: form.password2.value
+    }
+
+}
+
+function sendRequest(request, method, url, data) {
+
+    // let request = new XMLHttpRequest();
+
+    if (method === "GET") {
+        request.open("get", url + encodeForAjax(data) , true);
         request.send();
     }
-    else if (method === "post") {
+    else if (method === "POST") {
         request.open("post", url, true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send(encodeForAjax(data));

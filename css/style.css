@@ -39,9 +39,20 @@ footer {
 
 /* Sign bar */
 .sign-bar {
-	width: 300px;
+	
+	width: 20em;
+	max-height: 30em;
+
 	background: white;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.sign-bar #picture-click {
+	cursor: pointer;
+}
+
+.sign-bar #picture-upload {
+	display: none;
 }
 
 .sign-bar h1  {
@@ -221,8 +232,8 @@ a {
 
 input[type=text], input[type=password], input[type=search] {
 	width: 75%;
-    padding: 10px;
-    margin: 10px;
+    padding: 0.75em;
+    margin: 0.5em;
     display: inline-block;
 }
 
@@ -307,9 +318,8 @@ button {
 }
 
 .modal-content {
-	margin: 15% auto 15% auto;
+	margin: 8% auto 8% auto;
 }
-
 
 /* Post CSS */
 #pp {

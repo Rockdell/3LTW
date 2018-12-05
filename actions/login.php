@@ -4,9 +4,9 @@
 
     if (isLoginCorrect($_POST["username"], $_POST["password"])) {
         setCurrentUser($_POST["username"]);
-        header("Location: /pages/feed.php");
+        echo "success";
     }
     else {
-        echo "Wrong credentials... change this later";
+        echo "failure";
     }
 ?>
