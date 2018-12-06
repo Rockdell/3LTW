@@ -5,7 +5,7 @@
 
     $post = getPostById($_GET['id']);
     $comments = getCommentsByPost($_GET['id']);
-    $numberComments = getNumberComments($post['postID']);
+    $numberComments = getNumberComments($_GET['id']);
 
     include_once($_SERVER["DOCUMENT_ROOT"]."/templates/common/header.php");
 ?>

@@ -75,6 +75,29 @@ function getNumberComments($postID) {
 	}
 }
 
+// /* Returns the points of a post with the given ID */
+// function getPostPoints($postID) {
+// 	global $dbh;
+// 	try {
+// 		$stmt = $dbh->prepare("SELECT *	FROM PostVote WHERE postID = ?");
+// 		$stmt->execute(array($postID));
+// 		$stmt->fetchAll();
+
+// 		$points = 0;
+// 		foreach($stmt as $vote) {
+// 			if($vote['vote'] == 1)
+// 				$points++;
+// 			else
+// 				$points--;
+// 		}
+		
+// 		return $points;
+// 	} catch(PDOException $e) {
+// 		echo $e->getMessage();
+// 		return null;
+// 	}
+// }
+
 /* Add a new Post */
 function addPost($userID, $title, $content) {
 	global $dbh;

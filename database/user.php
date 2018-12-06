@@ -80,4 +80,30 @@ function updateUserPassword($userID, $password) {
 	}
 }
 
+/* Returns the vote on a current post if the user has already done so */
+function getSingleUserPostVote($userID, $postID) {
+	global $dbh;
+	try {
+		$stmt = $dbh->prepare("SELECT * FROM PostVote WHERE userID = ? AND postID = ?");
+		$stmt->execute(array($userID, $postID));
+		return $stmt->fetch();
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return null;
+	}
+}
+
+/* Returns the postIDs of the posts that a user has already voted for */
+function getUserPostVotes($userID) {
+	global $dbh;
+	try {
+		$stmt = $dbh->prepare("SELECT * FROM PostVote WHERE userID = ?");
+		$stmt->execute(array($userID));
+		return $stmt->fetchAll();
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return null;
+	}
+}
+
 ?>

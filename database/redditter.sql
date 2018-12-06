@@ -61,6 +61,8 @@ BEGIN
     DELETE FROM Comment WHERE commentID = old.commentID;
 END;
 
+-- For easy insertion of votes
+
 CREATE TRIGGER updatePostVote
 BEFORE INSERT ON PostVote
 WHEN EXISTS(SELECT * FROM PostVote WHERE PostVote.postID = new.postID AND PostVote.userID = new.userID)
@@ -73,6 +75,74 @@ BEFORE INSERT ON CommentVote
 WHEN EXISTS(SELECT * FROM CommentVote WHERE CommentVote.commentID = new.commentID AND CommentVote.userID = new.userID)
 BEGIN
     DELETE FROM CommentVote WHERE CommentVote.commentID = new.commentID AND CommentVote.userID = new.userID;
+END;
+
+
+-- Update Post Points on Insert
+
+CREATE TRIGGER updatePostPointsDownInsert
+AFTER INSERT ON PostVote
+WHEN (new.vote = 0)
+BEGIN
+    UPDATE Post SET points = points - 1 WHERE Post.postID = new.postID;
+END;
+
+CREATE TRIGGER updatePostPointsUpInsert
+AFTER INSERT ON PostVote
+WHEN (new.vote = 1)
+BEGIN
+    UPDATE Post SET points = points + 1 WHERE Post.postID = new.postID;
+END;
+
+
+-- Update Post Points on Delete
+
+CREATE TRIGGER updatePostPointsDownDelete
+AFTER DELETE ON PostVote
+WHEN (old.vote = 0)
+BEGIN
+    UPDATE Post SET points = points + 1 WHERE Post.postID = old.postID;
+END;
+
+CREATE TRIGGER updatePostPointsUpDelete
+AFTER DELETE ON PostVote
+WHEN (old.vote = 1)
+BEGIN
+    UPDATE Post SET points = points - 1 WHERE Post.postID = old.postID;
+END;
+
+
+-- Update Comment Points on Insert
+
+CREATE TRIGGER updateCommentPointsDownInsert
+AFTER INSERT ON CommentVote
+WHEN (new.vote = 0)
+BEGIN
+    UPDATE Comment SET points = points - 1 WHERE Comment.commentD = new.commentID;
+END;
+
+CREATE TRIGGER updateCommentPointsUpInsert
+AFTER INSERT ON CommentVote
+WHEN (new.vote = 1)
+BEGIN
+    UPDATE Post SET points = points + 1 WHERE Comment.commentD = new.commentID;
+END;
+
+
+-- Update Comment Points on Delete
+
+CREATE TRIGGER updateCommentPointsDownDelete
+AFTER DELETE ON CommentVote
+WHEN (old.vote = 0)
+BEGIN
+    UPDATE Comment SET points = points + 1 WHERE Comment.commentD = new.commentID;
+END;
+
+CREATE TRIGGER updateCommentPointsUpDelete
+AFTER DELETE ON CommentVote
+WHEN (old.vote = 1)
+BEGIN
+    UPDATE Comment SET points = points - 1 WHERE Comment.commentD = new.commentID;
 END;
 
 -- Rockdell:vidal

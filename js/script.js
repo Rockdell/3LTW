@@ -3,9 +3,7 @@ function upvoteAction(doc) {
     postID = this.id.match(/upvote(\d+)/)[1];
 
     if (this.checked) {
-        //postVote($postID, $userID, 1);
-        postVote(postID,1);
-        console.log("up");
+        postVote('add',postID,1);
 
         doc.getElementById('staticUp' + postID).id = 'movingUp' + postID;
 
@@ -13,35 +11,13 @@ function upvoteAction(doc) {
             mvDown.id = 'staticDown' + postID;
 
         let associatedDownvote = doc.getElementById('downvote' + postID);
-        console.log(associatedDownvote);
         associatedDownvote.checked = false;
     }
     else {
-        console.log("delete up");
-        doc.getElementById('movingUp' + postID).id = 'staticUp' + postID;
-        //removePostVote($postID, $userID)
+        postVote('del',postID,1);
+        if (doc.getElementById('movingUp' + postID).id !== null)
+            doc.getElementById('movingUp' + postID).id = 'staticUp' + postID;
     }
-}
-
-function postVote(postID, value) {
-
-    let request = new XMLHttpRequest();
-    console.log("hey");
-    request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-
-            if (this.responseText === "success") {
-                location.replace("/pages/feed.php");
-            }
-        }
-    }
-
-    let data = {
-        postID: postID,
-        value: value,
-    }
-    
-    sendRequest(request, "POST", "/actions/postVote.php", data);
 }
 
 function downvoteAction(doc) {
@@ -49,8 +25,7 @@ function downvoteAction(doc) {
     postID = this.id.match(/downvote(\d+)/)[1];
 
     if (this.checked) {
-        //postVote($postID, $userID, 1)
-        console.log("down");
+        postVote('add',postID,0);
 
         doc.getElementById('staticDown' + postID).id = 'movingDown' + postID;
 
@@ -58,14 +33,35 @@ function downvoteAction(doc) {
             mvUp.id = 'staticUp' + postID;
 
         let associatedUpvote = doc.getElementById('upvote' + postID);
-        console.log(associatedUpvote);
         associatedUpvote.checked = false;
     }
     else {
-        console.log("delete down");
-        doc.getElementById('movingDown' + postID).id = 'staticDown' + postID;
-        //removePostVote($postID, $userID)
+        postVote('del',postID,0);
+        if (doc.getElementById('movingDown' + postID).id !== null)
+            doc.getElementById('movingDown' + postID).id = 'staticDown' + postID;
     }
+}
+
+function postVote(action, postID, value) {
+
+    let data = {
+        action: action,
+        postID: postID,
+        value: value,
+    }
+
+    let callback = (response) => {
+        if (isNaN(parseInt(response))) {
+            console.log(response);
+        }
+        else {
+            let element = document.querySelector("#post-info #pp" + postID).innerHTML;
+            let currPoints = parseInt(element) + parseInt(response);
+            document.querySelector("#post-info #pp" + postID).innerHTML = currPoints.toString();
+        }
+    }
+    
+    sendRequest("/actions/postVote.php", data, callback);
 }
 
 let upvotes = document.querySelectorAll('#post-info input[id^="upvote"]');

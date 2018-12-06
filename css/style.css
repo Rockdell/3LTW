@@ -443,7 +443,7 @@ button {
 }
 
 /* Post CSS */
-#pp {
+#post-info p[id^="pp"] {
 	font-weight: bold;
 	display: inline;
 	position: relative;
@@ -483,12 +483,14 @@ button {
 	transition: color 1s;
 }
 
-#post-info label[for^="upvote"]:hover {	
-	color: green;
+#post-info label[for^="upvote"] i:hover {	
+	/* color: green; */
+	filter: contrast(50%);
 }
 
-#post-info label[for^="downvote"]:hover {
-	color: crimson;
+#post-info label[for^="downvote"] i:hover {
+	/* color: crimson; */
+	filter: contrast(50%);
 }
 
 #post-info label[for^="upvote"] i[id^="movingUp"] {

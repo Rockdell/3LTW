@@ -1,4 +1,10 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/database/timeAgo.php');?>
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'].'/database/timeAgo.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/database/user.php');
+ $userVote = null;
+ if(isLoggedIn())
+    $userVote = getSingleUserPostVote($_SESSION["userID"], $post["postID"])["vote"];
+?>
 
 <article class="post container">
     <a href="/pages/post.php?id=<?=$post["postID"]?>">
@@ -10,18 +16,19 @@
 
     <section id="post-info">
 
-            <input type="checkbox" id="upvote<?=$post["postID"]?>">
-            <label for="upvote<?=$post["postID"]?>">
-                <i id="staticUp<?=$post["postID"]?>" class="material-icons">thumb_up_alt</i>
-            </label>
+        <input type="checkbox" id="upvote<?=$post["postID"]?>"<?php if(!isLoggedIn()) echo " disabled"; if($userVote === "1") echo " checked"?>>
 
-        <p id="pp"><?=$post["points"]?></p>
+        <label for="upvote<?=$post["postID"]?>">
+            <i id="staticUp<?=$post["postID"]?>" class="material-icons">thumb_up_alt</i>
+        </label>
 
-        <input type="checkbox" id="downvote<?=$post["postID"]?>">
-            
-            <label for="downvote<?=$post["postID"]?>">
-                <i id="staticDown<?=$post["postID"]?>" class="material-icons">thumb_down_alt</i>
-            </label>
+        <p id="pp<?=$post["postID"]?>"><?=$post["points"]?></p>
+
+        <input type="checkbox" id="downvote<?=$post["postID"]?>"<?php if(!isLoggedIn()) echo " disabled"; if($userVote === "0") echo " checked"?>>
+
+        <label for="downvote<?=$post["postID"]?>">
+            <i id="staticDown<?=$post["postID"]?>" class="material-icons">thumb_down_alt</i>
+        </label>
 
         <p id="nbComments"><?=$numberComments["NbComments"]?></p>
         <a id="nbCommentsLink" href="/pages/post.php?id=<?=$post["postID"]?>">
