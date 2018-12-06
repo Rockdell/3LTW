@@ -9,18 +9,19 @@
     </section>
 
     <section id="post-info">
-        <input type="checkbox" id="upvote<?=$post["postID"]?>">
-        <label for="upvote<?=$post["postID"]?>">
-            <i class="material-icons">thumb_up_alt</i>
-        </label>
+
+            <input type="checkbox" id="upvote<?=$post["postID"]?>">
+            <label for="upvote<?=$post["postID"]?>">
+                <i id="staticUp<?=$post["postID"]?>" class="material-icons">thumb_up_alt</i>
+            </label>
 
         <p id="pp"><?=$post["points"]?></p>
 
         <input type="checkbox" id="downvote<?=$post["postID"]?>">
             
-        <label for="downvote<?=$post["postID"]?>">
-            <i class="material-icons">thumb_down_alt</i>
-        </label>
+            <label for="downvote<?=$post["postID"]?>">
+                <i id="staticDown<?=$post["postID"]?>" class="material-icons">thumb_down_alt</i>
+            </label>
 
         <p id="nbComments"><?=$numberComments["NbComments"]?></p>
         <a id="nbCommentsLink" href="/pages/post.php?id=<?=$post["postID"]?>">

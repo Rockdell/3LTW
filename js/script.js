@@ -1,29 +1,71 @@
 function upvoteAction(doc) {
+
+    postID = this.id.match(/upvote(\d+)/)[1];
+
     if (this.checked) {
-        //postVote($postID, $userID, 1)
+        //postVote($postID, $userID, 1);
+        postVote(postID,1);
         console.log("up");
 
-        let associatedDownvote = doc.getElementById('downvote' + this.id.match(/upvote(\d+)/)[1]);
+        doc.getElementById('staticUp' + postID).id = 'movingUp' + postID;
+
+        if((mvDown = doc.getElementById('movingDown' + postID)) != null)
+            mvDown.id = 'staticDown' + postID;
+
+        let associatedDownvote = doc.getElementById('downvote' + postID);
         console.log(associatedDownvote);
         associatedDownvote.checked = false;
     }
-    else
+    else {
         console.log("delete up");
+        doc.getElementById('movingUp' + postID).id = 'staticUp' + postID;
         //removePostVote($postID, $userID)
+    }
+}
+
+function postVote(postID, value) {
+
+    let request = new XMLHttpRequest();
+    console.log("hey");
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+
+            if (this.responseText === "success") {
+                location.replace("/pages/feed.php");
+            }
+        }
+    }
+
+    let data = {
+        postID: postID,
+        value: value,
+    }
+    
+    sendRequest(request, "POST", "/actions/postVote.php", data);
 }
 
 function downvoteAction(doc) {
+
+    postID = this.id.match(/downvote(\d+)/)[1];
+
     if (this.checked) {
         //postVote($postID, $userID, 1)
         console.log("down");
-        
-        let associatedUpvote = doc.getElementById('upvote' + this.id.match(/downvote(\d+)/)[1]);
+
+        doc.getElementById('staticDown' + postID).id = 'movingDown' + postID;
+
+        if((mvUp = doc.getElementById('movingUp' + postID)) != null)
+            mvUp.id = 'staticUp' + postID;
+
+        let associatedUpvote = doc.getElementById('upvote' + postID);
         console.log(associatedUpvote);
         associatedUpvote.checked = false;
     }
-    else    
+    else {
         console.log("delete down");
+        doc.getElementById('movingDown' + postID).id = 'staticDown' + postID;
         //removePostVote($postID, $userID)
+    }
 }
 
 let upvotes = document.querySelectorAll('#post-info input[id^="upvote"]');
