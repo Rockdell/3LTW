@@ -1,10 +1,10 @@
 <?php
 
 /* Checks if the Login information is correct */
-function isLoginCorrect($username, $password) {
+function isLoginCorrect($userID, $password) {
 	global $dbh;
 	$stmt = $dbh->prepare("SELECT * FROM User WHERE userID = ? AND pass = ?");
-	$stmt->execute(array($username, hash("sha256", $password)));
+	$stmt->execute(array($userID, hash("sha256", $password)));
 	return $stmt->fetch() !== false;
 }
 

@@ -1,11 +1,11 @@
 <aside class="user-bar">
-    <?php if (isset($_SESSION["username"]) && $_SESSION["username"] != "") { ?>
-        <a href="/pages/profile.php?user=<?=$_SESSION["username"]?>">
+    <?php if (isLoggedIn()) { ?>
+        <a href="/pages/profile.php?user=<?=$_SESSION["userID"]?>">
 
-            <span><?=$_SESSION["username"]?></span>
+            <span><?=$_SESSION["userID"]?></span>
 
-            <?php if (file_exists($_SERVER['DOCUMENT_ROOT']."/img/users/".$_SESSION["username"].".png")) { ?>
-                <img class="miniature-profile-picture" src="/img/users/<?=$_SESSION["username"]?>.png"?>
+            <?php if (file_exists($_SERVER['DOCUMENT_ROOT']."/img/users/".$_SESSION["userID"].".png")) { ?>
+                <img class="miniature-profile-picture" src="/img/users/<?=$_SESSION["userID"]?>.png"?>
             <?php } else { ?>
                 <img class="miniature-profile-picture" src="/img/users/unknown.png">
             <?php } ?>

@@ -1,7 +1,7 @@
 <aside class="profile-bar container">
 
     <section id="user-info">
-        <?php if (file_exists($_SERVER['DOCUMENT_ROOT']."/img/users/".$user["userID"].".png")) { ?>
+        <?php if (file_exists($_SERVER["DOCUMENT_ROOT"]."/img/users/".$user["userID"].".png")) { ?>
             <img class="profile-picture" src="/img/users/<?=$user["userID"]?>.png"?>
         <?php } else { ?>
             <img class="profile-picture" src="/img/users/unknown.png">
@@ -15,10 +15,12 @@
     </section>
 
     <section id="user-settings">
-    <?php if ($_SESSION["username"] == $user["userID"]) { ?>
-        <button class="fill" onclick="openSettings()"> Settings </button>
-        <button type="submit" class="fill"> Logout </button>
+    <?php if (isLoggedIn() && $_SESSION["userID"] === $user["userID"]) { ?>
+        <button class="fill" onclick="openSettings()">Settings</button>
+        <button id="logout-button" type="submit" class="fill">Logout</button>
     <?php } ?>
     </section>
+
+    <?php include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/settings-bar.php") ?>
 
 </aside>

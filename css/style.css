@@ -1,7 +1,9 @@
 body {
 	background: #e2e1e0;
 	font-family: 'Open Sans', sans-serif;
-
+	
+	margin: 2em;
+	
 	display: grid;
 	grid-gap: 0.5rem 0.5rem;
 	grid-template-areas: "header" "main" "footer";
@@ -10,6 +12,12 @@ body {
 header {
 	grid-area: header;
 	text-align: center;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	margin: auto 5% auto 45%;
 }
 
 footer {
@@ -18,7 +26,7 @@ footer {
 }
 
 #feed-page {
-	justify-content: space-evenly;
+	justify-content: space-around;
 }
 
 #profile-page {
@@ -31,9 +39,6 @@ footer {
 
 /* User bar */
 .user-bar {
-	position: absolute;
-	top: 1em;
-	right: 2em;
 	font-weight: bold;
 }
 
@@ -41,17 +46,18 @@ footer {
 .sign-bar {
 	
 	width: 20em;
-	max-height: 30em;
+	max-height: 32em;
 
 	background: white;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.sign-bar #picture-click {
+.sign-bar #reg-picture-preview {
+	margin-bottom: 1.55em;
 	cursor: pointer;
 }
 
-.sign-bar #picture-upload {
+.sign-bar #reg-picture {
 	display: none;
 }
 
@@ -61,15 +67,30 @@ footer {
 
 .sign-bar > button {
 	position: absolute;
-	right: 0;
+	/* float: left; */
+	right: 1em;
 	width: 35px;
+	height: 35px;
+
+	text-align: center;
+}
+
+.sign-bar span {
+	color: white;
+	background: #ff6262;
+
+	text-align: center;
+
+	width: 60%;
+	margin: 0em;
+	z-index: 3;
 }
 
 .sign-bar form {
 	text-align: center;
 
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-evenly;
 }
 
 /* Profile-bar */
@@ -78,7 +99,8 @@ footer {
 	text-align: center;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
-	width: 15em;
+	/* width: 22%; */
+	width: 16em;
 	height: 20em;
 
 	display: flex;
@@ -87,17 +109,30 @@ footer {
 }
 
 .profile-bar #user-info {
+	letter-spacing: 1px;
 	font-weight: bold;
 	color: #444;
 }
 
 .profile-bar #user-bio {
-	color: #888;
+	color: #444;
 }
 
 .profile-bar #user-settings {
 	height: 4em;
 	grid-area: settings;
+}
+
+.settings-bar {
+	width: 22em;
+	max-height: 40em;
+
+	background: white;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 /* Search-bar */
@@ -108,8 +143,6 @@ footer {
 
 	width: 16em;
 	height: 20em;
-	/* min-width: 20em;
-	max-height: 300px; */
 
 	display: flex;
 	flex-direction: column;
@@ -136,11 +169,11 @@ footer {
 	visibility: hidden;
 }
 
-#sort ul li label i {
+.sort-by#sort ul li label i {
 	font-size: 3em;
 }
 
-#order ul li label {
+.sort-by#order ul li label {
 	font-size: 1em;
 }
   
@@ -163,11 +196,15 @@ footer {
 /* List-posts */
 .list-posts {
 
-	width: 50%;
+	width: 40em;
 
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: flex-start;
+}
+
+#feed-page .list-posts {
+	margin-right: 20.5em;
 }
 
 /* Post */
@@ -176,18 +213,14 @@ footer {
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 	box-shadow: 0 1px 3px rgba(133, 96, 96, 0.12), 0 1px 2px rgba(0,0,0,0.24);
 
-	/* width: 94%; */
-/* 
-	display: grid;
-	grid-template-areas: 'title title title' 'text text text' 'info info date'; */
-
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 }
 
+/* Change later maybe */
 #post-page .post {
-	width: 50%;
+	width: 45em;
 }
 
 .post h1 {
@@ -230,23 +263,26 @@ a {
 	color: #444;
 }
 
-input[type=text], input[type=password], input[type=search] {
+/* Inputs */
+input[type=text], input[type=password], input[type=search], input[type=email] {
 	width: 75%;
     padding: 0.75em;
-    margin: 0.5em;
-    display: inline-block;
+	margin: 0.50em;
+	/* -webkit-appearance: none; */
 }
 
-/* Button */
+/* Buttons */
 button {
 	position: relative;
-	height: 35px;
+	height: 40px;
+	
 	margin: 10px;
+	padding: 5px 5px;
 
 	font-weight: bold;
 	font-size: 0.90em;
 	letter-spacing: 2px;
-
+	
 	color: #444;
 	border: 2px #444 solid;
 	border-radius: 4px;
@@ -260,6 +296,7 @@ button {
 	transition: 0.08s ease-in;
 }
 
+/* Animations */
 .fill:hover {
   	color: white;
 }
@@ -267,23 +304,101 @@ button {
 .fill:before {
   	content: "";
   	position: absolute;
-  	background: #444;
+  	background-color: #444;
  	bottom: 0;
   	left: 0;
  	right: 0;
  	top: 100%;
- 	z-index: -1;
-  	transition: 0.08s ease-in;
+	z-index: -1;
+	transition: top 0.08s ease-in;
 }
 
 .fill:hover:before {
   	top: 0;
 }
 
-/* .opacity {
-	background-color: rgba(0,0,0,0.4);
-	transition: 0.5s ease-in;
-} */
+.fade {
+	opacity: 0;
+	animation: fade 2s linear;
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+	25% {
+		opacity: 1;
+	}
+	75% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.shake-pulse {
+	box-shadow: 0 0 0 2px #ff6262;
+	animation: shake-pulse 0.75s;
+}
+
+@keyframes shake-pulse {
+	0% { transform: translate(1px, 0px) rotate(0deg);
+		box-shadow: 0 0 0 2px #ff6262;
+	}
+    10% { transform: translate(-1px, 0px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 0px) rotate(0deg); }
+    40% { transform: translate(1px, 0px) rotate(1deg); }
+    50% { transform: translate(-1px, 0px) rotate(-1deg); }
+    60% { transform: translate(-3px, 0px) rotate(0deg); }
+    70% { 
+		transform: translate(3px, 0px) rotate(-1deg);
+		box-shadow: 0 0 0 2px #ff6262;
+	}
+    80% { transform: translate(-1px, 0px) rotate(1deg); }
+    90% { transform: translate(1px, 0px) rotate(0deg); }
+	100% { 
+		transform: translate(1px, 0px) rotate(-1deg);
+		box-shadow: 0 0 0 0 #ff6262; 
+	}
+}
+
+.pop {
+	animation: pop 0.75s;
+}
+
+@keyframes pop {
+	0% {
+		transform: translate(-50%, -50%) scale(0.1);
+		-webkit-transform: translate(-50%, -50%) scale(0.1);
+	}
+	100% {
+
+		transform: translate(-50%, -50%) scale(1.0);
+		-webkit-transform: translate(-50%, -50%) scale(1.0);
+	}
+}
+
+.dim {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	background-color: rgba(0,0,0,0.8);
+
+	animation: dim 0.75s linear;
+}
+
+@keyframes dim {
+	0% {
+		background-color: rgba(0,0,0,0);
+	}
+	100% {
+		background-color: rgba(0,0,0,0.8);
+	}
+}
 
 /* Page */
 .page {
@@ -297,8 +412,12 @@ button {
 /* Container */
 .container {
 	border-radius: 2px;
-	padding: 10px;
-	margin: 10px;
+
+	padding: 1em;
+	margin: 1em;
+
+	/* padding: 10px; */
+	/* margin: 10px; */
 
 	word-wrap: break-word;
 	cursor: default;
@@ -318,7 +437,9 @@ button {
 }
 
 .modal-content {
-	margin: 8% auto 8% auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	/* margin: 8% auto 10% auto; */
 }
 
 /* Post CSS */
@@ -352,8 +473,8 @@ button {
 #post-info input {
 	margin: 0;
 	padding: 0;
+
 	-webkit-appearance: none;
-	-moz-appearance: none;
 	appearance: none;
 }
 
@@ -376,4 +497,8 @@ button {
 
 #post-info input[id^="downvote"]:checked ~ label[for^="downvote"] {
 	color: crimson;
+}
+
+::-webkit-scrollbar {
+	display: none;
 }

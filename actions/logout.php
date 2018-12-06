@@ -4,5 +4,5 @@
     session_destroy();
     session_start();
 
-    print("user logged out. change later");
+    echo "success";
 ?>
