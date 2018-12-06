@@ -51,14 +51,10 @@ function postVote(action, postID, value) {
     }
 
     let callback = (response) => {
-        if (isNaN(parseInt(response))) {
+        if (response == "NOT SIGNED IN!" || response == "failure")
             console.log(response);
-        }
-        else {
-            let element = document.querySelector("#post-info #pp" + postID).innerHTML;
-            let currPoints = parseInt(element) + parseInt(response);
-            document.querySelector("#post-info #pp" + postID).innerHTML = currPoints.toString();
-        }
+        else
+            document.querySelector("#post-info #pp" + postID).innerHTML = response;
     }
     
     sendRequest("/actions/postVote.php", data, callback);

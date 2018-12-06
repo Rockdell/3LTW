@@ -87,9 +87,21 @@ footer {
 	justify-content: space-evenly;
 }
 
-.settings-bar textarea {
-	/* height: 4em; */
+/* New Post Bar */
+#newPost-bar {
+	background: #0074D9;
+	text-align: center;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+	/* width: 22%; */
+	width: 16em;
+	height: 20em;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
+
 
 /* Profile-bar */
 .profile-bar {
@@ -262,7 +274,8 @@ a {
 }
 
 /* Inputs */
-input[type=text], input[type=password], input[type=search], input[type=email], textarea {
+input[type=text], input[type=password], input[type=search], input[type=email], textarea[name=postContent] {
+	font-family: 'Open Sans';
 	width: 75%;
     padding: 0.75em;
 	margin: 0.50em;

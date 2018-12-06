@@ -4,22 +4,14 @@
 
     if(isLoggedIn()) {
         if($_POST["action"] == "add") {
-            if(postVote($_POST["postID"], $_SESSION["userID"], $_POST["value"])) {
-                if($_POST["value"] === "0")
-                    echo "-1";
-                else
-                    echo "+1";
-            }
+            if(postVote($_POST["postID"], $_SESSION["userID"], $_POST["value"]))
+                echo getPostById($_POST["postID"])["points"];
             else
                 echo "failure";
         }
         else if($_POST["action"] == "del") {
-            if(removePostVote($_POST["postID"], $_SESSION["userID"])) {
-                if($_POST["value"] === "0")
-                    echo "+1";
-                else
-                    echo "-1";
-            }
+            if(removePostVote($_POST["postID"], $_SESSION["userID"]))
+                echo getPostById($_POST["postID"])["points"];
             else
                 echo "failure";
         } 
