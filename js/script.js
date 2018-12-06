@@ -15,7 +15,7 @@ function upvoteAction(doc) {
     }
     else {
         postVote('del',postID,1);
-        if (doc.getElementById('movingUp' + postID).id !== null)
+        if (doc.getElementById('movingUp' + postID) !== null)
             doc.getElementById('movingUp' + postID).id = 'staticUp' + postID;
     }
 }
@@ -37,7 +37,7 @@ function downvoteAction(doc) {
     }
     else {
         postVote('del',postID,0);
-        if (doc.getElementById('movingDown' + postID).id !== null)
+        if (doc.getElementById('movingDown' + postID) !== null)
             doc.getElementById('movingDown' + postID).id = 'staticDown' + postID;
     }
 }
