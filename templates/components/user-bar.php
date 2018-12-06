@@ -10,7 +10,8 @@
                 <img class="miniature-profile-picture" src="/img/users/unknown.png">
             <?php } ?>
         </a>
-    <?php } else { ?>
-        <button class="fill" onclick="openSignIn()">Login/Register</button>
+    <?php } else {
+        include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/sign-bar.php"); ?>
+        <button id="sign-btn" class="fill open-btn">Login/Register</button>
     <?php } ?>
 </aside>

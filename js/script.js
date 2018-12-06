@@ -75,52 +75,74 @@ for (let i = 0; i < downvotes.length; i++) {
     downvotes[i].addEventListener('click', downvoteAction.bind(downvotes[i], document));
 }
 
-function openSignIn() {
+// Open and close buttons
+
+let open_btn = document.querySelector(".open-btn");
+
+if (open_btn) {
+    open_btn.onclick = () => {
+
+        switch (open_btn.id) {
+            case "sign-btn":
+                openSign();
+                break;
+            case "settings-btn":
+                openSettings();
+                break;
+        }
+
+        document.querySelector("#dim-mask").classList.add("dim");
+    }
+}
+
+let close_btn = document.querySelector(".close-btn");
+
+if (close_btn) {
+    close_btn.onclick = () => {
+        switch (close_btn.parentElement.id) {
+            case "sign-bar":
+                closeSign();
+                break;
+            case "settings-bar":
+                closeSettings();
+                break;
+        }
+
+        document.querySelector("#dim-mask").classList.remove("dim");
+    }
+}
+
+// Sign
+
+function openSign() {
 
     // Reset preview
-    let preview = document.querySelector("#reg-picture-preview");
-    if (preview)
-        preview.src = "/img/users/unknown.png";
+    document.querySelector("#register-form img").src = "/img/users/unknown.png";
 
     let sign_bar = document.getElementById("sign-bar");
     sign_bar.style.display = "block";
 
-    // Dim in
-    document.querySelectorAll("#dim-masks").forEach((div) => {
-        div.classList.add("dim");
-    });
-
     sign_bar.classList.add("pop");
-
     sign_bar.classList.add("login-open");
 
     document.getElementById("login-form").style.display = "flex";
     document.getElementById("register-form").style.display = "none";
 }
 
-function closeSignIn() {
+function closeSign() {
 
     let sign_bar = document.getElementById("sign-bar");
     sign_bar.style.display = "none";
 
-    //Dim out
-    document.querySelectorAll("#dim-masks").forEach((div) => {
-        div.classList.remove("dim");
-    });
-
+    sign_bar.classList.remove("pop");
     sign_bar.classList.remove("login-open");
     sign_bar.classList.remove("register-open");
-
-    document.getElementById("login-form").style.display = "flex";
-    document.getElementById("register-form").style.display = "none";
 }
 
 function signInOrUp() {
 
     // Reset preview
-    let preview = document.querySelector("#reg-picture-preview");
-    if (preview)
-        preview.src = "/img/users/unknown.png";
+    document.querySelector("#register-form img").src ="/img/users/unknown.png";
 
     let sign_bar = document.getElementById("sign-bar");
 
@@ -140,64 +162,70 @@ function signInOrUp() {
     }
 }
 
+// Settings
+
 let openSettings = () => {
 
     let settings_bar = document.getElementById("settings-bar");
     settings_bar.style.display = "block";
+
+    settings_bar.classList.add("pop");
+    settings_bar.classList.add("profile-open");
+
+    document.getElementById("update-profile").style.display = "flex";
+    document.getElementById("update-password").style.display = "none";
 }
 
-let validateUserId = () => {
+let closeSettings = () => {
 
-    let userID = document.querySelector("#reg-userID");
+    let settings_bar = document.getElementById("settings-bar");
+    settings_bar.style.display = "none";
 
-    if(!userID.value.match(/^[a-zA-Z][a-zA-Z0-9-_]{3,32}$/gi)) {
-        displayWarning("UserID is not valid!")
-        displayError(userID);
+    settings_bar.classList.remove("pop");
+    settings_bar.classList.remove("profile-open");
+    settings_bar.classList.remove("password-open");
+}
+
+let profileOrPassword = () => {
+
+    let settings_bar = document.getElementById("settings-bar");
+
+    if (settings_bar.classList.contains("profile-open")) {
+        settings_bar.classList.remove("profile-open");
+        settings_bar.classList.add("password-open");
+
+        document.getElementById("update-profile").style.display = "none";
+        document.getElementById("update-password").style.display = "flex";
+    }
+    else if (settings_bar.classList.contains("password-open")) {
+        settings_bar.classList.remove("password-open");
+        settings_bar.classList.add("profile-open");
+
+        document.getElementById("update-profile").style.display = "flex";
+        document.getElementById("update-password").style.display = "none";
     }
 }
 
-let validateEmail = () => {
+// Error
 
-    let email = document.querySelector("#reg-email");
+let errorInput = (element) => {
 
-    if (!email.value.match(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g)) {
-        displayWarning("Email is not valid!");
-        displayError(email);
-    }
-}
-
-let validatePassword = () => {
-
-    let password = document.querySelector("#reg-pwd");
-
-    if (!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm)) {
-        displayWarning("Password is not valid!");
-        displayError(password);
-    }
-}
-
-let comparePasswords = () => {
-
-    let password = document.querySelector("#reg-pwd");
-    let chkPassword = document.querySelector("#reg-chkpwd");
-
-    if (password.value !== chkPassword.value) {
-        displayWarning("Passwords don't match!");
-        displayError(chkPassword);
-    }
-}
-
-let displayError = (element) => {
+    element.value = "";
 
     if (!element.classList.contains("shake-pulse")) {
         element.classList.add("shake-pulse");
-        setTimeout(() => { element.classList.remove("shake-pulse"); }, 750);
+
+        setTimeout(() => { 
+            element.classList.remove("shake-pulse");
+        }, 750);
     }
 }
 
-let displayWarning = (message) => {
+// Warning
 
-    let warning = document.getElementById("warning");
+let warnUser = (message) => {
+
+    let warning = document.querySelector("#warning");
 
     if (!warning.classList.contains("fade")) {
         warning.textContent = message;
@@ -212,7 +240,7 @@ let displayWarning = (message) => {
     }
 }
 
-// Ajax
+// Login
 
 let loginForm = document.querySelector("#login-form");
 
@@ -228,17 +256,16 @@ if (loginForm) {
             userID: userID,
             password: password
         }
-    
+
         let callback = (response) => {
             if (response === "success") {
                 setTimeout(window.location.reload(), 1000);
             }
             else {
+                warnUser(response);
 
-                displayWarning("Sign in failed!")
-
-                document.querySelectorAll("#login-form input").forEach((input) => {
-                   displayError(input);
+                loginForm.querySelectorAll("input").forEach((input) => {
+                   errorInput(input);
                 });
             }
         }
@@ -247,7 +274,9 @@ if (loginForm) {
     }
 }
 
-let logoutButton = document.querySelector("#logout-button");
+// Logout
+
+let logoutButton = document.querySelector("#logout-btn");
 
 if (logoutButton) {
 
@@ -263,38 +292,50 @@ if (logoutButton) {
     }
 }
 
+// Register
+
 let registerForm = document.querySelector("#register-form");
 
 if (registerForm) {
 
-    registerForm.querySelector("#reg-picture").onchange = (e) => {
+    registerForm.querySelector("input[name='picture']").onchange = (e) => {
         e.preventDefault();
 
-        let picture = registerForm.querySelector("#reg-picture");
-        let picturePreview = registerForm.querySelector("#reg-picture-preview");
+        let picture = registerForm.querySelector("input[name='picture']");
+        let picturePreview = registerForm.querySelector("img");
 
         if (picture.files.length > 0)
             picturePreview.src = URL.createObjectURL(picture.files[0]);
     }
 
     registerForm.onsubmit = (e) => {
+
         e.preventDefault();
 
         let picture = registerForm.querySelector("input[name='picture']");
         let userID = registerForm.querySelector("input[name='userID']").value;
         let username = registerForm.querySelector("input[name='username']").value;
-        let email = registerForm.querySelector("input[name='email']").value;
+        let mail = registerForm.querySelector("input[name='mail']").value;
         let password = registerForm.querySelector("input[name='password']").value;
+        let chkpassword = registerForm.querySelector("input[name='chkpassword']").value;
+
+        let data = {
+            userID: userID,
+            username: username,
+            mail: mail,
+            password: password,
+            chkpassword: chkpassword
+        }
 
         let callback = (response) => {
 
             if (response === "success") {
 
                 let callback_upload = (response) => {
-                    if (response === "sucess")
+                    if (response === "success")
                         setTimeout(window.location.reload(), 1000);
                     else
-                        displayWarning("Upload failed!");
+                        warnUser(response);
                 }
 
                 if (picture.files.length > 0)
@@ -303,25 +344,91 @@ if (registerForm) {
                 setTimeout(window.location.reload(), 1000);
             }
             else {
+                warnUser(response)
 
-                displayWarning("Sign up failed!")
-
-                document.querySelector("#register-form input").forEach((input) => {
-                    displayError(input);
-                })
+                registerForm.querySelectorAll("input").forEach((input) => {
+                    errorInput(input);
+                });
             }
-        }
-
-        let data = {
-            userID: userID,
-            username: username,
-            email: email,
-            password: password
         }
 
         sendRequest("/actions/register.php", data, callback);
     }
 }
+
+// Update profile
+
+let updateProfile = document.querySelector("#update-profile");
+
+if (updateProfile) {
+
+    updateProfile.onsubmit = (e) => {
+        e.preventDefault();
+
+        let username = updateProfile.querySelector("input[name='username']").value;
+        let mail = updateProfile.querySelector("input[name='mail']").value;
+        let bio = updateProfile.querySelector("textarea[name='bio']").value;
+
+        let data = {
+            username: username,
+            mail: mail,
+            bio: bio
+        }
+
+        let callback = (response) => {
+
+            if (response === "success") {
+                setTimeout(window.location.reload(), 1000);
+            }
+            else {
+                warnUser(response);
+
+                updateProfile.querySelectorAll("input, textarea").forEach((input) => {
+                   errorInput(input);
+                });
+            }
+        }
+
+        sendRequest("/actions/updateProfile.php", data, callback);
+    }
+}
+
+// Update password
+
+let updatePassword = document.querySelector("#update-password");
+
+if (updatePassword) {
+
+    updatePassword.onsubmit = (e) => {
+        e.preventDefault();
+
+        let password = updatePassword.querySelector("input[name='password']").value;
+        let chkpassword = updatePassword.querySelector("input[name='chkpassword']").value;
+
+        let data = {
+            password: password,
+            chkpassword: chkpassword
+        }
+
+        let callback = (response) => {
+
+            if (response === "success") {
+                setTimeout(window.location.reload(), 1000);
+            }
+            else {
+                warnUser(response);
+
+                updatePassword.querySelectorAll("input").forEach((input) => {
+                   errorInput(input);
+                });
+            }
+        }
+
+        sendRequest("/actions/updatePassword.php", data, callback);
+    }
+}
+
+// Upload
 
 let uploadPicture = (picture, name, callback) => {
 
@@ -335,6 +442,8 @@ let uploadPicture = (picture, name, callback) => {
 
     request.addEventListener("load", () => callback(request.responseText));
 }
+
+// Ajax
 
 let sendRequest = (url, data, callback) => {
 

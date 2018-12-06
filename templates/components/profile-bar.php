@@ -16,11 +16,10 @@
 
     <section id="user-settings">
     <?php if (isLoggedIn() && $_SESSION["userID"] === $user["userID"]) { ?>
-        <button class="fill" onclick="openSettings()">Settings</button>
-        <button id="logout-button" type="submit" class="fill">Logout</button>
+        <?php include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/settings-bar.php") ?>
+        <button id="settings-btn" class="fill open-btn">Settings</button>
+        <button id="logout-btn" type="submit" class="fill">Logout</button>
     <?php } ?>
     </section>
-
-    <?php include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/settings-bar.php") ?>
 
 </aside>

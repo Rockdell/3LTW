@@ -39,58 +39,56 @@ footer {
 
 /* User bar */
 .user-bar {
+	height: 2em;
 	font-weight: bold;
 }
 
 /* Sign bar */
-.sign-bar {
+.sign-bar, .settings-bar {
 	
-	width: 20em;
+	width: 24em;
 	max-height: 32em;
 
 	background: white;
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.sign-bar #reg-picture-preview {
-	margin-bottom: 1.55em;
+.sign-bar img, .settings-bar img {
 	cursor: pointer;
 }
 
-.sign-bar #reg-picture {
+.sign-bar #picture-preview, .settings-bar #picture-preview {
 	display: none;
 }
 
-.sign-bar h1  {
+.sign-bar h1, .settings-bar h1 {
 	color: #444;
  }
 
-.sign-bar > button {
-	position: absolute;
-	/* float: left; */
-	right: 1em;
-	width: 35px;
-	height: 35px;
-
-	text-align: center;
-}
-
-.sign-bar span {
+.sign-bar span, .settings-bar span {
 	color: white;
 	background: #ff6262;
 
-	text-align: center;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
-	width: 60%;
+	position: absolute;
+	
+	width: 55%;
 	margin: 0em;
-	z-index: 3;
+	z-index: 6;
+
+	text-align: center;
 }
 
-.sign-bar form {
+.sign-bar form, .settings-bar form {
 	text-align: center;
 
 	flex-direction: column;
 	justify-content: space-evenly;
+}
+
+.settings-bar textarea {
+	/* height: 4em; */
 }
 
 /* Profile-bar */
@@ -121,18 +119,6 @@ footer {
 .profile-bar #user-settings {
 	height: 4em;
 	grid-area: settings;
-}
-
-.settings-bar {
-	width: 22em;
-	max-height: 40em;
-
-	background: white;
-	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
 }
 
 /* Search-bar */
@@ -236,6 +222,18 @@ footer {
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+/* Close button */
+.close-btn {
+	position: absolute;
+	text-align: center;
+	
+	top: 1em;
+	right: 1em;
+
+	width: 35px;
+	height: 35px;
+}
+
 /* Profile-picture */
 .profile-picture {
 	border-radius: 50%;
@@ -264,11 +262,12 @@ a {
 }
 
 /* Inputs */
-input[type=text], input[type=password], input[type=search], input[type=email] {
+input[type=text], input[type=password], input[type=search], input[type=email], textarea {
 	width: 75%;
     padding: 0.75em;
 	margin: 0.50em;
-	/* -webkit-appearance: none; */
+	-webkit-appearance: button;
+	/* box-sizing: border-box; */
 }
 
 /* Buttons */
@@ -294,6 +293,8 @@ button {
 
 	cursor: pointer;
 	transition: 0.08s ease-in;
+
+	/* -webkit-appearance: listitem; */
 }
 
 /* Animations */
@@ -318,8 +319,8 @@ button {
 }
 
 .fade {
-	opacity: 0;
-	animation: fade 2s linear;
+	/* opacity: 0; */
+	animation: fade 2s;
 }
 
 @keyframes fade {
@@ -430,10 +431,11 @@ button {
 
 	left: 50%;
 	top: 50%;
+	margin-right: -50%;
 	transform: translate(-50%, -50%);
 
 	z-index: 2;
-	overflow: hidden;
+	overflow: hidden;	
 }
 
 .modal-content {

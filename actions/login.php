@@ -8,6 +8,6 @@
         echo "success";
     }
     else {
-        echo "failure";
+        echo "Failed to sign in!";
     }
 ?>
