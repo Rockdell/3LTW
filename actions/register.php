@@ -31,8 +31,8 @@
         return;
     }
 
-    if (!preg_match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", $_POST["email"])) {
-        echo "Email is not valid!";
+    if (!preg_match("/([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/", $_POST["mail"])) {
+        echo "Mail is not valid!";
         return;
     }
 

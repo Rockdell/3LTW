@@ -20,8 +20,8 @@
 
     if (strcmp($_POST["mail"], "")) {
 
-        // Valid email
-        if (!preg_match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", $_POST["mail"])) {
+        // Valid mail
+        if (!preg_match("/([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}/", $_POST["mail"])) {
             echo "Mail is not valid!";
             return;
         }
