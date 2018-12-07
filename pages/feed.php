@@ -3,7 +3,9 @@
 	require_once($_SERVER["DOCUMENT_ROOT"]."/database/post.php");
 	require_once($_SERVER["DOCUMENT_ROOT"]."/database/comment.php");
 
-	$posts = getAllPosts("p", "d");
+	$posts = getAllPosts();
+
+	include_once($_SERVER["DOCUMENT_ROOT"]."/actions/sort.php");
 
 	include_once($_SERVER["DOCUMENT_ROOT"]."/templates/common/header.php");
 ?>

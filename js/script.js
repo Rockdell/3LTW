@@ -162,6 +162,8 @@ function signInOrUp() {
 
 let openSettings = () => {
 
+    document.querySelector("#update-profile img").src = "/img/users/unknown.png";
+
     let settings_bar = document.getElementById("settings-bar");
     settings_bar.style.display = "block";
 
@@ -183,6 +185,8 @@ let closeSettings = () => {
 }
 
 let profileOrPassword = () => {
+
+    document.querySelector("#update-profile img").src = "/img/users/unknown.png";
 
     let settings_bar = document.getElementById("settings-bar");
 
@@ -233,6 +237,70 @@ let warnUser = (message) => {
             warning.style.display = "none";
             warning.textContent = "";
         }, 2000);
+    }
+}
+
+// Search
+
+let searchBar = document.querySelector(".search-bar");
+
+if (searchBar) {
+
+    let searchPosts = searchBar.querySelector("input[type=search]");
+
+    searchPosts.onsearch = (e) => {
+        e.preventDefault();
+
+        let url = new URL(window.location.href);
+
+        if (e.srcElement.value !== "")
+            url.searchParams.set("search", encodeURIComponent(e.srcElement.value));
+        else
+            url.searchParams.delete("search");
+
+        window.location.replace(url);
+    }
+
+    let setParam = (category, value) => {
+        let url = new URL(window.location.href);
+        url.searchParams.set(category, value);
+
+        window.location.replace(url);
+    }
+
+    let sortPoints = searchBar.querySelector("#points");
+
+    sortPoints.onclick = (e) => {
+        e.preventDefault();
+        setParam("sort", "points");
+    }
+
+    let sortComments = searchBar.querySelector("#comments");
+
+    sortComments.onclick = (e) => {
+        e.preventDefault();
+        setParam("sort", "comments");
+    }
+
+    let sortDate = searchBar.querySelector("#date");
+
+    sortDate.onclick = (e) => {
+        e.preventDefault();
+        setParam("sort", "date");
+    }
+
+    let orderAsc = searchBar.querySelector("#asc");
+
+    orderAsc.onclick = (e) => {
+        e.preventDefault();
+        setParam("order", "asc");
+    }
+
+    let orderDesc = searchBar.querySelector("#desc");
+
+    orderDesc.onclick = (e) => {
+        e.preventDefault();
+        setParam("order", "desc");
     }
 }
 
@@ -336,8 +404,8 @@ if (registerForm) {
 
                 if (picture.files.length > 0)
                     uploadPicture(picture.files[0], "users_" + userID, callback_upload);
-
-                setTimeout(window.location.reload(), 1000);
+                else
+                    setTimeout(window.location.reload(), 1000);
             }
             else {
                 warnUser(response)
@@ -358,9 +426,20 @@ let updateProfile = document.querySelector("#update-profile");
 
 if (updateProfile) {
 
+    updateProfile.querySelector("input[name='picture']").onchange = (e) => {
+        e.preventDefault();
+
+        let picture = updateProfile.querySelector("input[name='picture']");
+        let picturePreview = updateProfile.querySelector("img");
+
+        if (picture.files.length > 0)
+            picturePreview.src = URL.createObjectURL(picture.files[0]);
+    }
+
     updateProfile.onsubmit = (e) => {
         e.preventDefault();
 
+        let picture = updateProfile.querySelector("input[name='picture']");
         let username = updateProfile.querySelector("input[name='username']").value;
         let mail = updateProfile.querySelector("input[name='mail']").value;
         let bio = updateProfile.querySelector("textarea[name='bio']").value;
@@ -374,7 +453,18 @@ if (updateProfile) {
         let callback = (response) => {
 
             if (response === "success") {
-                setTimeout(window.location.reload(), 1000);
+
+                let callback_upload = (response) => {
+                    if (response === "success")
+                        setTimeout(window.location.reload(), 1000);
+                    else
+                        warnUser(response);
+                }
+
+                if (picture.files.length > 0)
+                    uploadPicture(picture.files[0], "users_", callback_upload);
+                else
+                    setTimeout(window.location.reload(), 1000);
             }
             else {
                 warnUser(response);
@@ -440,6 +530,14 @@ let uploadPicture = (picture, name, callback) => {
 }
 
 // Ajax
+
+let requestGET = (url, data) => {
+
+    let request = new XMLHttpRequest();
+
+    request.open("get", url + "?" + encodeForAjax(data), true);
+    request.send();
+}
 
 let sendRequest = (url, data, callback) => {
 

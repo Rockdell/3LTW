@@ -102,7 +102,6 @@ footer {
 	justify-content: space-between;
 }
 
-
 /* Profile-bar */
 .profile-bar {
 	background: #ffadad;
@@ -201,9 +200,15 @@ footer {
 	justify-content: flex-start;
 }
 
-#feed-page .list-posts {
-	margin-right: 20.5em;
+.list-posts h1 {
+	color: #444;
+	text-align: center;
 }
+
+/* Remove now that we have newPost-bar */
+/* #feed-page .list-posts {
+	margin-right: 20.5em;
+} */
 
 /* Post */
 .post {
@@ -274,7 +279,7 @@ a {
 }
 
 /* Inputs */
-input[type=text], input[type=password], input[type=search], input[type=email], textarea[name=postContent] {
+input[type=text], input[type=password], input[type=search], input[type=email], textarea {
 	font-family: 'Open Sans';
 	width: 75%;
     padding: 0.75em;

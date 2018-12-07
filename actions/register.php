@@ -36,7 +36,7 @@
         return;
     }
 
-    if (addUser($_POST["userID"], $_POST["username"], $_POST["password"], $_POST["email"])) {
+    if (addUser($_POST["userID"], $_POST["username"], $_POST["password"], $_POST["mail"])) {
         setCurrentUser($_POST["userID"]);
         echo "success";
     }

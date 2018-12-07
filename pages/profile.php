@@ -3,11 +3,12 @@
     require_once($_SERVER["DOCUMENT_ROOT"]."/database/user.php");
     require_once($_SERVER["DOCUMENT_ROOT"]."/database/post.php");
 
-    $user = getUserById($_GET["user"]);
-    $posts = getPostByUser($user["userID"]);
+    $user =  getUserById($_GET["user"]);
+    $posts = getPostByUser($_GET["user"]);
+    
+    include_once($_SERVER["DOCUMENT_ROOT"]."/actions/sort.php");
 
     include_once($_SERVER["DOCUMENT_ROOT"]."/templates/common/header.php");
-    // include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/login-register.php");
 ?>
 
 <div id="profile-page" class="page">

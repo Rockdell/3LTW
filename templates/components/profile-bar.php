@@ -11,7 +11,11 @@
     </section>
 
     <section id="user-bio">
-        <p><?=$user["bio"]?></p>
+        <?php if (strcmp($user["bio"], "")) { ?>
+            <p><?=$user["bio"]?></p>
+        <?php } else { ?>
+            <p>Nothing to show</p>
+        <?php } ?>
     </section>
 
     <section id="user-settings">

@@ -1,34 +1,21 @@
 <?php
 
-/* Returns posts ordered accordingly
-* $cat - Category that is ordered by (p->points, d->date, c->number of comments)
-* $order - Order of the result (a->ascendant, d->descendant)
-*/
-function getAllPosts($cat, $order) {
+function searchPosts($postsID, $query) {
 	global $dbh;
-
 	try {
-		switch($cat) {
-			case "p":
-				if($order == "a")
-					$stmt = $dbh->prepare("SELECT * FROM Post ORDER BY points ASC");
-				else if($order == "d")
-					$stmt = $dbh->prepare("SELECT * FROM Post ORDER BY points DESC");
-				break;
-			case "d":
-				if($order == "a")
-					$stmt = $dbh->prepare("SELECT * FROM Post ORDER BY postDate ASC");
-				else if($order == "d")
-					$stmt = $dbh->prepare("SELECT * FROM Post ORDER BY postDate DESC");
-				break;
-			case "c":
-				if($order == "a")
-					$stmt = $dbh->prepare("SELECT * FROM Post LEFT JOIN PostComment ON Post.postID = PostComment.postID GROUP BY Post.postID ORDER BY count(commentID) ASC");
-				else if($order == "d")	
-					$stmt = $dbh->prepare("SELECT * FROM Post LEFT JOIN PostComment ON Post.postID = PostComment.postID GROUP BY Post.postID ORDER BY count(commentID) DESC");
-			break;
-		}
+		$stmt = $dbh->prepare("SELECT * FROM Post WHERE postID IN (".$postsID.") AND content LIKE ?");
+		$stmt->execute(array("%".$query."%"));
+		return $stmt->fetchAll();
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return null;
+	}
+}
 
+function getAllPosts() {
+	global $dbh;
+	try {
+		$stmt = $dbh->prepare("SELECT P.*, IFNULL(PC.count, 0) AS nbComments FROM Post P LEFT JOIN (SELECT postID, count(commentID) AS count FROM PostComment GROUP BY postID) AS PC ON P.postID = PC.postID ORDER BY P.postDate DESC");
 		$stmt->execute();
 		return $stmt->fetchAll();
 	} catch(PDOException $e) {
@@ -36,6 +23,43 @@ function getAllPosts($cat, $order) {
 		return null;
 	}
 }
+
+/* Returns posts ordered accordingly
+* $cat - Category that is ordered by (p->points, d->date, c->number of comments)
+* $order - Order of the result (a->ascendant, d->descendant)
+*/
+// function getAllPosts($cat, $order) {
+// 	global $dbh;
+
+// 	try {
+// 		switch($cat) {
+// 			case "p":
+// 				if($order == "a")
+// 					$stmt = $dbh->prepare("SELECT * FROM Post ORDER BY points ASC");
+// 				else if($order == "d")
+// 					$stmt = $dbh->prepare("SELECT * FROM Post ORDER BY points DESC");
+// 				break;
+// 			case "d":
+// 				if($order == "a")
+// 					$stmt = $dbh->prepare("SELECT * FROM Post ORDER BY postDate ASC");
+// 				else if($order == "d")
+// 					$stmt = $dbh->prepare("SELECT * FROM Post ORDER BY postDate DESC");
+// 				break;
+// 			case "c":
+// 				if($order == "a")
+// 					$stmt = $dbh->prepare("SELECT * FROM Post LEFT JOIN PostComment ON Post.postID = PostComment.postID GROUP BY Post.postID ORDER BY count(commentID) ASC");
+// 				else if($order == "d")	
+// 					$stmt = $dbh->prepare("SELECT * FROM Post LEFT JOIN PostComment ON Post.postID = PostComment.postID GROUP BY Post.postID ORDER BY count(commentID) DESC");
+// 			break;
+// 		}
+
+// 		$stmt->execute();
+// 		return $stmt->fetchAll();
+// 	} catch(PDOException $e) {
+// 		echo $e->getMessage();
+// 		return null;
+// 	}
+// }
 
 function getPostByUser($userID) {
 	global $dbh;
