@@ -28,10 +28,10 @@
 
         switch ($_GET["sort"]) {
             case "points":
-                usort($posts, cmp_points);
+                usort($posts, "cmp_points");
                 break;
             case "comments":
-                usort($posts, cmp_comments);
+                usort($posts, "cmp_comments");
                 break;
             case "date":
                 // Default
