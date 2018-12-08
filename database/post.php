@@ -64,7 +64,7 @@ function getAllPosts() {
 function getPostByUser($userID) {
 	global $dbh;
 	try {
-		$stmt = $dbh->prepare("SELECT * FROM Post Where userID = ?");
+		$stmt = $dbh->prepare("SELECT P.*, IFNULL(PC.count, 0) AS nbComments FROM Post P LEFT JOIN (SELECT postID, count(commentID) AS count FROM PostComment GROUP BY postID) AS PC ON P.postID = PC.postID WHERE P.userID = ? ORDER BY P.postDate DESC");
 		$stmt->execute(array($userID));
 		return $stmt->fetchAll();
 	} catch(PDOException $e) {
