@@ -3,20 +3,20 @@ function upvoteAction(doc) {
     postID = this.id.match(/upvote(\d+)/)[1];
 
     if (this.checked) {
-        postVote('add',postID,1);
+        postVote("add", postID, 1);
 
-        doc.getElementById('staticUp' + postID).id = 'movingUp' + postID;
+        doc.getElementById("staticUp" + postID).id = "movingUp" + postID;
 
-        if((mvDown = doc.getElementById('movingDown' + postID)) != null)
-            mvDown.id = 'staticDown' + postID;
+        if((mvDown = doc.getElementById("movingDown" + postID)) != null)
+            mvDown.id = "staticDown" + postID;
 
-        let associatedDownvote = doc.getElementById('downvote' + postID);
+        let associatedDownvote = doc.getElementById("downvote" + postID);
         associatedDownvote.checked = false;
     }
     else {
-        postVote('del',postID,1);
-        if (doc.getElementById('movingUp' + postID) !== null)
-            doc.getElementById('movingUp' + postID).id = 'staticUp' + postID;
+        postVote("del", postID, 1);
+        if (doc.getElementById("movingUp" + postID) !== null)
+            doc.getElementById("movingUp" + postID).id = "staticUp" + postID;
     }
 }
 
@@ -25,20 +25,20 @@ function downvoteAction(doc) {
     postID = this.id.match(/downvote(\d+)/)[1];
 
     if (this.checked) {
-        postVote('add',postID,0);
+        postVote("add", postID, 0);
 
-        doc.getElementById('staticDown' + postID).id = 'movingDown' + postID;
+        doc.getElementById("staticDown" + postID).id = "movingDown" + postID;
 
-        if((mvUp = doc.getElementById('movingUp' + postID)) != null)
-            mvUp.id = 'staticUp' + postID;
+        if((mvUp = doc.getElementById("movingUp" + postID)) != null)
+            mvUp.id = "staticUp" + postID;
 
-        let associatedUpvote = doc.getElementById('upvote' + postID);
+        let associatedUpvote = doc.getElementById("upvote" + postID);
         associatedUpvote.checked = false;
     }
     else {
-        postVote('del',postID,0);
-        if (doc.getElementById('movingDown' + postID) !== null)
-            doc.getElementById('movingDown' + postID).id = 'staticDown' + postID;
+        postVote("del", postID, 0);
+        if (doc.getElementById("movingDown" + postID) !== null)
+            doc.getElementById("movingDown" + postID).id = "staticDown" + postID;
     }
 }
 
@@ -71,305 +71,275 @@ for (let i = 0; i < downvotes.length; i++) {
     downvotes[i].addEventListener('click', downvoteAction.bind(downvotes[i], document));
 }
 
-// Open and close buttons
+// Media queries
+let maxWidth = window.matchMedia("(max-width: 1024px)");
 
-let open_btn = document.querySelector(".open-btn");
+if (maxWidth.matches) {
 
-if (open_btn) {
-    open_btn.onclick = () => {
+    let feed = document.querySelector("#feed-page");
+    let profile = document.querySelector("#profile-page");
+    let post = document.querySelector("#post-page");
 
-        switch (open_btn.id) {
-            case "sign-btn":
-                openSign();
-                break;
-            case "settings-btn":
-                openSettings();
-                break;
-        }
-
-        document.querySelector("#dim-mask").classList.add("dim");
+    if (feed != null) {
+        document.querySelector("header #settings-btn").style.display = "none";
     }
+    else if (profile != null) {
+        document.querySelector("header #write-btn").style.display = "none";
+    }
+    else if (post != null) {
+        document.querySelector("header #search-btn").style.display = "none";
+        document.querySelector("header #write-btn").style.display = "none";
+        document.querySelector("header #settings-btn").style.display = "none";
+    }
+
+    let user_bar = document.querySelector("#user-bar button");
+    
+    if (user_bar != null) {
+        document.querySelector("header .logout-btn").style.display = "none";
+        document.querySelector("#user-bar").style.display = "none";
+    }
+    else {
+        document.querySelector("header #sign-btn").style.display = "none";
+
+        if (profile != null)
+            document.querySelector("#user-bar").style.display = "none";
+        else
+            document.querySelector("header .logout-btn").style.display = "none";
+    }
+
+    let search_bar = document.querySelector("#search-bar");
+
+    if (search_bar)
+        search_bar.classList.add("modal");
+
+    let profile_bar = document.querySelector("#profile-bar");
+
+    if (profile_bar)
+        profile_bar.classList.add("modal");
+
+    let newpost_bar = document.querySelector("#newpost-bar"); 
+
+    if (newpost_bar)
+        newpost_bar.classList.add("modal");
 }
 
-let close_btn = document.querySelector(".close-btn");
-
-if (close_btn) {
-    close_btn.onclick = () => {
-        switch (close_btn.parentElement.id) {
-            case "sign-bar":
-                closeSign();
-                break;
-            case "settings-bar":
-                closeSettings();
-                break;
-        }
+// Handle click
+window.onclick = (e) => {
+    if (e.target.id == "dim-mask") {
+        document.querySelectorAll(".modal").forEach((modal) => {
+            modal.style.display = "none";
+            modal.classList.remove("pop");
+            modal.classList.remove("one");
+            modal.classList.remove("two");
+        });
 
         document.querySelector("#dim-mask").classList.remove("dim");
     }
 }
 
-// Sign
+// Open buttons
+document.querySelectorAll(".open-btn").forEach((openButton) => {
+    openButton.onclick = (e) => {
+        e.preventDefault();
 
-function openSign() {
+        let modal;
 
-    // Reset preview
-    document.querySelector("#register-form img").src = "/img/users/unknown.png";
+        switch (openButton.id) {
+            case "sign-btn":
+                modal = document.querySelector("#sign-bar");
+                break;
+            case "logout-btn":
 
-    let sign_bar = document.getElementById("sign-bar");
-    sign_bar.style.display = "block";
+            case "write-btn":
+                modal = document.querySelector("#newpost-bar");
+                break;
+            case "settings-btn":
+                modal = document.querySelector("#settings-bar");
+                break;
+            case "search-btn":
+                modal = document.querySelector("#search-bar");
+                break;
+            case "profile-btn":
+                modal = document.querySelector("#profile-bar");
+                break;
+        }
 
-    sign_bar.classList.add("pop");
-    sign_bar.classList.add("login-open");
+        if (modal == null)
+            return;
 
-    document.getElementById("login-form").style.display = "flex";
-    document.getElementById("register-form").style.display = "none";
-}
+        modal.style.display = "block";
 
-function closeSign() {
+        modal.classList.add("pop");
+        modal.classList.add("one");
 
-    let sign_bar = document.getElementById("sign-bar");
-    sign_bar.style.display = "none";
+        let one = modal.querySelector(".one");
+        if (one != null) one.style.display = "flex";
 
-    sign_bar.classList.remove("pop");
-    sign_bar.classList.remove("login-open");
-    sign_bar.classList.remove("register-open");
-}
+        let two = modal.querySelector(".two");
+        if (two != null) two.style.display = "none";
 
-function signInOrUp() {
-
-    // Reset preview
-    document.querySelector("#register-form img").src ="/img/users/unknown.png";
-
-    let sign_bar = document.getElementById("sign-bar");
-
-    if (sign_bar.classList.contains("login-open")) {
-        sign_bar.classList.remove("login-open");
-        sign_bar.classList.add("register-open");
-
-        document.getElementById("login-form").style.display = "none";
-        document.getElementById("register-form").style.display = "flex";
+        document.querySelector("#dim-mask").classList.add("dim");
     }
-    else if (sign_bar.classList.contains("register-open")) {
-        sign_bar.classList.remove("register-open");
-        sign_bar.classList.add("login-open");
+});
 
-        document.getElementById("login-form").style.display = "flex";
-        document.getElementById("register-form").style.display = "none";
+// Close buttons
+document.querySelectorAll(".close-btn").forEach((closeButton) => {
+    closeButton.onclick = (e) => {
+        e.preventDefault();
+
+        let modal = closeButton.parentElement;
+
+        modal.style.display = "none";
+        modal.classList.remove("pop");
+        modal.classList.remove("one");
+        modal.classList.remove("two");
+    
+        document.querySelector("#dim-mask").classList.remove("dim");
     }
-}
+});
+
+// Switch buttons
+document.querySelectorAll(".switch-btn").forEach((switchButton) => {
+    switchButton.onclick = (e) => {
+        e.preventDefault();
+
+        let modal = switchButton.parentElement.parentElement.parentElement;
+    
+        if (modal.classList.contains("one")) {
+            modal.classList.remove("one");
+            modal.classList.add("two");
+    
+            modal.querySelector(".one").style.display = "none";
+            modal.querySelector(".two").style.display = "flex";
+        }
+        else if (modal.classList.contains("two")) {
+            modal.classList.remove("two");
+            modal.classList.add("one");
+    
+            modal.querySelector(".one").style.display = "flex";
+            modal.querySelector(".two").style.display = "none";
+        }
+    }
+});
 
 // New Post
 
 let openCloseNewStory = () => {
 
-    let newPost_bar = document.getElementById("newPost-bar");
+    let newpost_bar = document.querySelector("#newpost-bar");
 
-    if (newPost_bar.classList.contains("newStory-open")) {
-        newPost_bar.classList.remove("unfold");
-        newPost_bar.classList.add("conceal");
+    if (newpost_bar.classList.contains("newStory-open")) {
+        newpost_bar.classList.remove("unfold");
+        newpost_bar.classList.add("conceal");
+
         setTimeout(() => { 
-            newPost_bar.style = "height: 4.5em";
-            newPost_bar.classList.remove("conceal");
+            newpost_bar.style.height = "4.5em";
+            newpost_bar.classList.remove("conceal");
         }, 200);
 
-        newPost_bar.classList.remove("newStory-open");
+        newpost_bar.classList.remove("newStory-open");
 
-        document.getElementById("newStory-form").style.display = "none";
+        document.getElementById("story-form").style.display = "none";
     }
-    else if (newPost_bar.classList.contains("newImage-open")) {
-        newPost_bar.classList.remove("newImage-open");
-        newPost_bar.classList.add("newStory-open");
+    else if (newpost_bar.classList.contains("newImage-open")) {
+        newpost_bar.classList.remove("newImage-open");
+        newpost_bar.classList.add("newStory-open");
 
-        document.getElementById("newStory-form").style.display = "initial";
-        document.getElementById("newImage-form").style.display = "none";
+        document.getElementById("story-form").style.display = "initial";
+        document.getElementById("image-form").style.display = "none";
     }
     else {
-        newPost_bar.classList.add("unfold");
+        newpost_bar.classList.add("unfold");
+            
         setTimeout(() => { 
-            newPost_bar.style = "height: 30em";
-            document.getElementById("newStory-form").style.display = "initial";
+            newpost_bar.style.height = "30em";
+            document.getElementById("story-form").style.display = "initial";
         }, 200);
 
-        newPost_bar.classList.add("newStory-open");
+        newpost_bar.classList.add("newStory-open");
     }
 }
 
 let openCloseNewImage= () => {
 
-    let newPost_bar = document.getElementById("newPost-bar");
+    let newpost_bar = document.querySelector("#newpost-bar");
 
-    if (newPost_bar.classList.contains("newStory-open")) {
-        newPost_bar.classList.remove("newStory-open");
-        newPost_bar.classList.add("newImage-open");
+    if (newpost_bar.classList.contains("newStory-open")) {
+        newpost_bar.classList.remove("newStory-open");
+        newpost_bar.classList.add("newImage-open");
 
-        document.getElementById("newImage-form").style.display = "initial";
-        document.getElementById("newStory-form").style.display = "none";
+        document.getElementById("image-form").style.display = "initial";
+        document.getElementById("story-form").style.display = "none";
     }
-    else if (newPost_bar.classList.contains("newImage-open")) {
-        newPost_bar.classList.remove("unfold");
-        newPost_bar.classList.add("conceal");
+    else if (newpost_bar.classList.contains("newImage-open")) {
+        newpost_bar.classList.remove("unfold");
+        newpost_bar.classList.add("conceal");
+
         setTimeout(() => { 
-            newPost_bar.style = "height: 4.5em";
-            newPost_bar.classList.remove("conceal");
+            newpost_bar.style.height = "4.5em";
+            newpost_bar.classList.remove("conceal");
         }, 200);
 
-        newPost_bar.classList.remove("newImage-open");
+        newpost_bar.classList.remove("newImage-open");
 
-        document.getElementById("newImage-form").style.display = "none";
+        document.getElementById("image-form").style.display = "none";
     }
     else {
-        newPost_bar.classList.add("unfold");
+        newpost_bar.classList.add("unfold");
+
         setTimeout(() => { 
-            newPost_bar.style = "height: 30em";
-            document.getElementById("newImage-form").style.display = "initial";
+            newpost_bar.style.height = "30em";
+            document.getElementById("image-form").style.display = "initial";
         }, 200);
 
-        newPost_bar.classList.add("newImage-open");
+        newpost_bar.classList.add("newImage-open");
     }
 
-}
-
-// Settings
-
-let openSettings = () => {
-
-    document.querySelector("#update-profile img").src = "/img/users/unknown.png";
-
-    let settings_bar = document.getElementById("settings-bar");
-    settings_bar.style.display = "block";
-
-    settings_bar.classList.add("pop");
-    settings_bar.classList.add("profile-open");
-
-    document.getElementById("update-profile").style.display = "flex";
-    document.getElementById("update-password").style.display = "none";
-}
-
-let closeSettings = () => {
-
-    let settings_bar = document.getElementById("settings-bar");
-    settings_bar.style.display = "none";
-
-    settings_bar.classList.remove("pop");
-    settings_bar.classList.remove("profile-open");
-    settings_bar.classList.remove("password-open");
-}
-
-let profileOrPassword = () => {
-
-    document.querySelector("#update-profile img").src = "/img/users/unknown.png";
-
-    let settings_bar = document.getElementById("settings-bar");
-
-    if (settings_bar.classList.contains("profile-open")) {
-        settings_bar.classList.remove("profile-open");
-        settings_bar.classList.add("password-open");
-
-        document.getElementById("update-profile").style.display = "none";
-        document.getElementById("update-password").style.display = "flex";
-    }
-    else if (settings_bar.classList.contains("password-open")) {
-        settings_bar.classList.remove("password-open");
-        settings_bar.classList.add("profile-open");
-
-        document.getElementById("update-profile").style.display = "flex";
-        document.getElementById("update-password").style.display = "none";
-    }
-}
-
-// Error
-
-let errorInput = (element) => {
-
-    element.value = "";
-
-    if (!element.classList.contains("shake-pulse")) {
-        element.classList.add("shake-pulse");
-
-        setTimeout(() => { 
-            element.classList.remove("shake-pulse");
-        }, 750);
-    }
-}
-
-// Warning
-
-let warnUser = (message) => {
-
-    let warning = document.querySelector("#warning");
-
-    if (!warning.classList.contains("fade")) {
-        warning.textContent = message;
-        warning.style.display = "block";
-        warning.classList.add("fade");
-
-        setTimeout(() => {
-            warning.classList.remove("fade");
-            warning.style.display = "none";
-            warning.textContent = "";
-        }, 2000);
-    }
 }
 
 // Search
 
-let searchBar = document.querySelector(".search-bar");
+let searchBar = document.querySelector("#search-bar");
 
 if (searchBar) {
 
-    let searchPosts = searchBar.querySelector("input[type=search]");
-
-    searchPosts.onsearch = (e) => {
-        e.preventDefault();
-
-        let url = new URL(window.location.href);
-
-        if (e.srcElement.value !== "")
-            url.searchParams.set("search", encodeURIComponent(e.srcElement.value));
-        else
-            url.searchParams.delete("search");
-
-        window.location.replace(url);
-    }
-
     let setParam = (category, value) => {
         let url = new URL(window.location.href);
-        url.searchParams.set(category, value);
+
+        if (value != "")
+            url.searchParams.set(category, value);
+        else
+            url.searchParams.delete(category);
 
         window.location.replace(url);
     }
 
-    let sortPoints = searchBar.querySelector("#points");
+    searchBar.querySelector("input[type=search]").onsearch = (e) => {
+        e.preventDefault();
+        setParam("search", e.srcElement.value);
+    }
 
-    sortPoints.onclick = (e) => {
+    searchBar.querySelector("#points").onclick = (e) => {
         e.preventDefault();
         setParam("sort", "points");
     }
 
-    let sortComments = searchBar.querySelector("#comments");
-
-    sortComments.onclick = (e) => {
+    searchBar.querySelector("#comments").onclick = (e) => {
         e.preventDefault();
         setParam("sort", "comments");
     }
 
-    let sortDate = searchBar.querySelector("#date");
-
-    sortDate.onclick = (e) => {
+    searchBar.querySelector("#date").onclick = (e) => {
         e.preventDefault();
         setParam("sort", "date");
     }
 
-    let orderAsc = searchBar.querySelector("#asc");
-
-    orderAsc.onclick = (e) => {
+    searchBar.querySelector("#asc").onclick = (e) => {
         e.preventDefault();
         setParam("order", "asc");
     }
 
-    let orderDesc = searchBar.querySelector("#desc");
-
-    orderDesc.onclick = (e) => {
+    searchBar.querySelector("#desc").onclick = (e) => {
         e.preventDefault();
         setParam("order", "desc");
     }
@@ -411,9 +381,9 @@ if (loginForm) {
 
 // Logout
 
-let logoutButton = document.querySelector("#logout-btn");
+let logoutButtons = document.querySelectorAll(".logout-btn");
 
-if (logoutButton) {
+logoutButtons.forEach((logoutButton) => {
 
     logoutButton.onclick = (e) => {
         e.preventDefault();
@@ -425,7 +395,7 @@ if (logoutButton) {
         
         sendRequest("/actions/logout.php", {}, callback);
     }
-}
+});
 
 // Register
 
@@ -601,7 +571,7 @@ if (updateProfile) {
         if (picture.files.length > 0)
             picturePreview.src = URL.createObjectURL(picture.files[0]);
     }
-
+ 
     updateProfile.onsubmit = (e) => {
         e.preventDefault();
 
@@ -680,8 +650,39 @@ if (updatePassword) {
     }
 }
 
-// Upload
+// Error
+let errorInput = (element) => {
 
+    element.value = "";
+
+    if (!element.classList.contains("shake-pulse")) {
+        element.classList.add("shake-pulse");
+
+        setTimeout(() => { 
+            element.classList.remove("shake-pulse");
+        }, 750);
+    }
+}
+
+// Warning
+let warnUser = (message) => {
+
+    let warning = document.querySelector("#warning");
+
+    if (!warning.classList.contains("fade")) {
+        warning.textContent = message;
+        warning.style.display = "block";
+        warning.classList.add("fade");
+
+        setTimeout(() => {
+            warning.classList.remove("fade");
+            warning.style.display = "none";
+            warning.textContent = "";
+        }, 2000);
+    }
+}
+
+// Upload
 let uploadPicture = (picture, name, callback) => {
 
     let request = new XMLHttpRequest();
@@ -695,16 +696,7 @@ let uploadPicture = (picture, name, callback) => {
     request.addEventListener("load", () => callback(request.responseText));
 }
 
-// Ajax
-
-let requestGET = (url, data) => {
-
-    let request = new XMLHttpRequest();
-
-    request.open("get", url + "?" + encodeForAjax(data), true);
-    request.send();
-}
-
+// Request
 let sendRequest = (url, data, callback) => {
 
     let request = new XMLHttpRequest();
@@ -712,10 +704,10 @@ let sendRequest = (url, data, callback) => {
     request.open("post", url, true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send(encodeForAjax(data));
-
     request.addEventListener("load", () => callback(request.responseText));
 }
 
+// Encode
 let encodeForAjax = (data) => {
     return Object.keys(data).map(function(k) {
         return encodeURIComponent(k) + "=" + encodeURIComponent(data[k])

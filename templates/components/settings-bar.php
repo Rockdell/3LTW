@@ -1,7 +1,8 @@
-<aside id="settings-bar" class="settings-bar modal container">
-    <button class="fill close-btn">&times;</button>
+<aside id="settings-bar" class="modal container">
+
     <span id="warning" class="modal container"></span>
-    <form id="update-profile" class="modal-content">
+
+    <form id="update-profile" class="one">
         <h1>Profile settings</h1>
         <div>
             <label for="picture-preview">
@@ -16,11 +17,11 @@
         </div>
         <div>
             <button type="submit" class="fill">Update profile</button>
-            <button type="button" class="fill" onclick="profileOrPassword()">Update password</button>
+            <button type="button" class="fill switch-btn">Update password</button>
         </div>
     </form>
 
-    <form id="update-password" class="modal-content">
+    <form id="update-password" class="two">
         <h1>Password settings</h1>  
         <div>
             <input type="password" name="password" placeholder="Enter new password">
@@ -28,7 +29,8 @@
         </div>
         <div>
             <button type="submit" class="fill">Update password</button>
-            <button type="button" class="fill" onclick="profileOrPassword()">Update profile</button>
+            <button type="button" class="fill switch-btn">Update profile</button>
         </div>
     </form>
+
 </aside>

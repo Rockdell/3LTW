@@ -1,7 +1,8 @@
-<aside id="sign-bar" class="sign-bar modal container">
-    <button class="fill close-btn">&times;</button>
+<aside id="sign-bar" class="modal container">
+    
     <span id="warning" class="modal container"></span>
-    <form id="login-form" class="modal-content">
+
+    <form id="login-form" class="one">
         <h1>Login</h1>
         <div>
             <input type="text" name="userID" placeholder="Enter userID" required>
@@ -9,10 +10,11 @@
         </div>
         <div>
             <button type="submit" class="fill">Sign in</button>
-            <button type="button" class="fill" onclick="signInOrUp()">Sign up</button>
+            <button type="button" class="fill switch-btn">Sign up</button>
         </div>
     </form>
-    <form id="register-form" >
+
+    <form id="register-form" class="two">
         <h1>Register</h1>
         <div>
             <label for="picture-preview">
@@ -29,7 +31,8 @@
         </div>
         <div>
             <button type="submit" class="fill">Sign up</button>
-            <button type="button" class="fill" onclick="signInOrUp()">Sign in</button>
+            <button type="button" class="fill switch-btn">Sign in</button>
         </div>
     </form>
+    
 </aside>

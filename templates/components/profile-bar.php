@@ -1,4 +1,4 @@
-<aside class="profile-bar container">
+<aside id="profile-bar" class="container">
 
     <section id="user-info">
         <?php if (file_exists($_SERVER["DOCUMENT_ROOT"]."/img/users/".$user["userID"].".png")) { ?>
@@ -18,12 +18,11 @@
         <?php } ?>
     </section>
 
-    <section id="user-settings">
     <?php if (isLoggedIn() && $_SESSION["userID"] === $user["userID"]) { ?>
-        <?php include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/settings-bar.php") ?>
+    <section id="user-settings">
         <button id="settings-btn" class="fill open-btn">Settings</button>
-        <button id="logout-btn" type="submit" class="fill">Logout</button>
-    <?php } ?>
+        <button id="logout-btn" type="submit" class="fill logout-btn">Logout</button>
     </section>
+    <?php } ?>
 
 </aside>

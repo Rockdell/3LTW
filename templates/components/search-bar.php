@@ -1,12 +1,11 @@
-<aside class="search-bar container">
+<aside id="search-bar" class="container">
 
-    <section id="search" class="sort-by">
+    <section>
         <h1>Search</h1>
         <input type="search" placeholder="Search posts"/>
-        <!-- <button class="fill" onclick="searchPosts()"> Search </button> -->
     </section>
 
-    <section id="sort" class="sort-by">
+    <section>
         <h1>Sort by</h1>
         <ul>
             <li>
@@ -30,7 +29,7 @@
         </ul>
     </section>
 
-    <section id="order" class="sort-by">
+    <section>
         <h1>Order</h1>
         <ul>
             <li>

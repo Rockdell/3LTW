@@ -90,7 +90,7 @@ function getPostById($postID) {
 function getNumberComments($postID) {
 	global $dbh;
 	try {
-		$stmt = $dbh->prepare("SELECT count(*) as NbComments FROM PostComment Where postID = ?");
+		$stmt = $dbh->prepare("SELECT count(*) as nrComments FROM PostComment Where postID = ?");
 		$stmt->execute(array($postID));
 		return $stmt->fetch();
 	} catch(PDOException $e) {

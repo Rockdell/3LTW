@@ -10,6 +10,8 @@
 	include_once($_SERVER["DOCUMENT_ROOT"]."/templates/common/header.php");
 ?>
 
+<?php if (!isLoggedIn()) include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/sign-bar.php"); ?>
+
 <div id="feed-page" class="page">
 	<?php
 		include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/search-bar.php");
@@ -17,6 +19,9 @@
 
 		if (isLoggedIn())
 			include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/newPost-bar.php");
+		else {
+			echo "<div class=\"free-space container\"></div>";
+		}
 	?>
 </div>
 

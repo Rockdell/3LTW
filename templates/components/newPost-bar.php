@@ -1,10 +1,10 @@
-<aside id="newPost-bar" class="newPost-bar container">
+<aside id="newpost-bar" class="container">
     <div id="newPostButtons">
         <button type="button" class="fill newPostBtn" onclick="openCloseNewStory()">New Story</button>
         <button type="button" class="fill newPostBtn" onclick="openCloseNewImage()">New Image</button>
     </div>
  
-    <form id="newStory-form" class="modal-content">
+    <form id="story-form">
         <h1>New Story</h1>
         <div id="newPostInput">
             <input type="text" name="postTitle" placeholder="Enter Post Title" required>
@@ -15,7 +15,7 @@
         </div>
     </form>
    
-    <form id="newImage-form" class="modal-content">
+    <form id="image-form">
         <h1>New Image</h1>
         <div id="newPostInput">
             <input type="text" name="postTitle" placeholder="Enter Post Title" required>
