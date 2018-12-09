@@ -262,6 +262,10 @@ footer {
 	width: 40%;
 }
 
+#newpost-bar .newPost-picture {
+	width: 84%;
+}
+
 /* POST */
 
 .post {
@@ -279,8 +283,45 @@ footer {
 }
 
 .post h1 {
+	font-size: 1.5em;
 	font-weight: bold;
 	color: var(--main-text-color);
+}
+
+#post-page .post {
+	width: 40em;
+}
+
+#post-page .post #post-title {
+	/* text-overflow: ellipsis; */
+	/* display: flex;
+	flex-direction: row;*/
+
+
+	display: grid;
+	grid-auto-columns: 5fr 1fr;
+	grid-template-areas: "title delete";
+}
+
+#post-page .post #post-title a {
+	grid-area: title;
+	word-break:break-all;
+ }
+
+#post-page .post #delete-post {
+	grid-area: delete;
+	text-align: right;
+	transition: color 0.5s;
+	align-self: center;
+	display: block;
+}
+
+.post #delete-post {
+	display: none;
+}
+
+.post #delete-post:hover {
+	color: crimson;
 }
 
 .post #post-content, #post-info {

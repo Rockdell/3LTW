@@ -556,6 +556,41 @@ if (createNewImagePost) {
     }
 }
 
+// Delete Post
+
+let deletePost = document.querySelector("#delete-post");
+
+if (deletePost) {
+
+    deletePost.onclick = (e) => {
+        e.preventDefault();
+
+        let postID = deletePost.closest("article").classList[2];
+
+        // deleteConfirmation("post");
+
+        let data = {
+            postID: postID,
+        }
+
+        let callback = (response) => {
+
+            if (response === "failure" || response === "NOT SIGNED IN!") {
+                // warnUser(response);
+                console.log(response);
+
+                // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
+                //    errorInput(input);
+                // });
+            }
+            else
+                setTimeout(window.location.replace("/pages/feed.php"), 1000);  
+        }
+
+        sendRequest("/actions/deletePost.php", data, callback);
+    }
+}
+
 // Update profile
 
 let updateProfile = document.querySelector("#update-profile");
@@ -662,6 +697,27 @@ let errorInput = (element) => {
             element.classList.remove("shake-pulse");
         }, 750);
     }
+}
+
+// Delete Confirmation
+
+let deleteConfirmation = (message) => {
+
+    let confirmation = document.querySelector("#delete-post-confirmation");
+
+    if (confirmation) {
+        console.log("Are you sure you want to delete this " + message + "?");
+        // confirmation.textContent = message;
+        confirmation.style.display = "block";
+        // confirmation.classList.add("fade");
+
+        setTimeout(() => {
+            // confirmation.classList.remove("fade");
+            confirmation.style.display = "none";
+            // confirmation.textContent = "";
+        }, 2000);
+    }
+
 }
 
 // Warning
