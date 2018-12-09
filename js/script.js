@@ -158,6 +158,77 @@ function signInOrUp() {
     }
 }
 
+// New Post
+
+let openCloseNewStory = () => {
+
+    let newPost_bar = document.getElementById("newPost-bar");
+
+    if (newPost_bar.classList.contains("newStory-open")) {
+        newPost_bar.classList.remove("unfold");
+        newPost_bar.classList.add("conceal");
+        setTimeout(() => { 
+            newPost_bar.style = "height: 4.5em";
+            newPost_bar.classList.remove("conceal");
+        }, 200);
+
+        newPost_bar.classList.remove("newStory-open");
+
+        document.getElementById("newStory-form").style.display = "none";
+    }
+    else if (newPost_bar.classList.contains("newImage-open")) {
+        newPost_bar.classList.remove("newImage-open");
+        newPost_bar.classList.add("newStory-open");
+
+        document.getElementById("newStory-form").style.display = "initial";
+        document.getElementById("newImage-form").style.display = "none";
+    }
+    else {
+        newPost_bar.classList.add("unfold");
+        setTimeout(() => { 
+            newPost_bar.style = "height: 30em";
+            document.getElementById("newStory-form").style.display = "initial";
+        }, 200);
+
+        newPost_bar.classList.add("newStory-open");
+    }
+}
+
+let openCloseNewImage= () => {
+
+    let newPost_bar = document.getElementById("newPost-bar");
+
+    if (newPost_bar.classList.contains("newStory-open")) {
+        newPost_bar.classList.remove("newStory-open");
+        newPost_bar.classList.add("newImage-open");
+
+        document.getElementById("newImage-form").style.display = "initial";
+        document.getElementById("newStory-form").style.display = "none";
+    }
+    else if (newPost_bar.classList.contains("newImage-open")) {
+        newPost_bar.classList.remove("unfold");
+        newPost_bar.classList.add("conceal");
+        setTimeout(() => { 
+            newPost_bar.style = "height: 4.5em";
+            newPost_bar.classList.remove("conceal");
+        }, 200);
+
+        newPost_bar.classList.remove("newImage-open");
+
+        document.getElementById("newImage-form").style.display = "none";
+    }
+    else {
+        newPost_bar.classList.add("unfold");
+        setTimeout(() => { 
+            newPost_bar.style = "height: 30em";
+            document.getElementById("newImage-form").style.display = "initial";
+        }, 200);
+
+        newPost_bar.classList.add("newImage-open");
+    }
+
+}
+
 // Settings
 
 let openSettings = () => {
@@ -408,7 +479,7 @@ if (registerForm) {
                     setTimeout(window.location.reload(), 1000);
             }
             else {
-                warnUser(response)
+                warnUser(response);
 
                 registerForm.querySelectorAll("input").forEach((input) => {
                     errorInput(input);
@@ -417,6 +488,101 @@ if (registerForm) {
         }
 
         sendRequest("/actions/register.php", data, callback);
+    }
+}
+
+// Create New Story Post
+
+let createNewStoryPost = document.querySelector("#newStory-form");
+
+if (createNewStoryPost) {
+
+    createNewStoryPost.onsubmit = (e) => {
+        e.preventDefault();
+
+        let title = createNewStoryPost.querySelector("input[name='postTitle']").value;
+        let content = createNewStoryPost.querySelector("textarea[name='postContent']").value;
+
+        let data = {
+            title: title,
+            content: content
+        }
+
+        let callback = (response) => {
+
+            if (response === "failure" || response === "NOT SIGNED IN!") {
+                // warnUser(response);
+                console.log(response);
+
+                // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
+                //    errorInput(input);
+                // });
+            }
+            else
+                setTimeout(window.location.reload(), 1000);  
+        }
+
+        sendRequest("/actions/createNewPost.php", data, callback);
+    }
+}
+
+// Create new Image Post
+
+let createNewImagePost = document.querySelector("#newImage-form");
+
+if (createNewImagePost) {
+
+    createNewImagePost.querySelector("input[name='picture']").onchange = (e) => {
+        e.preventDefault();
+
+        let picture = createNewImagePost.querySelector("input[name='picture']");
+        let picturePreview = createNewImagePost.querySelector("img");
+
+        if (picture.files.length > 0)
+            picturePreview.src = URL.createObjectURL(picture.files[0]);
+    }
+
+    createNewImagePost.onsubmit = (e) => {
+        e.preventDefault();
+
+        let title = createNewImagePost.querySelector("input[name='postTitle']").value;
+        let picture = createNewImagePost.querySelector("input[name='picture']");
+
+        let data = {
+            title: title,
+            content: ""
+        }
+
+        let callback = (response) => {
+
+            if (response === "failure" || response === "NOT SIGNED IN!") {
+                // warnUser(response);
+                console.log(response);
+
+                // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
+                //    errorInput(input);
+                // });
+
+            }
+            else {
+                postID = parseInt(response);
+                
+                let callback_upload = (response) => {
+                    if (response === "success")
+                        setTimeout(window.location.reload(), 1000);
+                    else
+                        console.log(response);
+                        // warnUser(response);
+                }
+
+                if (picture.files.length > 0)
+                    uploadPicture(picture.files[0], "posts_" + postID, callback_upload);
+
+                // setTimeout(window.location.reload(), 1000);
+            }
+        }
+
+        sendRequest("/actions/createNewPost.php", data, callback);
     }
 }
 

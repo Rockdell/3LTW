@@ -12,8 +12,16 @@
     <a href="/pages/post.php?id=<?=$post["postID"]?>">
         <h1><?=$post["title"]?></h1>
     </a>
+    
     <section id="post-content">
-        <p><?=$post["content"]?></p>
+
+    <?php if ($post["content"] === "") {
+            if (file_exists($_SERVER["DOCUMENT_ROOT"]."/img/posts/".$post["postID"].".png")) { ?>
+                <img class="post-picture" src="/img/posts/<?=$post["postID"]?>.png">
+        <?php } } else { ?>
+            <p><?=$post["content"]?></p>
+        <?php } ?>
+
     </section>
 
     <section id="post-info">
@@ -38,7 +46,14 @@
         <a id="nbCommentsLink" href="/pages/post.php?id=<?=$post["postID"]?>">
             <i class="material-icons">textsms</i>
         </a>
-        <p id="time_ago"><?=time_ago($post["postDate"])?></p>
+
+        <div id="postBytime_ago">
+            <p id="postBy">Posted by 
+                <a id="postByLink" href="/pages/profile.php?user=<?=$post["userID"]?>"><?=$post["userID"]?></a>
+                &minus;
+            </p>
+            <p id="time_ago"><?=time_ago($post["postDate"])?></p>
+        </div>
     </section>
 
     <?php if (isset($comments)) { ?>

@@ -14,7 +14,9 @@
 	<?php
 		include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/search-bar.php");
 		include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/list-posts.php");
-		include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/newPost-bar.php");
+
+		if (isLoggedIn())
+			include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/newPost-bar.php");
 	?>
 </div>
 

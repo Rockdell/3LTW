@@ -128,7 +128,7 @@ function addPost($userID, $title, $content) {
 	try {
 		$stmt = $dbh->prepare("INSERT INTO Post (userID,title,content) VALUES (?,?,?)");
 		$stmt->execute(array($userID, $title, $content));
-		return 1;
+		return $dbh->lastInsertId();
 	} catch(PDOException $e) {
 		echo $e->getMessage();
 		return -1;
