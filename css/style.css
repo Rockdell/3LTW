@@ -18,6 +18,11 @@
 	--selected-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+* {
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	background: var(--main-bg-color);
 	font-family: 'Open Sans', sans-serif;
@@ -25,15 +30,15 @@ body {
 	display: grid;
 	grid-gap: 0.5em 0.5em;
 	grid-auto-rows: auto 1fr;
-	grid-template-areas: "header" "main";
+	grid-template-areas: "header" "page";
 }
 
 header {
 	grid-area: header;
-	/* height: auto; */
 	display: grid;
-	grid-auto-columns: 0.5fr 0.5fr 2fr 1fr;
-	grid-template-areas: "icon1 icon2 logo user";
+	grid-auto-columns: 1fr  2fr 1fr;
+	grid-template-areas: "search logo user";
+	box-sizing: border-box;
 }
 
 header .mobile {
@@ -48,21 +53,17 @@ header .logo {
 	text-align: center;
 } 
 
-header .icon1, .icon2, .icon3 {
+header .icon1, .icon2 {
 	color: var(--main-text-color);
 	align-self: center;
 	text-align: center;
 }
 
 header .icon1 {
-	grid-area: icon1;
+	grid-area: search;
 } 
 
 header .icon2 {
-	grid-area: icon2;
-}
-
-header .icon3 {
 	grid-area: user;
 }
 
@@ -91,6 +92,7 @@ footer {
 
 #list-posts {
 	max-width: 40em;
+	/* max-width: inherit; */
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -107,10 +109,8 @@ footer {
 	background: var(--alt2-container-bg-color);
 	text-align: center;
 	box-shadow: var(--selected-box-shadow);
-
 	width: 16em;
 	height: 20em;
-
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -185,10 +185,8 @@ footer {
 	background: var(--alt1-container-bg-color);
 	text-align: center;
 	box-shadow: var(--selected-box-shadow);
-
 	width: 16em;
 	height: 22em;
-
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -270,6 +268,7 @@ footer {
 /* POST */
 
 .post {
+	max-width: inherit;
 	background: var(--main-container-bg-color);
 	box-shadow: var(--box-shadow);
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -284,7 +283,7 @@ footer {
 }
 
 #post-page .post {
-	width: 40em;
+	max-width: 36em;
 	display: grid;
 	grid-template-areas: "post-title delete-post" "post-content post-content" "post-info post-info";
 }
@@ -295,6 +294,7 @@ footer {
 
 .post #post-title {
 	grid-area: post-title;
+	word-break: break-word;
 }
 
 .post #post-title h1 {
@@ -318,14 +318,20 @@ footer {
 	color: crimson;
 }
 
-.post #post-content img {
-	margin-top: 0.5em;
-}
-
 .post #post-content {
 	grid-area: post-content;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.post #post-content #post-image {
 	align-self: center;
 	text-align: center;
+}
+
+.post #post-content #post-story {
+	align-content: stretch;
+	text-align: left;
 }
 
 .post #post-info {
@@ -401,7 +407,7 @@ footer {
 
 /* CLOSE BUTTON */
 
-.close-btn {
+/* .close-btn {
 	position: absolute;
 	text-align: center;
 	
@@ -410,7 +416,7 @@ footer {
 
 	width: 35px;
 	height: 35px;
-}
+} */
 
 /* POST PICTURE */
 
@@ -432,7 +438,6 @@ footer {
 	border-radius: 50%;
 	height: 75px;
 	width: 75px;
-
 	vertical-align: middle;
 	margin-bottom: 0.75em;
 }
@@ -443,10 +448,7 @@ footer {
 	border-radius: 50%;
 	width: 40px;
 	height: 40px;
-
 	vertical-align: middle;
-	/* margin-left: 0.75em;
-	margin-bottom: 0.75em; */
 }
 
 /* FREE SPACE */
@@ -458,7 +460,7 @@ footer {
 /** PAGE */
 
 .page {
-	grid-area: main;
+	grid-area: page;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -516,14 +518,11 @@ textarea[name=postContent] {
 button {
 	position: relative;
 	height: 40px;
-	
 	margin: 10px;
 	padding: 5px 5px;
-
 	font-weight: bold;
 	font-size: 0.90em;
 	letter-spacing: 2px;
-	
 	color: var(--main-text-color);
 	border: 2px var(--main-text-color) solid;
 	border-radius: 4px;
@@ -532,7 +531,6 @@ button {
 	overflow:hidden;
 	background: none;
 	z-index: 1;
-
 	cursor: pointer;
 	transition: 0.08s ease-in;
 }
@@ -585,21 +583,38 @@ button {
 }
 
 @keyframes shake-pulse {
-	0% { transform: translate(1px, 0px) rotate(0deg);
+	0% { 
+		transform: translate(1px, 0px) rotate(0deg);
 		box-shadow: 0 0 0 2px #ff6262;
 	}
-    10% { transform: translate(-1px, 0px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 0px) rotate(0deg); }
-    40% { transform: translate(1px, 0px) rotate(1deg); }
-    50% { transform: translate(-1px, 0px) rotate(-1deg); }
-    60% { transform: translate(-3px, 0px) rotate(0deg); }
+    10% { 
+		transform: translate(-1px, 0px) rotate(-1deg); 
+	}
+    20% { 
+		transform: translate(-3px, 0px) rotate(1deg); 
+	}
+    30% { 
+		transform: translate(3px, 0px) rotate(0deg); 
+	}
+    40% { 
+		transform: translate(1px, 0px) rotate(1deg); 
+	}
+    50% { 
+		transform: translate(-1px, 0px) rotate(-1deg); 
+	}
+    60% { 
+		transform: translate(-3px, 0px) rotate(0deg); 
+	}
     70% { 
 		transform: translate(3px, 0px) rotate(-1deg);
 		box-shadow: 0 0 0 2px #ff6262;
 	}
-    80% { transform: translate(-1px, 0px) rotate(1deg); }
-    90% { transform: translate(1px, 0px) rotate(0deg); }
+    80% { 
+		transform: translate(-1px, 0px) rotate(1deg); 
+	}
+    90% { 
+		transform: translate(1px, 0px) rotate(0deg);
+	}
 	100% { 
 		transform: translate(1px, 0px) rotate(-1deg);
 		box-shadow: 0 0 0 0 #ff6262; 
@@ -717,52 +732,40 @@ button {
 	display: none;
 }
 
-@media screen and (max-width: 1025px) {
-
-	body {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-evenly;
-	}
+@media screen and (max-width: 768px) {
 
 	header > a {
 		font-size: 1.5em;
 	}
 
-	#list-posts {
-		width: 100vw;
-	}
-
-	#user-bar span, #search-bar, #newpost-bar {
+	#user-bar span, #search-bar, .free-space {
 		display: none;
 	}
 
-	#profile-bar {
-		width: auto;
+	#newpost-bar, #profile-bar {
+		max-width: 70vw;
 	}
- 
-	#feed-page, #post-page, #profile-page {
+
+	#list-posts {
+		width: 90vw;
+	}
+
+	#post-page .post {
+		max-width: 80vw;
+		word-wrap: break-word;
+	}
+
+	.page {
+		align-items: center;
 		flex-direction: column;
 		flex-direction: column-reverse;
 	}
 
-	.free-space {
-		display: none;
-	}
-
-	.page {
-		align-self: center;
-	}
-
 	.modal {
-		max-width: 90vw;
+		max-width: 80vw;
 	}
 
 	header .mobile {
 		display: block;
-	}
-
-	#post-page .post {
-		width: 85vw;
 	}
 }

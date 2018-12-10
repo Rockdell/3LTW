@@ -72,17 +72,12 @@ for (let i = 0; i < downvotes.length; i++) {
 }
 
 // Media queries
-let maxWidth = window.matchMedia("(max-width: 1025px)");
+let maxWidth = window.matchMedia("(max-width: 768px)");
 
 if (maxWidth.matches) {
-    
-    if (document.querySelector("#profile-page") != null) {
-        document.querySelector("header #write-btn").style.display = "none";
-    }
 
     if (document.querySelector("#post-page") != null) {
         document.querySelector("header #search-btn").style.display = "none";
-        document.querySelector("header #write-btn").style.display = "none";
     }
     
     if (document.querySelector("#user-bar button") != null) {
@@ -95,10 +90,6 @@ if (maxWidth.matches) {
     let search_bar = document.querySelector("#search-bar");
     if (search_bar)
         search_bar.classList.add("modal");
-
-    let newpost_bar = document.querySelector("#newpost-bar"); 
-    if (newpost_bar)
-        newpost_bar.classList.add("modal");
 }
 
 // Handle click
@@ -145,7 +136,7 @@ document.querySelectorAll(".open-btn").forEach((openButton) => {
         if (modal == null)
             return;
 
-        modal.style.display = "block";
+        modal.style.display = "flex";
 
         modal.classList.add("pop");
         modal.classList.add("one");

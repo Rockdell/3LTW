@@ -21,9 +21,13 @@
     <section id="post-content">
         <?php if ($post["content"] === "") {
             if (file_exists($_SERVER["DOCUMENT_ROOT"]."/img/posts/".$post["postID"].".png")) { ?>
+            <div id="post-image">
                 <img class="post-picture" src="/img/posts/<?=$post["postID"]?>.png">
+            </div>
         <?php } } else { ?>
-            <p><?=$post["content"]?></p>
+            <div id="post-story">
+                <p><?=$post["content"]?></p>
+            </div>
         <?php } ?>
     </section>
 
