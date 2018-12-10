@@ -15,9 +15,7 @@
         <header>
             <i id="search-btn" class="open-btn icon1 fas fa-search mobile"></i>
             <i id="write-btn" class="open-btn icon2 fas fa-pen mobile"></i>
-            <i id="settings-btn" class="open-btn icon2 fas fa-cog mobile"></i>
             <a href="/pages/feed.php" class="logo"><i class="fas fa-paper-plane">  Redditer</i></a>
             <i id="sign-btn" class="open-btn icon3 fas fa-sign-in-alt mobile"></i>
-            <i class="logout-btn icon3 fas fa-sign-out-alt mobile"></i>
             <?php include_once($_SERVER["DOCUMENT_ROOT"]."/templates/components/user-bar.php"); ?>
         </header>

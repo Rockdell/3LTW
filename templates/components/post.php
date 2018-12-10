@@ -12,9 +12,10 @@
 <article class="post container <?=$post["postID"]?>">
    
     <span id="delete-post-confirmation" class="modal container"></span>
+    <i id="delete-post" class="material-icons">delete</i>
+
     <section id="post-title">
         <a href="/pages/post.php?id=<?=$post["postID"]?>"><h1><?=$post["title"]?></h1></a>
-        <i id="delete-post" class="material-icons">delete</i>
     </section>
     
     <section id="post-content">

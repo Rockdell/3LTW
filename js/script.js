@@ -72,53 +72,31 @@ for (let i = 0; i < downvotes.length; i++) {
 }
 
 // Media queries
-let maxWidth = window.matchMedia("(max-width: 1024px)");
+let maxWidth = window.matchMedia("(max-width: 1025px)");
 
 if (maxWidth.matches) {
-
-    let feed = document.querySelector("#feed-page");
-    let profile = document.querySelector("#profile-page");
-    let post = document.querySelector("#post-page");
-
-    if (feed != null) {
-        document.querySelector("header #settings-btn").style.display = "none";
-    }
-    else if (profile != null) {
+    
+    if (document.querySelector("#profile-page") != null) {
         document.querySelector("header #write-btn").style.display = "none";
     }
-    else if (post != null) {
+
+    if (document.querySelector("#post-page") != null) {
         document.querySelector("header #search-btn").style.display = "none";
         document.querySelector("header #write-btn").style.display = "none";
-        document.querySelector("header #settings-btn").style.display = "none";
     }
-
-    let user_bar = document.querySelector("#user-bar button");
     
-    if (user_bar != null) {
-        document.querySelector("header .logout-btn").style.display = "none";
+    if (document.querySelector("#user-bar button") != null) {
         document.querySelector("#user-bar").style.display = "none";
     }
     else {
         document.querySelector("header #sign-btn").style.display = "none";
-
-        if (profile != null)
-            document.querySelector("#user-bar").style.display = "none";
-        else
-            document.querySelector("header .logout-btn").style.display = "none";
     }
 
     let search_bar = document.querySelector("#search-bar");
-
     if (search_bar)
         search_bar.classList.add("modal");
 
-    let profile_bar = document.querySelector("#profile-bar");
-
-    if (profile_bar)
-        profile_bar.classList.add("modal");
-
     let newpost_bar = document.querySelector("#newpost-bar"); 
-
     if (newpost_bar)
         newpost_bar.classList.add("modal");
 }
@@ -463,7 +441,7 @@ if (registerForm) {
 
 // Create New Story Post
 
-let createNewStoryPost = document.querySelector("#newStory-form");
+let createNewStoryPost = document.querySelector("#story-form");
 
 if (createNewStoryPost) {
 
@@ -498,7 +476,7 @@ if (createNewStoryPost) {
 
 // Create new Image Post
 
-let createNewImagePost = document.querySelector("#newImage-form");
+let createNewImagePost = document.querySelector("#image-form");
 
 if (createNewImagePost) {
 

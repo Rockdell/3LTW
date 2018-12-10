@@ -12,7 +12,6 @@
 	--radio-selected-color: #0dff92;
 	--radio-hover-color: white;
 
-
 	--warning-bg-color: #ff6262;
 
 	--box-shadow: 0 1px 3px rgba(133, 96, 96, 0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -31,7 +30,7 @@ body {
 
 header {
 	grid-area: header;
-	height: 40px;
+	/* height: auto; */
 	display: grid;
 	grid-auto-columns: 0.5fr 0.5fr 2fr 1fr;
 	grid-template-areas: "icon1 icon2 logo user";
@@ -91,7 +90,7 @@ footer {
 /* LIST POSTS */
 
 #list-posts {
-	width: 40em;
+	max-width: 40em;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -134,6 +133,8 @@ footer {
 
 #user-bar {
 	font-weight: bold;
+	align-self: center;
+	text-align: center;
 }
 
 #user-bar span {
@@ -282,54 +283,58 @@ footer {
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.post h1 {
-	font-size: 1.5em;
-	font-weight: bold;
-	color: var(--main-text-color);
-}
-
 #post-page .post {
 	width: 40em;
-}
-
-#post-page .post #post-title {
-	/* text-overflow: ellipsis; */
-	/* display: flex;
-	flex-direction: row;*/
-
-
 	display: grid;
-	grid-auto-columns: 5fr 1fr;
-	grid-template-areas: "title delete";
+	grid-template-areas: "post-title delete-post" "post-content post-content" "post-info post-info";
 }
-
-#post-page .post #post-title a {
-	grid-area: title;
-	word-break:break-all;
- }
 
 #post-page .post #delete-post {
-	grid-area: delete;
-	text-align: right;
-	transition: color 0.5s;
-	align-self: center;
 	display: block;
 }
 
+.post #post-title {
+	grid-area: post-title;
+}
+
+.post #post-title h1 {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: var(--main-text-color);
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
 .post #delete-post {
+	grid-area: delete-post;
 	display: none;
+	color: var(--main-text-color);
+	text-align: right;
+	transition: color 0.5s;
+	align-self: center;
 }
 
 .post #delete-post:hover {
 	color: crimson;
 }
 
-.post #post-content, #post-info {
-	color: var(--main-text-color);
+.post #post-content img {
+	margin-top: 0.5em;
 }
 
 .post #post-content {
-	width: 100%;
+	grid-area: post-content;
+	align-self: center;
+	text-align: center;
+}
+
+.post #post-info {
+	grid-area: post-info;
+	margin-top: 1em;
+}
+
+.post #post-content, #post-info {
+	color: var(--main-text-color);
 }
 
 .post #post-info input {
@@ -712,7 +717,7 @@ button {
 	display: none;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1025px) {
 
 	body {
 		display: flex;
@@ -728,12 +733,29 @@ button {
 		width: 100vw;
 	}
 
-	#user-bar span, #profile-bar, #search-bar, #settings-bar, #newpost-bar {
+	#user-bar span, #search-bar, #newpost-bar {
 		display: none;
 	}
 
+	#profile-bar {
+		width: auto;
+	}
+ 
+	#feed-page, #post-page, #profile-page {
+		flex-direction: column;
+		flex-direction: column-reverse;
+	}
+
+	.free-space {
+		display: none;
+	}
+
+	.page {
+		align-self: center;
+	}
+
 	.modal {
-		max-width: 80vw;
+		max-width: 90vw;
 	}
 
 	header .mobile {
