@@ -1,5 +1,5 @@
 <?php
-    require_once($BASE_DIR."/includes/init.php");
-    
+    require_once("includes/init.php");
+
     header("Location: /pages/feed.php");
 ?>
