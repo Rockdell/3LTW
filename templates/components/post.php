@@ -10,18 +10,16 @@
 ?>
 
 <article class="post container <?=$post["postID"]?>">
-   
-    <span id="delete-post-confirmation" class="modal container open-btn">
-        <p id="confirm-question">Are you sure you want to delete this post kind human?</p>
-        <button type="button" class="fill" id="yes"><i class="material-icons">check</i></button>
-        <button type="button" class="fill" id="no"><i class="material-icons">close</i></button>
-    </span>
 
-    <?php
-        if(isSameUser($post["userID"])) { ?>
-            <i id="delete-post" class="material-icons">delete</i>
-        <?php }
-    ?>
+    <?php if(isSameUser($post["userID"])) { ?>
+        <span id="delete-post-confirmation" class="modal container open-btn">
+            <p id="confirm-question">Are you sure you want to delete this post kind human?</p>
+            <button type="button" class="fill" id="yes"><i class="material-icons">check</i></button>
+            <button type="button" class="fill" id="no"><i class="material-icons">close</i></button>
+        </span>
+
+        <i id="delete-post" class="material-icons">delete</i>
+    <?php } ?>
 
     <section id="post-title">
         <a href="/pages/post.php?id=<?=$post["postID"]?>"><h1><?=$post["title"]?></h1></a>

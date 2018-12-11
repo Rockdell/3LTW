@@ -3,7 +3,7 @@
     require_once($BASE_DIR."/database/post.php");
 
     if (empty($posts)) { ?>
-        <h1>No posts to show </h1>
+        <h1>No posts to show</h1>
     <?php }
     else {
         foreach($posts as $post) {
