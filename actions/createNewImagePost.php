@@ -1,6 +1,6 @@
 <?php
-    require_once($_SERVER["DOCUMENT_ROOT"]."/includes/init.php");
-    require_once($_SERVER["DOCUMENT_ROOT"]."/database/post.php");
+    require_once("../includes/init.php");
+    require_once($BASE_DIR."/database/post.php");
 
     if(isLoggedIn()) {
         

@@ -1,6 +1,6 @@
 <?php
-    require_once($_SERVER["DOCUMENT_ROOT"]."/includes/init.php");
-    require_once($_SERVER["DOCUMENT_ROOT"]."/database/user.php");
+    require_once("../includes/init.php");
+    require_once($BASE_DIR."/database/user.php");
 
     if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/", $_POST["password"])) {
         echo "Password is not valid!";

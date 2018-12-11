@@ -20,10 +20,10 @@
         }
 
         function cmp_comments($a, $b) {
-            if ($a["nbComments"] == $b["nbComments"])
+            if ($a["nrComments"] == $b["nrComments"])
                 return 0;
 
-            return ($a["nbComments"] > $b["nbComments"]) ? -1 : 1;
+            return ($a["nrComments"] > $b["nrComments"]) ? -1 : 1;
         }
 
         switch ($_GET["sort"]) {

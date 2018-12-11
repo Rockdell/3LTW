@@ -406,8 +406,10 @@ if (registerForm) {
                         warnUser(response);
                 }
 
+                let picture_name = "users." + userID + picture.files[0].name.match(/(\.\w+$)/)[0];
+
                 if (picture.files.length > 0)
-                    uploadPicture(picture.files[0], "users_" + userID, callback_upload);
+                    uploadPicture(picture.files[0], picture_name, callback_upload);
                 else
                     setTimeout(window.location.reload(), 1000);
             }
@@ -498,18 +500,19 @@ if (createNewImagePost) {
 
             }
             else {
-                postID = parseInt(response);
+                let newPostID = parseInt(response);
 
                 let callback_upload = (response) => {
                     if (response === "success")
                         setTimeout(window.location.reload(), 1000);
                     else
                         console.log(response);
-                        // warnUser(response);
                 }
 
+                let picture_name = "posts." + newPostID + picture.files[0].name.match(/(\.\w+$)/)[0];
+
                 if (picture.files.length > 0)
-                    uploadPicture(picture.files[0], "posts_" + postID, callback_upload);
+                    uploadPicture(picture.files[0], picture_name, callback_upload);
 
                 // setTimeout(window.location.reload(), 1000);
             }
@@ -596,8 +599,10 @@ if (updateProfile) {
                         warnUser(response);
                 }
 
+                let picture_name = "users." + picture.files[0].name.match(/(\.\w+$)/)[0];
+
                 if (picture.files.length > 0)
-                    uploadPicture(picture.files[0], "users_", callback_upload);
+                    uploadPicture(picture.files[0], picture_name, callback_upload);
                 else
                     setTimeout(window.location.reload(), 1000);
             }

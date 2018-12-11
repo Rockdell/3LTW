@@ -9,8 +9,7 @@
     define( 'TIMEBEFORE_FORMAT',      '%e %b' );
     define( 'TIMEBEFORE_FORMAT_YEAR', '%e %b, %Y' );
 
-    function time_ago( $time )
-    {
+    function time_ago($time) {
         $out    = ''; // what we will print out
         $now    = time(); // current time
         $diff   = $now - $time; // difference between the current and the provided dates

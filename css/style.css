@@ -131,11 +131,8 @@ footer {
 	height: 4em;
 }
 
-#profile-bar #settings-btn, #profile-bar #logout-btn {
-	width: 40%;
-}
-
 #profile-bar #delete-user {
+	color: var(--main-text-color);
 	width: 1em;
 	transition: color 0.5s;
 	align-self: flex-end;
@@ -281,6 +278,7 @@ footer {
 /* NEW POST BAR */
 
 #newpost-bar {
+	color: var(--main-text-color);
 	background: var(--alt2-container-bg-color);
 	text-align: center;
 	box-shadow: var(--selected-box-shadow);
@@ -308,7 +306,6 @@ footer {
 }
 
 #newpost-bar .newPost-picture {
-
 	max-width: 84%;
 	max-height: 77%;
 }
@@ -336,7 +333,8 @@ footer {
 }
 
 #post-page .post {
-	max-width: 36em;
+	width: 50em;
+	/* width: 80%; */
 	display: grid;
 	grid-template-areas: "post-title delete-post" "post-content post-content" "post-info post-info";
 }
@@ -807,7 +805,7 @@ button {
 	}
 
 	#post-page .post {
-		max-width: 80vw;
+		max-width: 70vw;
 		word-wrap: break-word;
 	}
 

@@ -1,9 +1,9 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'].'/database/timeAgo.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/database/user.php');
+    require_once($BASE_DIR."/database/timeAgo.php");
+    require_once($BASE_DIR."/database/user.php");
     
     $userVote = null;
-    $numberComments = getNumberComments($post['postID']);
+    $numberComments = getNumberComments($post["postID"]);
     
     if(isLoggedIn())
         $userVote = getSingleUserPostVote($_SESSION["userID"], $post["postID"])["vote"];
@@ -28,12 +28,22 @@
     </section>
     
     <section id="post-content">
-        <?php if ($post["content"] === "") {
-            if (file_exists($_SERVER["DOCUMENT_ROOT"]."/img/posts/".$post["postID"].".png")) { ?>
+        <?php if ($post["content"] === "") { ?>
             <div id="post-image">
-                <img class="post-picture" src="/img/posts/<?=$post["postID"]?>.png">
+                <img class="post-picture" src=
+                <?php
+                    $image = "/img/posts/".sha1($post["postID"]);
+
+                    if (file_exists($BASE_DIR.$image.".png")) {
+                        echo $image.".png";
+                    } else if (file_exists($BASE_DIR.$image.".jpg")) {
+                        echo $image.".jpg";
+                    } else if (file_exists($BASE_DIR.$image.".gif")) {
+                        echo $image.".gif";
+                    }
+                ?>>
             </div>
-        <?php } } else { ?>
+        <?php } else { ?>
             <div id="post-story">
                 <p><?=$post["content"]?></p>
             </div>

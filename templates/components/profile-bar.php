@@ -12,12 +12,20 @@
     <?php } ?>
 
     <section id="user-info">
-        <?php if (file_exists($_SERVER["DOCUMENT_ROOT"]."/img/users/".$user["userID"].".png")) { ?>
-            <img class="profile-picture" src="/img/users/<?=$user["userID"]?>.png"?>
-        <?php } else { ?>
-            <img class="profile-picture" src="/img/users/unknown.png">
-        <?php } ?>
+        <img class="profile-picture" src=
+        <?php
+            $image = "/img/users/".sha1($user["userID"]);
 
+            if (file_exists($BASE_DIR.$image.".png")) {
+                echo $image.".png";
+            } else if (file_exists($BASE_DIR.$image.".jpg")) {
+                echo $image.".jpg";
+            } else if (file_exists($BASE_DIR.$image.".gif")) {
+                echo $image.".gif";
+            } else {
+                echo "/img/users/unknown.png";
+            } 
+        ?>>
         <h1><?=$user["username"]?></h1>
     </section>
 

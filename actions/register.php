@@ -1,6 +1,6 @@
 <?php
-    require_once($_SERVER["DOCUMENT_ROOT"]."/includes/init.php");
-    require_once($_SERVER["DOCUMENT_ROOT"]."/database/user.php");
+    require_once("../includes/init.php");
+    require_once($BASE_DIR."/database/user.php");
 
     // Valid userID
     if (!preg_match("/^[a-zA-Z][a-zA-Z0-9-_]{3,32}$/", $_POST["userID"])) {

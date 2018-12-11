@@ -1,4 +1,6 @@
 <?php
-	include_once($_SERVER['DOCUMENT_ROOT'].'/database/connection.php');
-	include_once($_SERVER['DOCUMENT_ROOT'].'/includes/session.php');
+	$BASE_DIR = dirname(__DIR__);
+
+	include_once($BASE_DIR."/database/connection.php");
+	include_once($BASE_DIR."/includes/session.php");
 ?>

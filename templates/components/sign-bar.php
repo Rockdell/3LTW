@@ -19,7 +19,7 @@
         <div>
             <label for="picture-preview">
                 <img src="/img/users/unknown.png" class="profile-picture">
-                <input id="picture-preview" type="file" name="picture" accept="image/png">
+                <input id="picture-preview" type="file" name="picture" accept="image/*">
             </label>
         </div>
         <div>

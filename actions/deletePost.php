@@ -1,12 +1,26 @@
 <?php
-    require_once($_SERVER["DOCUMENT_ROOT"]."/includes/init.php");
-    require_once($_SERVER["DOCUMENT_ROOT"]."/database/post.php");
+    require_once("../includes/init.php");
+    require_once($BASE_DIR."/database/post.php");
 
     if(isLoggedIn()) {
 
         if (getPostById($_POST["postID"])["content"] === "") {
             //It means its an image post!
-            unlink($_SERVER["DOCUMENT_ROOT"]."/img/posts/".$_POST["postID"].".png");
+            
+            $image = $BASE_DIR."/img/posts/".sha1($_POST["postID"]);
+
+            if (file_exists($image.".png")) {
+                $image .= ".png";
+            } else if (file_exists($image.".jpg")) {
+                $image .= ".jpg";
+            } else if (file_exists($image.".gif")) {
+                $image .= ".gif";
+            } else {
+                $image = "";
+            }
+
+            if ($image !== "")
+                unlink($image);
         }
 
         if (removePost($_POST["postID"]))
