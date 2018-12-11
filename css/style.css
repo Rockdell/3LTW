@@ -114,6 +114,8 @@ footer {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
+	padding-top: 0em;
+	padding-bottom: 0em;
 }
 
 #profile-bar #user-info, #user-bio {
@@ -127,6 +129,50 @@ footer {
 
 #profile-bar #user-settings {
 	height: 4em;
+}
+
+#profile-bar #settings-btn, #profile-bar #logout-btn {
+	width: 40%;
+}
+
+#profile-bar #delete-user {
+	width: 1em;
+	transition: color 0.5s;
+	align-self: flex-end;
+}
+
+#profile-bar #delete-user:hover {
+	color: crimson;
+}
+
+#profile-bar span {
+	color: var(--main-text-color);
+	background: var(--warning-bg-color);
+	box-shadow: var(--selected-box-shadow);
+	position: absolute;
+	width: 23em;
+	margin: 0em;
+	z-index: 4;
+	text-align: center;
+}
+
+#profile-bar span #confirm-question-warning {
+	font-weight: bolder;
+}
+
+#profile-bar span #yes, #profile-bar span #no {
+	/* display: flex;
+	align-items: center; */
+	margin-left: 0em;
+	margin-right: 0em;
+	vertical-align: middle;
+	display: inline-block;
+	width: 45%;
+}
+
+#profile-bar span i {
+	vertical-align: middle;
+	margin-right: 3%;
 }
 
 /* USER BAR */
@@ -162,7 +208,7 @@ footer {
 	color: var(--main-text-color);
 }
 
-#sign-bar span, #settings-bar span {
+#sign-bar span, #settings-bar span, .post span {
 	color: var(--alt-text-color);
 	background: var(--warning-bg-color);
 	box-shadow: var(--selected-box-shadow);
@@ -262,7 +308,9 @@ footer {
 }
 
 #newpost-bar .newPost-picture {
-	width: 84%;
+
+	max-width: 84%;
+	max-height: 77%;
 }
 
 /* POST */
@@ -280,6 +328,11 @@ footer {
 
 .post:hover {
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.post span {
+	color: var(--main-text-color);
+	width: 16em;
 }
 
 #post-page .post {
@@ -312,6 +365,7 @@ footer {
 	text-align: right;
 	transition: color 0.5s;
 	align-self: center;
+	margin-left: 1em;
 }
 
 .post #delete-post:hover {
@@ -623,6 +677,7 @@ button {
 
 .unfold {
 	animation: unfold 0.2s ease;
+	animation-fill-mode: forwards;
 }
 
 @keyframes unfold {
@@ -630,17 +685,18 @@ button {
 		height: 4.5em;
 	}
 	to {
-		height: 30em;
+		height: 28em;
 	}
 }
 
 .conceal {
 	animation: conceal 0.2s ease;
+	animation-fill-mode: forwards;
 }
 
 @keyframes conceal {
 	from {
-		height: 30em;
+		height: 28em;
 	}
 	to {
 		height: 4.5em;

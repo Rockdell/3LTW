@@ -1,7 +1,7 @@
 <aside id="newpost-bar" class="container">
     <div id="newPostButtons">
-        <button type="button" class="fill newPostBtn" onclick="openCloseNewStory()">New Story</button>
-        <button type="button" class="fill newPostBtn" onclick="openCloseNewImage()">New Image</button>
+        <button type="button" class="fill newPostBtn storyBtn" onclick="openCloseNewStory()">New Story</button>
+        <button type="button" class="fill newPostBtn imageBtn" onclick="openCloseNewImage()">New Image</button>
     </div>
  
     <form id="story-form">
@@ -21,7 +21,7 @@
             <input type="text" name="postTitle" placeholder="Enter Post Title" required>
             <label for="picture-preview">
                 <img src="/img/posts/insertImage.png" class="newPost-picture">
-                <input id="picture-preview" type="file" name="picture" accept="image/*">
+                <input id="picture-preview" type="file" name="picture" accept="image/*" required>
             </label>
         </div>
         <div>

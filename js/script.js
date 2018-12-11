@@ -117,11 +117,6 @@ document.querySelectorAll(".open-btn").forEach((openButton) => {
             case "sign-btn":
                 modal = document.querySelector("#sign-bar");
                 break;
-            case "logout-btn":
-
-            case "write-btn":
-                modal = document.querySelector("#newpost-bar");
-                break;
             case "settings-btn":
                 modal = document.querySelector("#settings-bar");
                 break;
@@ -148,22 +143,6 @@ document.querySelectorAll(".open-btn").forEach((openButton) => {
         if (two != null) two.style.display = "none";
 
         document.querySelector("#dim-mask").classList.add("dim");
-    }
-});
-
-// Close buttons
-document.querySelectorAll(".close-btn").forEach((closeButton) => {
-    closeButton.onclick = (e) => {
-        e.preventDefault();
-
-        let modal = closeButton.parentElement;
-
-        modal.style.display = "none";
-        modal.classList.remove("pop");
-        modal.classList.remove("one");
-        modal.classList.remove("two");
-    
-        document.querySelector("#dim-mask").classList.remove("dim");
     }
 });
 
@@ -196,15 +175,19 @@ document.querySelectorAll(".switch-btn").forEach((switchButton) => {
 let openCloseNewStory = () => {
 
     let newpost_bar = document.querySelector("#newpost-bar");
+    document.querySelector(".imageBtn").disabled = true;
+    document.querySelector(".storyBtn").disabled = true;
 
     if (newpost_bar.classList.contains("newStory-open")) {
         newpost_bar.classList.remove("unfold");
         newpost_bar.classList.add("conceal");
 
-        setTimeout(() => { 
-            newpost_bar.style.height = "4.5em";
+        setTimeout(() => {
+            // newpost_bar.style.height = "4.5em";
             newpost_bar.classList.remove("conceal");
-        }, 200);
+            document.querySelector(".imageBtn").disabled = false;
+            document.querySelector(".storyBtn").disabled = false;
+        }, 190);
 
         newpost_bar.classList.remove("newStory-open");
 
@@ -216,22 +199,28 @@ let openCloseNewStory = () => {
 
         document.getElementById("story-form").style.display = "initial";
         document.getElementById("image-form").style.display = "none";
+        document.querySelector(".imageBtn").disabled = false;
+        document.querySelector(".storyBtn").disabled = false;
     }
     else {
         newpost_bar.classList.add("unfold");
-            
-        setTimeout(() => { 
-            newpost_bar.style.height = "30em";
+
+        setTimeout(() => {
+            // newpost_bar.style.height = "28em";
             document.getElementById("story-form").style.display = "initial";
-        }, 200);
+            document.querySelector(".imageBtn").disabled = false;
+            document.querySelector(".storyBtn").disabled = false;
+        }, 190);
 
         newpost_bar.classList.add("newStory-open");
     }
 }
 
-let openCloseNewImage= () => {
+let openCloseNewImage = () => {
 
     let newpost_bar = document.querySelector("#newpost-bar");
+    document.querySelector(".imageBtn").disabled = true;
+    document.querySelector(".storyBtn").disabled = true;
 
     if (newpost_bar.classList.contains("newStory-open")) {
         newpost_bar.classList.remove("newStory-open");
@@ -239,15 +228,19 @@ let openCloseNewImage= () => {
 
         document.getElementById("image-form").style.display = "initial";
         document.getElementById("story-form").style.display = "none";
+        document.querySelector(".imageBtn").disabled = false;
+        document.querySelector(".storyBtn").disabled = false;
     }
     else if (newpost_bar.classList.contains("newImage-open")) {
         newpost_bar.classList.remove("unfold");
         newpost_bar.classList.add("conceal");
 
-        setTimeout(() => { 
-            newpost_bar.style.height = "4.5em";
+        setTimeout(() => {
+            // newpost_bar.style.height = "4.5em";
             newpost_bar.classList.remove("conceal");
-        }, 200);
+            document.querySelector(".imageBtn").disabled = false;
+            document.querySelector(".storyBtn").disabled = false;
+        }, 190);
 
         newpost_bar.classList.remove("newImage-open");
 
@@ -256,14 +249,15 @@ let openCloseNewImage= () => {
     else {
         newpost_bar.classList.add("unfold");
 
-        setTimeout(() => { 
-            newpost_bar.style.height = "30em";
+        setTimeout(() => {
+            // newpost_bar.style.height = "28em";
             document.getElementById("image-form").style.display = "initial";
-        }, 200);
+            document.querySelector(".imageBtn").disabled = false;
+            document.querySelector(".storyBtn").disabled = false;
+        }, 190);
 
         newpost_bar.classList.add("newImage-open");
     }
-
 }
 
 // Search
@@ -359,7 +353,7 @@ logoutButtons.forEach((logoutButton) => {
 
         let callback = (response) => {
             if (response === "success")
-                setTimeout(window.location.reload(), 1000);
+                setTimeout(window.location.replace("/pages/feed.php"), 1000);
         }
         
         sendRequest("/actions/logout.php", {}, callback);
@@ -461,7 +455,7 @@ if (createNewStoryPost) {
                 setTimeout(window.location.reload(), 1000);  
         }
 
-        sendRequest("/actions/createNewPost.php", data, callback);
+        sendRequest("/actions/createNewStoryPost.php", data, callback);
     }
 }
 
@@ -505,7 +499,7 @@ if (createNewImagePost) {
             }
             else {
                 postID = parseInt(response);
-                
+
                 let callback_upload = (response) => {
                     if (response === "success")
                         setTimeout(window.location.reload(), 1000);
@@ -521,7 +515,7 @@ if (createNewImagePost) {
             }
         }
 
-        sendRequest("/actions/createNewPost.php", data, callback);
+        sendRequest("/actions/createNewImagePost.php", data, callback);
     }
 }
 
@@ -530,33 +524,34 @@ if (createNewImagePost) {
 let deletePost = document.querySelector("#delete-post");
 
 if (deletePost) {
-
+    let postID = deletePost.closest("article").classList[2];
     deletePost.onclick = (e) => {
         e.preventDefault();
+        deleteConfirmation("post", postID);
+    }
+}
 
-        let postID = deletePost.closest("article").classList[2];
+// Delete Comment
 
-        // deleteConfirmation("post");
+let deleteComment = document.querySelector("#delete-comment");
 
-        let data = {
-            postID: postID,
-        }
+if (deleteComment) {
+    // let commentID = deletePost.closest("article").classList[2]; TODO alter to fit comments needs
+    deleteComment.onclick = (e) => {
+        e.preventDefault();
+        // deleteConfirmation("comment", commentID);
+    }
+}
 
-        let callback = (response) => {
+// Delete User
 
-            if (response === "failure" || response === "NOT SIGNED IN!") {
-                // warnUser(response);
-                console.log(response);
+let deleteUser = document.querySelector("#delete-user");
 
-                // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
-                //    errorInput(input);
-                // });
-            }
-            else
-                setTimeout(window.location.replace("/pages/feed.php"), 1000);  
-        }
+if (deleteUser) {
 
-        sendRequest("/actions/deletePost.php", data, callback);
+    deleteUser.onclick = (e) => {
+        e.preventDefault();
+        deleteConfirmation("user");
     }
 }
 
@@ -670,23 +665,91 @@ let errorInput = (element) => {
 
 // Delete Confirmation
 
-let deleteConfirmation = (message) => {
+let deleteConfirmation = (component, postID, commentID) => {
 
-    let confirmation = document.querySelector("#delete-post-confirmation");
+    let confirmation = document.querySelector("#delete-" + component + "-confirmation");
 
     if (confirmation) {
-        console.log("Are you sure you want to delete this " + message + "?");
-        // confirmation.textContent = message;
+
         confirmation.style.display = "block";
-        // confirmation.classList.add("fade");
+        confirmation.classList.add("pop");
+        document.querySelector("#dim-mask").classList.add("dim");
 
-        setTimeout(() => {
-            // confirmation.classList.remove("fade");
+        let yesBtn = document.querySelector("#delete-" + component + "-confirmation #yes");
+        let noBtn = document.querySelector("#delete-" + component + "-confirmation #no");
+
+        yesBtn.onclick = (e) => {
+
+            if (component === "post") {
+
+                let data = { postID: postID }
+
+                let callback = (response) => {
+                    if (response === "failure" || response === "NOT SIGNED IN!") {
+                        // warnUser(response);
+                        console.log(response);
+
+                        // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
+                        //    errorInput(input);
+                        // });
+                    }
+                    // else
+                    setTimeout(window.location.replace("/pages/feed.php"), 1000);
+                }
+                sendRequest("/actions/deletePost.php", data, callback);
+
+            } else if (component === "comment") {
+
+                let data = { commentID: commentID }
+
+                let callback = (response) => {
+                    if (response === "failure" || response === "NOT SIGNED IN!") {
+                        // warnUser(response);
+                        console.log(response);
+
+                        // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
+                        //    errorInput(input);
+                        // });
+                    }
+                    else
+                        setTimeout(window.location.replace("/pages/post.php?id=" + postID), 1000);
+                }
+                sendRequest("/actions/deleteComment.php", data, callback);
+
+            } else if (component === "user") {
+
+                let callback = (response) => {
+
+                    if (response === "failure" || response === "NOT SIGNED IN!") {
+                        // warnUser(response);
+                        console.log(response);
+
+                        // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
+                        //    errorInput(input);
+                        // });
+                    }
+                    else {
+                        let callback = (response) => {
+                            if (response === "success") {
+                                setTimeout(window.location.replace("/pages/feed.php"), 1000);
+                            }
+                        }
+                        sendRequest("/actions/logout.php", {}, callback);
+                    }
+                }
+
+                sendRequest("/actions/deleteUser.php", {}, callback);
+            }
+
             confirmation.style.display = "none";
-            // confirmation.textContent = "";
-        }, 2000);
-    }
+        }
 
+        noBtn.onclick = (e) => {
+            confirmation.style.display = "none";
+            confirmation.classList.remove("pop");
+            document.querySelector("#dim-mask").classList.remove("dim");
+        }
+    }
 }
 
 // Warning

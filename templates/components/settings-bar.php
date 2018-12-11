@@ -16,8 +16,8 @@
             <textarea type="text" name="bio" placeholder="Update bio"></textarea>
         </div>
         <div>
-            <button type="submit" class="fill">Update profile</button>
-            <button type="button" class="fill switch-btn">Update password</button>
+            <button type="submit" class="fill">Update profile Now</button>
+            <button type="button" class="fill switch-btn">Password Settings</button>
         </div>
     </form>
 
@@ -28,8 +28,8 @@
             <input type="password" name="chkpassword" placeholder="Reenter new password">
         </div>
         <div>
-            <button type="submit" class="fill">Update password</button>
-            <button type="button" class="fill switch-btn">Update profile</button>
+            <button type="submit" class="fill">Update password Now</button>
+            <button type="button" class="fill switch-btn">Profile Settings</button>
         </div>
     </form>
 
