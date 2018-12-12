@@ -1,4 +1,7 @@
 <aside id="newpost-bar" class="container">
+
+    <span id="warning" class="modal container"></span>
+
     <div id="newPostButtons">
         <button type="button" class="fill newPostBtn storyBtn" onclick="openCloseNewStory()">New Story</button>
         <button type="button" class="fill newPostBtn imageBtn" onclick="openCloseNewImage()">New Image</button>

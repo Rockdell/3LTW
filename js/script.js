@@ -435,19 +435,21 @@ if (createNewStoryPost) {
     createNewStoryPost.onsubmit = (e) => {
         e.preventDefault();
 
-        let title = createNewStoryPost.querySelector("input[name='postTitle']").value;
-        let content = createNewStoryPost.querySelector("textarea[name='postContent']").value;
+        let title = createNewStoryPost.querySelector("input[name='postTitle']");
+        let content = createNewStoryPost.querySelector("textarea[name='postContent']");
 
         let data = {
-            title: title,
-            content: content
+            title: title.value,
+            content: content.value
         }
 
         let callback = (response) => {
 
-            if (response === "failure" || response === "NOT SIGNED IN!") {
-                // warnUser(response);
-                console.log(response);
+            if (isNaN(parseInt(response))) {
+                errorInput(title);
+                errorInput(content);
+                warnUser(response);
+                // console.log(response);
 
                 // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
                 //    errorInput(input);
@@ -480,19 +482,20 @@ if (createNewImagePost) {
     createNewImagePost.onsubmit = (e) => {
         e.preventDefault();
 
-        let title = createNewImagePost.querySelector("input[name='postTitle']").value;
+        let title = createNewImagePost.querySelector("input[name='postTitle']");
         let picture = createNewImagePost.querySelector("input[name='picture']");
 
         let data = {
-            title: title,
+            title: title.value,
             content: ""
         }
 
         let callback = (response) => {
 
-            if (response === "failure" || response === "NOT SIGNED IN!") {
-                // warnUser(response);
-                console.log(response);
+            if (isNaN(parseInt(response))) {
+                errorInput(title);
+                warnUser(response);
+                // console.log(response);
 
                 // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
                 //    errorInput(input);
@@ -505,8 +508,27 @@ if (createNewImagePost) {
                 let callback_upload = (response) => {
                     if (response === "success")
                         setTimeout(window.location.reload(), 1000);
-                    else
-                        console.log(response);
+                    else {
+                        errorInput(title);
+                        warnUser(response);
+
+                        let data = { postID: postID }
+
+                        let callback = (response) => {
+                            if (response === "failure" || response === "NOT SIGNED IN!") {
+                                // warnUser(response);
+                                console.log(response);
+        
+                                // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
+                                //    errorInput(input);
+                                // });
+                            }
+                            // else
+                            setTimeout(window.location.replace("/pages/feed.php"), 1000);
+                        }
+                        sendRequest("/actions/deletePost.php", data, callback);
+                    }
+                       
                 }
 
                 if (picture.files.length > 0) {

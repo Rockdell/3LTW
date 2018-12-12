@@ -56,7 +56,7 @@
             <i id="staticUp<?=$post["postID"]?>" class="material-icons">thumb_up_alt</i>
         </label>
 
-        <p id="pp<?=$post["postID"]?>"><?=$post["points"]?></p>
+        <p id="pp<?=$post["postID"]?>"><?=display_points($post["points"])?></p>
 
         <input type="checkbox" id="downvote<?=$post["postID"]?>"
         <?php if(!isLoggedIn()) echo "disabled"; if($userVote === "0") echo "checked"?>>

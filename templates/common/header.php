@@ -4,7 +4,7 @@
         <title>Redditter</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/img/favicon.png">
+        <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
         <link href="/css/style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

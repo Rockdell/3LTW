@@ -30,4 +30,15 @@
             return strftime( date( 'Y', $time ) == date( 'Y' ) ? TIMEBEFORE_FORMAT : TIMEBEFORE_FORMAT_YEAR, $time );
     }
 
+    function display_points($points) {
+        if(abs($points) < 1000)
+            return $points;
+        else if(abs($points) < 1000000)
+            return (floor($points / 100)/10)."K";
+        else if(abs($points) < 1000000000)
+            return (floor($points / 100000)/10)."M";
+        else if(abs($points) < 1000000000000)
+            return (floor($points / 100000000)/10)."B";
+    }
+
 ?>

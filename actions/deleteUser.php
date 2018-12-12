@@ -4,7 +4,22 @@
 
     if(isLoggedIn()) {
 
-        $userID = ($_SESSION["userID"]);
+        $userID = $_SESSION["userID"];
+
+        $image = $BASE_DIR."/img/users/".sha1($userID);
+
+        if (file_exists($image.".png")) {
+            $image .= ".png";
+        } else if (file_exists($image.".jpg")) {
+            $image .= ".jpg";
+        } else if (file_exists($image.".gif")) {
+            $image .= ".gif";
+        } else {
+            $image = "";
+        }
+
+        if ($image !== "")
+            unlink($image);
 
         if (removeUser($userID)) {
             unlink($BASE_DIR."/img/users/".$userID.".png");

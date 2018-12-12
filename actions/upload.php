@@ -18,17 +18,29 @@
         return;
     }
 
-    // Check fake image
-    if (getimagesize($_FILES["picture"]["tmp_name"]) == FALSE) {
+    if ($_FILES["picture"]["tmp_name"] == null || getimagesize($_FILES["picture"]["tmp_name"]) == FALSE) {
         echo "Image is not valid.";
         return;
     }
 
-    // Check file size
-    if ($_FILES["picture"]["size"] > 200000000) {
-        echo "File size bigger than 2MB.";
-        return;
+    if ($args[1] !== "") {
+        $image = $target_dir.sha1($args[1]);
+    } else {
+        $image = $target_dir.sha1($_SESSION["userID"]);
     }
+
+    if (file_exists($image.".png")) {
+        $image .= ".png";
+    } else if (file_exists($image.".jpg")) {
+        $image .= ".jpg";
+    } else if (file_exists($image.".gif")) {
+        $image .= ".gif";
+    } else {
+        $image = "";
+    }
+
+    if ($image !== "")
+        unlink($image);
 
     if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file))
         echo "success";
