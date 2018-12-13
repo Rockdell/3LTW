@@ -159,6 +159,10 @@ footer {
 	font-weight: bolder;
 }
 
+#profile-bar span button {
+	font-size: 70%;
+}
+
 #profile-bar span #yes, #profile-bar span #no {
 	margin-left: 0em;
 	margin-right: 0em;
@@ -256,6 +260,7 @@ footer {
 #search-bar ul li {
 	display: inline;
 	color: var(--radio-color);
+
 }
   
 #search-bar ul li input[type=radio]{
@@ -280,7 +285,8 @@ footer {
 }
   
 #search-bar input[type=radio]:checked ~ label{
-	color: var(--radio-selected-color);
+	/* color: var(--radio-selected-color); */
+	color: var(--alt2-container-bg-color);
 }
 
 /* NEW POST BAR */
@@ -305,6 +311,8 @@ footer {
 
 #newpost-bar #newPostInput {
 	height: 17.5em;
+	object-fit: contain;
+	align-content: center;
 }
 
 #newpost-bar .newPostBtn {
@@ -314,8 +322,12 @@ footer {
 }
 
 #newpost-bar .newPost-picture {
-	max-width: 84%;
-	max-height: 77%;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+#newpost-bar #picture-preview-enclosure {
+	height: 80%;
 }
 
 /* POST */
@@ -372,6 +384,11 @@ footer {
 	grid-area: post-content;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
+}
+
+#list-posts .post #post-content {
+	max-height: 23em;
+	overflow: hidden;
 }
 
 .post #post-content #post-image {
@@ -470,6 +487,16 @@ footer {
 .post-picture {
 	max-width: 100%;
 	height: auto;
+}
+
+#picture-modal #popup-picture {
+	max-width: 70vw;
+}
+
+#picture-modal {
+	display: inline-block;
+	max-height: 80%;
+	overflow-y: auto;
 }
 
 /* MINIATURE POST PICTURE */

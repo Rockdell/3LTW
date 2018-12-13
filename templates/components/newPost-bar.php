@@ -22,10 +22,12 @@
         <h1>New Image</h1>
         <div id="newPostInput">
             <input type="text" name="postTitle" placeholder="Enter Post Title" required>
-            <label for="picture-preview">
-                <img src="/img/posts/insertImage.png" class="newPost-picture">
-                <input id="picture-preview" type="file" name="picture" accept="image/*" required>
-            </label>
+            <div id="picture-preview-enclosure">
+                <label for="picture-preview">
+                    <img src="/img/posts/insertImage.png" class="newPost-picture">
+                    <input id="picture-preview" type="file" name="picture" accept="image/*" required>
+                </label>
+            </div>
         </div>
         <div>
             <button type="submit" class="fill">Create new Post</button>

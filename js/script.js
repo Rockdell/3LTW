@@ -100,6 +100,9 @@ window.onclick = (e) => {
             modal.classList.remove("pop");
             modal.classList.remove("one");
             modal.classList.remove("two");
+
+            // document.querySelector("#popup-picture").removeAttribute('src');
+            document.querySelector("body").style.overflow = "visible";
         });
 
         document.querySelector("#dim-mask").classList.remove("dim");
@@ -130,6 +133,8 @@ document.querySelectorAll(".open-btn").forEach((openButton) => {
 
         if (modal == null)
             return;
+        
+        document.querySelector("body").style.overflow = "hidden";
 
         modal.style.display = "flex";
 
@@ -317,6 +322,8 @@ if (loginForm) {
     loginForm.onsubmit = (e) => {
         e.preventDefault();
 
+        loginForm.querySelector("button[type=submit]").disabled = true;
+
         let userID = loginForm.querySelector("input[name='userID']").value;
         let password = loginForm.querySelector("input[name='password']").value;
 
@@ -338,7 +345,8 @@ if (loginForm) {
             }
         }
     
-        sendRequest("/actions/login.php", data, callback); 
+        sendRequest("/actions/login.php", data, callback);
+        loginForm.querySelector("button[type=submit]").disabled = false;
     }
 }
 
@@ -355,7 +363,7 @@ logoutButtons.forEach((logoutButton) => {
             if (response === "success")
                 setTimeout(window.location.replace("/pages/feed.php"), 1000);
         }
-        
+
         sendRequest("/actions/logout.php", {}, callback);
     }
 });
@@ -379,6 +387,8 @@ if (registerForm) {
     registerForm.onsubmit = (e) => {
 
         e.preventDefault();
+
+        registerForm.querySelector("button[type=submit]").disabled = true;
 
         let picture = registerForm.querySelector("input[name='picture']");
         let userID = registerForm.querySelector("input[name='userID']").value;
@@ -423,8 +433,25 @@ if (registerForm) {
         }
 
         sendRequest("/actions/register.php", data, callback);
+        registerForm.querySelector("button[type=submit]").disabled = false;
     }
 }
+
+// Post Images Popup
+
+document.querySelectorAll(".post-picture").forEach((postImage) => {
+    postImage.onclick = (e) => {
+        let modal = document.querySelector("#picture-modal");
+
+        document.querySelector("#popup-picture").src = postImage.src;
+
+        modal.style.display = "block";
+        modal.classList.add("pop");
+
+        document.querySelector("body").style.overflow = "hidden";
+        document.querySelector("#dim-mask").classList.add("dim");
+    }
+});
 
 // Create New Story Post
 
@@ -434,6 +461,8 @@ if (createNewStoryPost) {
 
     createNewStoryPost.onsubmit = (e) => {
         e.preventDefault();
+       
+        createNewStoryPost.querySelector("button[type=submit]").disabled = true;
 
         let title = createNewStoryPost.querySelector("input[name='postTitle']");
         let content = createNewStoryPost.querySelector("textarea[name='postContent']");
@@ -449,17 +478,13 @@ if (createNewStoryPost) {
                 errorInput(title);
                 errorInput(content);
                 warnUser(response);
-                // console.log(response);
-
-                // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
-                //    errorInput(input);
-                // });
             }
             else
-                setTimeout(window.location.reload(), 1000);  
+                setTimeout(window.location.reload(), 1000);
         }
 
         sendRequest("/actions/createNewStoryPost.php", data, callback);
+        createNewStoryPost.querySelector("button[type=submit]").disabled = false;
     }
 }
 
@@ -482,6 +507,8 @@ if (createNewImagePost) {
     createNewImagePost.onsubmit = (e) => {
         e.preventDefault();
 
+        createNewImagePost.querySelector("button[type=submit]").disabled = true;
+
         let title = createNewImagePost.querySelector("input[name='postTitle']");
         let picture = createNewImagePost.querySelector("input[name='picture']");
 
@@ -495,12 +522,6 @@ if (createNewImagePost) {
             if (isNaN(parseInt(response))) {
                 errorInput(title);
                 warnUser(response);
-                // console.log(response);
-
-                // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
-                //    errorInput(input);
-                // });
-
             }
             else {
                 let newPostID = parseInt(response);
@@ -516,31 +537,25 @@ if (createNewImagePost) {
 
                         let callback = (response) => {
                             if (response === "failure" || response === "NOT SIGNED IN!") {
-                                // warnUser(response);
-                                console.log(response);
-        
-                                // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
-                                //    errorInput(input);
-                                // });
+                                warnUser(response);
                             }
-                            // else
-                            setTimeout(window.location.replace("/pages/feed.php"), 1000);
+                            else
+                                setTimeout(window.location.replace("/pages/feed.php"), 1000);
                         }
                         sendRequest("/actions/deletePost.php", data, callback);
                     }
-                       
+
                 }
 
                 if (picture.files.length > 0) {
                     let picture_name = "posts." + newPostID + picture.files[0].name.match(/(\.\w+$)/)[0];
                     uploadPicture(picture.files[0], picture_name, callback_upload);
                 }
-
-                // setTimeout(window.location.reload(), 1000);
             }
         }
 
         sendRequest("/actions/createNewImagePost.php", data, callback);
+        createNewImagePost.querySelector("button[type=submit]").disabled = false;
     }
 }
 
@@ -599,6 +614,8 @@ if (updateProfile) {
     updateProfile.onsubmit = (e) => {
         e.preventDefault();
 
+        updateProfile.querySelector("button[type=submit]").disabled = true;
+
         let picture = updateProfile.querySelector("input[name='picture']");
         let username = updateProfile.querySelector("input[name='username']").value;
         let mail = updateProfile.querySelector("input[name='mail']").value;
@@ -639,6 +656,7 @@ if (updateProfile) {
         }
 
         sendRequest("/actions/updateProfile.php", data, callback);
+        updateProfile.querySelector("button[type=submit]").disabled = false;
     }
 }
 
@@ -650,6 +668,8 @@ if (updatePassword) {
 
     updatePassword.onsubmit = (e) => {
         e.preventDefault();
+
+        updatePassword.querySelector("button[type=submit]").disabled = true;
 
         let password = updatePassword.querySelector("input[name='password']").value;
         let chkpassword = updatePassword.querySelector("input[name='chkpassword']").value;
@@ -674,6 +694,7 @@ if (updatePassword) {
         }
 
         sendRequest("/actions/updatePassword.php", data, callback);
+        updatePassword.querySelector("button[type=submit]").disabled = false;
     }
 }
 
@@ -713,15 +734,9 @@ let deleteConfirmation = (component, postID, commentID) => {
                 let data = { postID: postID }
 
                 let callback = (response) => {
-                    if (response === "failure" || response === "NOT SIGNED IN!") {
-                        // warnUser(response);
+                    if (response === "failure" || response === "NOT SIGNED IN!")
                         console.log(response);
 
-                        // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
-                        //    errorInput(input);
-                        // });
-                    }
-                    // else
                     setTimeout(window.location.replace("/pages/feed.php"), 1000);
                 }
                 sendRequest("/actions/deletePost.php", data, callback);
@@ -731,14 +746,8 @@ let deleteConfirmation = (component, postID, commentID) => {
                 let data = { commentID: commentID }
 
                 let callback = (response) => {
-                    if (response === "failure" || response === "NOT SIGNED IN!") {
-                        // warnUser(response);
+                    if (response === "failure" || response === "NOT SIGNED IN!")
                         console.log(response);
-
-                        // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
-                        //    errorInput(input);
-                        // });
-                    }
                     else
                         setTimeout(window.location.replace("/pages/post.php?id=" + postID), 1000);
                 }
@@ -748,14 +757,8 @@ let deleteConfirmation = (component, postID, commentID) => {
 
                 let callback = (response) => {
 
-                    if (response === "failure" || response === "NOT SIGNED IN!") {
-                        // warnUser(response);
+                    if (response === "failure" || response === "NOT SIGNED IN!")
                         console.log(response);
-
-                        // updateProfile.querySelectorAll("input, textarea").forEach((input) => {
-                        //    errorInput(input);
-                        // });
-                    }
                     else {
                         let callback = (response) => {
                             if (response === "success") {

@@ -3,8 +3,8 @@
 function searchPosts($postsID, $query) {
 	global $dbh;
 	try {
-		$stmt = $dbh->prepare("SELECT * FROM Post WHERE postID IN (".$postsID.") AND content LIKE ?");
-		$stmt->execute(array("%".$query."%"));
+		$stmt = $dbh->prepare("SELECT * FROM Post WHERE postID IN (".$postsID.") AND (content LIKE ? OR title LIKE ?)");
+		$stmt->execute(array("%".$query."%", "%".$query."%"));
 		return $stmt->fetchAll();
 	} catch(PDOException $e) {
 		echo $e->getMessage();
