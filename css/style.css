@@ -94,12 +94,14 @@ footer {
 	width: 40em;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: space-between;
 }
 
 #list-posts > h1 {
+	margin-top: 2em;
 	color: var(--main-text-color);
 	text-align: center;
+	display: block;
 }
 
 /* PROFILE BAR */

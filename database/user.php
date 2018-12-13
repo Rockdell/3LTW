@@ -3,9 +3,10 @@
 /* Checks if the Login information is correct */
 function isLoginCorrect($userID, $password) {
 	global $dbh;
-	$stmt = $dbh->prepare("SELECT * FROM User WHERE userID = ? AND pass = ?");
-	$stmt->execute(array($userID, hash("sha256", $password)));
-	return $stmt->fetch() !== false;
+	$stmt = $dbh->prepare("SELECT * FROM User WHERE userID = ?");
+	$stmt->execute(array($userID));
+	$user = $stmt->fetch();
+	return $user !== false && password_verify($password, $user["pass"]);
 }
 
 /* Returns the user with the given ID */
@@ -26,7 +27,7 @@ function addUser($userID, $username, $password, $email) {
 	global $dbh;
 	try {
 		$stmt = $dbh->prepare("INSERT INTO User (userID,username,pass,mail) VALUES (?,?,?,?)");
-		$stmt->execute(array($userID, $username, hash('sha256', $password), $email));
+		$stmt->execute(array($userID, $username, password_hash($password, PASSWORD_DEFAULT), $email));
 		return 1;
 	} catch(PDOException $e) {
 		echo $e->getMessage();
@@ -72,7 +73,7 @@ function updateUserPassword($userID, $password) {
 	global $dbh;
 	try {
 		$stmt = $dbh->prepare("UPDATE User SET pass = ? WHERE userID = ?");
-		$stmt->execute(array(hash('sha256', $password), $userID));
+		$stmt->execute(array(password_hash($password, PASSWORD_DEFAULT), $userID));
 		return 1;
 	} catch(PDOException $e) {
 		echo $e->getMessage();

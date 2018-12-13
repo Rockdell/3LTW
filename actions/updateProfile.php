@@ -17,7 +17,7 @@
             return;
         }
     
-        $username = $_POST["username"];
+        $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
     }
 
     if ($_POST["mail"] !== "") {
@@ -39,7 +39,7 @@
             return;
         }
 
-        $bio = $_POST["bio"];
+        $bio = htmlspecialchars($_POST["bio"], ENT_QUOTES);
     }
 
     $birthday = "1998-10-02";

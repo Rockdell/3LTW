@@ -17,8 +17,9 @@
 		include_once($BASE_DIR."/templates/components/search-bar.php");
 		include_once($BASE_DIR."/templates/components/list-posts.php");
 
-		if (isLoggedIn())
+		if (isLoggedIn()) {
 			include_once($BASE_DIR."/templates/components/newPost-bar.php");
+		}
 		else {
 			echo "<div class=\"free-space container\"></div>";
 		}

@@ -10,7 +10,7 @@
         {
             if (strlen($_POST["title"]) > 60)
                 echo "Title too long! We give you a budget of 60 words.";
-            else if (($newPostID = addPost($_SESSION["userID"], $_POST["title"], $_POST["content"])) != -1)
+            else if (($newPostID = addPost($_SESSION["userID"], htmlspecialchars($_POST["title"], ENT_QUOTES), $_POST["content"])) != -1)
                 echo $newPostID;
             else
                 echo "failure";
