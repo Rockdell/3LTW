@@ -4,24 +4,9 @@
 
     if(isLoggedIn()) {
 
-        if (getPostById($_POST["postID"])["content"] === "") {
-            //It means its an image post!
-            
-            $image = $BASE_DIR."/img/posts/".sha1($_POST["postID"]);
-
-            if (file_exists($image.".png")) {
-                $image .= ".png";
-            } else if (file_exists($image.".jpg")) {
-                $image .= ".jpg";
-            } else if (file_exists($image.".gif")) {
-                $image .= ".gif";
-            } else {
-                $image = "";
-            }
-
-            if ($image !== "")
-                unlink($image);
-        }
+        //It means its an image post!
+        if (getPostById($_POST["postID"])["content"] === "")
+            unlink(glob($BASE_DIR."/img/posts/".sha1($_POST["postID"]).".{png,jpeg,jpg,gif}", GLOB_BRACE)[0]);
 
         if (removePost($_POST["postID"]))
             echo "success";

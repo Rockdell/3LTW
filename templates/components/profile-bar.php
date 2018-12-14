@@ -14,24 +14,15 @@
     <section id="user-info">
         <img class="profile-picture" src=
         <?php
-            $image = "/img/users/".sha1($user["userID"]);
-
-            if (file_exists($BASE_DIR.$image.".png")) {
-                echo $image.".png";
-            } else if (file_exists($BASE_DIR.$image.".jpg")) {
-                echo $image.".jpg";
-            } else if (file_exists($BASE_DIR.$image.".gif")) {
-                echo $image.".gif";
-            } else {
-                echo "/img/users/unknown.png";
-            } 
+            $image = glob($BASE_DIR."/img/users/".sha1($user["userID"]).".{png,jpeg,jpg,gif}", GLOB_BRACE);
+            echo (!empty($image) ? str_replace($BASE_DIR, "", $image[0]) : "/img/users/unknown.png");
         ?>>
         <h1><?=$user["username"]?></h1>
     </section>
 
     <section id="user-bio">
         <?php if (strcmp($user["bio"], "")) { ?>
-            <p><?=$user["bio"]?></p>
+            <p><?=nl2br($user["bio"])?></p>
         <?php } else { ?>
             <p>Nothing to show</p>
         <?php } ?>

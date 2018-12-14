@@ -6,20 +6,10 @@
 
         $userID = $_SESSION["userID"];
 
-        $image = $BASE_DIR."/img/users/".sha1($userID);
+        $image = glob($BASE_DIR."/img/users/".sha1($userID).".{png,jpeg,jpg,gif}", GLOB_BRACE);
 
-        if (file_exists($image.".png")) {
-            $image .= ".png";
-        } else if (file_exists($image.".jpg")) {
-            $image .= ".jpg";
-        } else if (file_exists($image.".gif")) {
-            $image .= ".gif";
-        } else {
-            $image = "";
-        }
-
-        if ($image !== "")
-            unlink($image);
+        if (!empty($image))
+            unlink($image[0]);
 
         if (removeUser($userID)) {
             unlink($BASE_DIR."/img/users/".$userID.".png");

@@ -5,17 +5,8 @@
 
             <img class="miniature-profile-picture" src=
             <?php 
-                $image = "/img/users/".sha1($_SESSION["userID"]);
-
-                if (file_exists($BASE_DIR.$image.".png")) {
-                    echo $image.".png";
-                } else if (file_exists($BASE_DIR.$image.".jpg")) {
-                    echo $image.".jpg";
-                } else if (file_exists($BASE_DIR.$image.".gif")) {
-                    echo $image.".gif";
-                } else {
-                    echo "/img/users/unknown.png";
-                } 
+                $image = glob($BASE_DIR."/img/users/".sha1($_SESSION["userID"]).".{png,jpeg,jpg,gif}", GLOB_BRACE);
+                echo (!empty($image) ? str_replace($BASE_DIR, "", $image[0]) : $BASE_DIR."/img/users/unknown.png");
             ?>>
         </a>
     <?php } else { ?>

@@ -104,6 +104,11 @@ footer {
 	display: block;
 }
 
+#list-posts .post #post-content {
+	max-height: 30em;
+	overflow: hidden;
+}
+
 /* PROFILE BAR */
 
 #profile-bar {
@@ -199,6 +204,7 @@ footer {
 
 #sign-bar img, #settings-bar img, #newpost-bar img {
 	cursor: pointer;
+	object-fit: cover;
 }
 
 #sign-bar #picture-preview, #settings-bar #picture-preview, #newpost-bar #picture-preview {
@@ -260,7 +266,6 @@ footer {
 #search-bar ul li {
 	display: inline;
 	color: var(--radio-color);
-
 }
   
 #search-bar ul li input[type=radio]{
@@ -386,11 +391,6 @@ footer {
 	margin-bottom: 0.5em;
 }
 
-#list-posts .post #post-content {
-	max-height: 23em;
-	overflow: hidden;
-}
-
 .post #post-content #post-image {
 	align-self: center;
 	text-align: center;
@@ -490,7 +490,7 @@ footer {
 }
 
 #picture-modal #popup-picture {
-	max-width: 70vw;
+	max-width: 65vw;
 }
 
 #picture-modal {
@@ -502,7 +502,8 @@ footer {
 /* MINIATURE POST PICTURE */
 
 .miniature-post-picture {
-	width: 84%;
+	height: 35px;
+	width: 35px;
 	vertical-align: middle;
 }
 

@@ -28,22 +28,11 @@
     <section id="post-content">
         <?php if ($post["content"] === "") { ?>
             <div id="post-image">
-                <img class="post-picture" src=
-                <?php
-                    $image = "/img/posts/".sha1($post["postID"]);
-
-                    if (file_exists($BASE_DIR.$image.".png")) {
-                        echo $image.".png";
-                    } else if (file_exists($BASE_DIR.$image.".jpg")) {
-                        echo $image.".jpg";
-                    } else if (file_exists($BASE_DIR.$image.".gif")) {
-                        echo $image.".gif";
-                    }
-                ?>>
+                <img class="post-picture" src=<?=str_replace($BASE_DIR, "", glob($BASE_DIR."/img/posts/".sha1($post["postID"]).".{png,jpeg,jpg,gif}", GLOB_BRACE)[0])?>>
             </div>
         <?php } else { ?>
             <div id="post-story">
-                <p><?=$post["content"]?></p>
+                <p><?=nl2br($post["content"])?></p>
             </div>
         <?php } ?>
     </section>
@@ -79,13 +68,13 @@
             </p>
         </div>
     </section>
+</article>
 
-    <?php if (isset($comments)) { ?>
+<!-- TODO -->
+<?php if (isset($comments) && !empty($comments)) { ?>
         <section id="post-comments">
             <?php foreach($comments as $comment) { ?>
                 <h1><?=$comment["content"]?></h1>
             <?php } ?>
         </section>
-    <?php } ?>
-
-</article>
+<?php } ?>
