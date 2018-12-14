@@ -3,7 +3,6 @@
     require_once($BASE_DIR."/database/user.php");
     
     $userVote = null;
-    $numberComments = getNumberComments($post["postID"]);
     
     if(isLoggedIn())
         $userVote = getSingleUserPostVote($_SESSION["userID"], $post["postID"])["vote"];
@@ -54,7 +53,7 @@
             <i id="staticDown<?=$post["postID"]?>" class="material-icons">thumb_down_alt</i>
         </label>
 
-        <p id="nrComments"><?=$numberComments["nrComments"]?></p>
+        <p id="nrComments"><?=getNumberComments($post["postID"])["nrComments"]?></p>
         <a id="nrCommentsLink" href="/pages/post.php?id=<?=$post["postID"]?>">
             <i class="material-icons">textsms</i>
         </a>

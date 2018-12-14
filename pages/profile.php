@@ -6,7 +6,7 @@
     $user =  getUserById($_GET["user"]);
 
     if ($user == NULL)
-        header("Location: /pages/404.php");
+        header("Location: /pages/error-404.php");
 
     $posts = getPostByUser($_GET["user"]);
     

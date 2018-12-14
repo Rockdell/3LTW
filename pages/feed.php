@@ -4,7 +4,6 @@
 	require_once($BASE_DIR."/database/comment.php");
 
 	$posts = getAllPosts();
-
 	include_once($BASE_DIR."/actions/sort.php");
 
 	include_once($BASE_DIR."/templates/common/header.php");

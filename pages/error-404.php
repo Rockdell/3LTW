@@ -4,7 +4,7 @@
     include_once($BASE_DIR."/templates/common/header.php"); 
 ?>
 
-<div id="404-page" class="page fof">
+<div id="error-404-page" class="page fof">
     <h1>Error 404</h1>
 </div>
 

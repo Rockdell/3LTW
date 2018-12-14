@@ -97,16 +97,27 @@ footer {
 	justify-content: space-between;
 }
 
-#list-posts > h1 {
+#list-posts .post #post-content {
+	max-height: 30em;
+	overflow: hidden;
+}
+
+/* LIST COMMENTS */
+
+#list-comments {
+	width: 72.5%;
+}
+
+#list-comments .comment {
+	margin: 0.5em;
+	padding: 0.5em;
+}
+
+#list-posts > h1, #list-comments > h1  {
 	margin-top: 2em;
 	color: var(--main-text-color);
 	text-align: center;
 	display: block;
-}
-
-#list-posts .post #post-content {
-	max-height: 30em;
-	overflow: hidden;
 }
 
 /* PROFILE BAR */
@@ -414,7 +425,6 @@ footer {
 	margin: 0;
 	padding: 0;
 	-webkit-appearance: none;
-	appearance: none;
 }
 
 .post #post-info label {
@@ -472,6 +482,100 @@ footer {
 	text-decoration: underline;
 }
 
+/* COMMENT SIMPLIFY/MERGE COMMON CSS WITH POST LATER */
+
+.comment {
+	max-width: inherit;
+	background: var(--main-container-bg-color);
+	box-shadow: var(--box-shadow);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: "comment-content comment-content" "comment-info comment-info" "sub-comments sub-comments";
+}
+
+.comment > h1 {
+	margin-top: 2em;
+	color: var(--main-text-color);
+	text-align: center;
+	display: block;
+}
+
+.comment #comment-content {
+	grid-area: comment-content;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.comment #comment-info {
+	grid-area: post-info;
+	margin-top: 1em;
+}
+
+.comment #comment-content, #comment-info {
+	color: var(--main-text-color);
+}
+
+.comment #comment-info input {
+	margin: 0;
+	padding: 0;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.comment #comment-info label {
+	cursor: pointer;
+	transition: color 1s;
+}
+
+.comment #comment-info input[id^="upvote"]:checked ~ label[for^="upvote"] {
+	color: green;
+}
+
+.comment #comment-info input[id^="downvote"]:checked ~ label[for^="downvote"] {
+	color: crimson;
+}
+
+.comment #comment-info label[for^="upvote"] i:hover, label[for^="downvote"] i:hover {	
+	filter: contrast(50%);
+}
+
+.comment #comment-info label[for^="upvote"] i[id^="movingUp"] {
+	animation: jumpUp 0.5s 0s ease;
+}
+
+.comment #comment-info label[for^="downvote"] i[id^="movingDown"] {
+	animation: jumpDown 0.5s 0s ease;
+}
+
+.comment #sub-comments {
+	grid-area: sub-comments;
+
+}
+
+.comment #commentByTimeAgo {
+	position: relative;
+	float: right;
+	font-size: 0.8em;
+}
+
+.comment #commentBy {
+	display: inline;
+}
+
+.comment #commentByLink {
+	text-decoration: underline;
+}
+
+
+/* POST PAGE */
+
+#post-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
 #post-page .post {
 	width: 70%;
 	grid-template-columns: 20fr 1fr;
@@ -481,6 +585,17 @@ footer {
 #post-page .post #delete-post {
 	display: block;
 }
+
+/* 404 PAGE */
+
+#error-404-page {
+	color: var(--main-text-color);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 
 /* PICTURE MODAL */
 
@@ -827,7 +942,7 @@ button {
 		max-width: 70vw;
 	}
 
-	#list-posts {
+	#list-posts, #list-comments {
 		width: 100%;
 	}
 

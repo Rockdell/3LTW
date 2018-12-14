@@ -92,6 +92,16 @@ if (maxWidth.matches) {
         search_bar.classList.add("modal");
 }
 
+// Comment colors
+let colorIndex = 0;
+document.querySelectorAll(".comment").forEach((comment) => {
+    let colors = ["#ff6262", "#6fff62", "#7962ff", "#62e0ff", "#ffef60"];
+    comment.style.borderLeft = "2px " + colors[colorIndex] + " solid";
+    comment.style.borderTop = "1px " + colors[colorIndex++] + " solid";
+
+    if (colorIndex >= colors.length) colorIndex = 0;
+})
+
 // Handle click
 window.onclick = (e) => {
     if (e.target.id == "dim-mask") {
