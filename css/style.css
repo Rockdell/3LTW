@@ -482,12 +482,7 @@ footer {
 	display: block;
 }
 
-/* POST PICTURE */
-
-.post-picture {
-	max-width: 100%;
-	height: auto;
-}
+/* PICTURE MODAL */
 
 #picture-modal #popup-picture {
 	max-width: 65vw;
@@ -499,13 +494,20 @@ footer {
 	overflow-y: auto;
 }
 
+/* POST PICTURE */
+
+.post-picture {
+	max-width: 100%;
+	height: auto;
+}
+
 /* MINIATURE POST PICTURE */
 
-.miniature-post-picture {
+/* .miniature-post-picture {
 	height: 35px;
 	width: 35px;
 	vertical-align: middle;
-}
+} */
 
 /* PROFILE PICTURE */
 
@@ -515,6 +517,7 @@ footer {
 	width: 75px;
 	vertical-align: middle;
 	margin-bottom: 0.75em;
+	object-fit: cover;
 }
 
 /* MINIATURE PROFILE PICTURE */
@@ -524,6 +527,7 @@ footer {
 	width: 40px;
 	height: 40px;
 	vertical-align: middle;
+	object-fit: cover;
 }
 
 /* FREE SPACE */

@@ -25,25 +25,25 @@
     if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
 
         // Crop picture of user
-        if ($args[0] === "users") {
-            $openImage = "imagecreatefrom".$args[2];
-            $image = $openImage($target_file);
-            $width = imagesx($image);
-            $height = imagesy($image);
+        // if ($args[0] === "users") {
+        //     $openImage = "imagecreatefrom".$args[2];
+        //     $image = $openImage($target_file);
+        //     $width = imagesx($image);
+        //     $height = imagesy($image);
 
-            if ($width > $height)
-                $crop = imagecrop($image, ["x" => ($width - $height) / 2, "y" => 0, "width" => $height, "height" => $height]);
-            else
-                $crop = imagecrop($image, ["x" => 0, "y" => ($height - $width) / 2, "width" => $width, "height" => $width]);
+        //     if ($width > $height)
+        //         $crop = imagecrop($image, ["x" => ($width - $height) / 2, "y" => 0, "width" => $height, "height" => $height]);
+        //     else
+        //         $crop = imagecrop($image, ["x" => 0, "y" => ($height - $width) / 2, "width" => $width, "height" => $width]);
 
-            if ($crop) {
-                $saveImage = "image".$args[2];
-                $saveImage($crop, $target_file);
-                imagedestroy($crop);
-            }
+        //     if ($crop) {
+        //         $saveImage = "image".$args[2];
+        //         $saveImage($crop, $target_file);
+        //         imagedestroy($crop);
+        //     }
 
-            imagedestroy($image);
-        }
+        //     imagedestroy($image);
+        // }
 
         echo "success";
     } 
