@@ -114,7 +114,7 @@ if (maxWidth.matches) {
 // Comment colors
 let colorIndex = 0;
 document.querySelectorAll(".comment").forEach((comment) => {
-    let colors = ["#ff6262", "#6fff62", "#7962ff", "#62e0ff", "#ffef60"];
+    let colors = ["#85144b", "#001f3f", "#0074D9", "#2ECC40", "#FFDC00", "#FF851B", "#FF4136"];
     comment.style.borderLeft = "2px " + colors[colorIndex] + " solid";
     comment.style.borderTop = "1px " + colors[colorIndex++] + " solid";
 
