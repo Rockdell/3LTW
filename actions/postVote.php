@@ -1,6 +1,6 @@
 <?php
     require_once("../includes/init.php");
-    require_once("../database/timeAgo.php");
+    require_once("../database/utils.php");
     require_once($BASE_DIR."/database/post.php");
 
     if(isLoggedIn()) {

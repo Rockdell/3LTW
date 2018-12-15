@@ -1,9 +1,8 @@
 <?php
-    require_once($BASE_DIR."/database/timeAgo.php");
+    require_once($BASE_DIR."/database/utils.php");
     require_once($BASE_DIR."/database/user.php");
     
     $userVote = null;
-    
     if(isLoggedIn())
         $userVote = getSingleUserPostVote($_SESSION["userID"], $post["postID"])["vote"];
 ?>

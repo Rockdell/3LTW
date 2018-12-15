@@ -541,8 +541,9 @@ footer {
 	margin-top: 1em;
 }
 
-.comment #comment-info p[id^="pp"] {
+.comment #comment-info p[id="dp"] {
 	font-weight: bold;
+	font-size: 0.8em;
 	display: inline;
 	position: relative;
 	left: 0.1em;

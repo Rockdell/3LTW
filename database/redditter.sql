@@ -8,8 +8,7 @@ CREATE TABLE User (
     username VARCHAR NOT NULL,
     pass VARCHAR NOT NULL,
     mail VARCHAR NOT NULL UNIQUE,
-    bio VARCHAR,
-    birthday DATE
+    bio VARCHAR
 );
 
 CREATE TABLE Post (
@@ -118,14 +117,14 @@ CREATE TRIGGER updateCommentPointsDownInsert
 AFTER INSERT ON CommentVote
 WHEN (new.vote = 0)
 BEGIN
-    UPDATE Comment SET points = points - 1 WHERE Comment.commentD = new.commentID;
+    UPDATE Comment SET points = points - 1 WHERE Comment.commentID = new.commentID;
 END;
 
 CREATE TRIGGER updateCommentPointsUpInsert
 AFTER INSERT ON CommentVote
 WHEN (new.vote = 1)
 BEGIN
-    UPDATE Post SET points = points + 1 WHERE Comment.commentD = new.commentID;
+    UPDATE Comment SET points = points + 1 WHERE Comment.commentID = new.commentID;
 END;
 
 
@@ -135,20 +134,20 @@ CREATE TRIGGER updateCommentPointsDownDelete
 AFTER DELETE ON CommentVote
 WHEN (old.vote = 0)
 BEGIN
-    UPDATE Comment SET points = points + 1 WHERE Comment.commentD = new.commentID;
+    UPDATE Comment SET points = points + 1 WHERE Comment.commentID = old.commentID;
 END;
 
 CREATE TRIGGER updateCommentPointsUpDelete
 AFTER DELETE ON CommentVote
 WHEN (old.vote = 1)
 BEGIN
-    UPDATE Comment SET points = points - 1 WHERE Comment.commentD = new.commentID;
+    UPDATE Comment SET points = points - 1 WHERE Comment.commentID = old.commentID;
 END;
 
 -- Rockdell:vidal
-INSERT INTO User VALUES ('Rockdell', 'Pedro Pinho', '7c8045a66fcb89d3099f8faff3e8058d788982a2d3cb88db73b3aada9f32fd8c', 'xavi@gmail.com', 'This is bio', NULL);
+INSERT INTO User VALUES ('Rockdell', 'Pedro Pinho', '7c8045a66fcb89d3099f8faff3e8058d788982a2d3cb88db73b3aada9f32fd8c', 'xavi@gmail.com', 'This is bio');
 -- kick0ut:ltwftw
-INSERT INTO User VALUES ('kick0ut', 'Miguel Teixeira', '657eaa9e4fc3cccb0cb352eba782f0ae6d7ea8c73688a44421c95c9c9533582e', 'miguel@gmail.com', 'Je suis très jolie', NULL);
+INSERT INTO User VALUES ('kick0ut', 'Miguel Teixeira', '657eaa9e4fc3cccb0cb352eba782f0ae6d7ea8c73688a44421c95c9c9533582e', 'miguel@gmail.com', 'Je suis très jolie');
 
 INSERT INTO Post VALUES (1, 'Rockdell', 'First Post!', 'Hello there, glad to be your first post! :D', strftime('%s', 'now'), 420);
 INSERT INTO Post VALUES (2, 'kick0ut', 'Second Post!', 'Oh Hi Mark, glad to be your second post! xD', '1517355738', 1);

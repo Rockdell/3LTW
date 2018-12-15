@@ -1,25 +1,40 @@
-let upvotes = document.querySelectorAll('#post-info input[id="upvote"]');
-let downvotes = document.querySelectorAll('#post-info input[id="downvote"]');
+let postUpvotes = document.querySelectorAll('#post-info input[id="upvote"]');
+let postDownvotes = document.querySelectorAll('#post-info input[id="downvote"]');
 
-upvotes.forEach((upvote) => {
-    upvote.onclick = () => { upvoteAction(upvote, "post") };
+postUpvotes.forEach((postUpvote) => {
+    postUpvote.onclick = () => { upvoteAction(postUpvote, "post") };
 });
 
-downvotes.forEach((downvote) => {
-    downvote.onclick = () => { downvoteAction(downvote, "post"); };
+postDownvotes.forEach((postDownvote) => {
+    postDownvote.onclick = () => { downvoteAction(postDownvote, "post"); };
+});
+
+let commentUpvotes = document.querySelectorAll('#comment-info input[id="upvote"]');
+let commentDownvotes = document.querySelectorAll('#comment-info input[id="downvote"]');
+
+commentUpvotes.forEach((commentUpvote) => {
+    commentUpvote.onclick = () => { upvoteAction(commentUpvote, "comment") };
+});
+
+commentDownvotes.forEach((commentDownvote) => {
+    commentDownvote.onclick = () => { downvoteAction(commentDownvote, "comment"); };
 });
 
 function upvoteAction(up, type) {
 
     let parent = up.parentElement.parentElement;
-    let postID = up.closest("article").getAttribute("data-id");
+    let componentID;
+    if (type === "post")
+        componentID = up.closest("article").getAttribute("data-id");
+    else if (type === "comment")
+        componentID = up.closest("article").getAttribute("data-commentID");
 
     if (up.checked) {
 
         if (type === "post")
-            postVote("add", postID, 1);
+            postVote("add", componentID, 1);
         else if (type === "comment")
-            console.log("comment");
+            commentVote("add", componentID, 1);
 
         parent.querySelector("i[id='staticUp']").id = "movingUp";
 
@@ -32,9 +47,9 @@ function upvoteAction(up, type) {
     }
     else {
         if (type === "post")
-            postVote("del", postID, 1);
+            postVote("del", componentID, 1);
         else if (type === "comment")
-            console.log("comment");
+            commentVote("del", componentID, 1);;
 
         if ((mvUp = parent.querySelector("i[id='movingUp']")) != null)
             mvUp.id = "staticUp";
@@ -44,13 +59,17 @@ function upvoteAction(up, type) {
 function downvoteAction(down, type) {
 
     let parent = down.parentElement.parentElement;
-    let postID = down.closest("article").getAttribute("data-id");
+    let componentID;
+    if (type === "post")
+        componentID = down.closest("article").getAttribute("data-id");
+    else if (type === "comment")
+        componentID = down.closest("article").getAttribute("data-commentID");
 
     if (down.checked) {
         if (type === "post")
-            postVote("add", postID, 0);
+            postVote("add", componentID, 0);
         else if (type === "comment")
-            console.log("comment");
+            commentVote("add", componentID, 0);
 
         parent.querySelector("i[id='staticDown']").id = "movingDown";
 
@@ -63,9 +82,9 @@ function downvoteAction(down, type) {
     }
     else {
         if (type === "post")
-            postVote("del", postID, 0);
+            postVote("del", componentID, 0);
         else if (type === "comment")
-            console.log("comment");
+            commentVote("del", componentID, 0);
 
         if ((mvDown = parent.querySelector("i[id='movingDown']")) != null)
             mvDown.id = "staticDown";
@@ -90,6 +109,24 @@ function postVote(action, postID, value) {
     sendRequest("/actions/postVote.php", data, callback);
 }
 
+function commentVote(action, commentID, value) {
+
+    let data = {
+        action: action,
+        commentID: commentID,
+        value: value,
+    }
+
+    let callback = (response) => {
+        if (response == "NOT SIGNED IN!" || response == "failure")
+            console.log(response);
+        else
+            document.querySelector("article[data-commentID=\'" + commentID + "\'] #comment-info #dp").innerHTML = response;
+    }
+
+    sendRequest("/actions/commentVote.php", data, callback);
+}
+
 // Media queries
 let maxWidth = window.matchMedia("(max-width: 768px)");
 
@@ -112,14 +149,27 @@ if (maxWidth.matches) {
 }
 
 // Comment colors
-let colorIndex = 0;
-document.querySelectorAll(".comment").forEach((comment) => {
-    let colors = ["#85144b", "#001f3f", "#0074D9", "#2ECC40", "#FFDC00", "#FF851B", "#FF4136"];
-    comment.style.borderLeft = "2px " + colors[colorIndex] + " solid";
-    comment.style.borderTop = "1px " + colors[colorIndex++] + " solid";
+// let colorIndex = 0;
+document.querySelectorAll("#list-comments .comment").forEach((comment) => {
+    // let colors = ["firebrick", "#001f3f", "#0074D9", "green", "#FFDC00", "#FF851B", "#FF4136"];
+    // comment.style.borderLeft = "2px " + colors[colorIndex] + " solid";
+    // comment.style.borderTop = "1px " + colors[colorIndex++] + " solid";
+    comment.style.borderLeft = "2px " + "black" + " solid";
+    comment.style.borderTop = "1px " + "black" + " solid";
 
-    if (colorIndex >= colors.length) colorIndex = 0;
+    // if (colorIndex >= colors.length) colorIndex = 0;
 })
+
+document.querySelectorAll("#list-comments #sub-comments .comment").forEach((comment) => {
+    // let colors = ["firebrick", "#001f3f", "#0074D9", "green", "#FFDC00", "#FF851B", "#FF4136"];
+    // comment.style.borderLeft = "2px " + colors[colorIndex] + " solid";
+    // comment.style.borderTop = "1px " + colors[colorIndex++] + " solid";
+    comment.style.borderLeft = "2px " + "gray" + " solid";
+    comment.style.borderTop = "1px " + "gray" + " solid";
+
+    // if (colorIndex >= colors.length) colorIndex = 0;
+})
+
 
 // Handle click
 window.onclick = (e) => {
@@ -468,7 +518,7 @@ if (registerForm) {
 
 // Post Images Popup
 
-document.querySelectorAll(".post-picture").forEach((postImage) => {
+document.querySelectorAll("#list-posts .post-picture").forEach((postImage) => {
     postImage.onclick = (e) => {
         let modal = document.querySelector("#picture-modal");
 
@@ -562,16 +612,14 @@ if (createNewImagePost) {
                         errorInput(title);
                         warnUser(response);
 
-                        let data = { postID: postID }
+                        let dataDelete = { postID: newPostID }
 
-                        let callback = (response) => {
+                        let callback_receive_upload = (response) => {
                             if (response === "failure" || response === "NOT SIGNED IN!") {
                                 warnUser(response);
                             }
-                            else
-                                setTimeout(window.location.replace("/pages/feed.php"), 1000);
                         }
-                        sendRequest("/actions/deletePost.php", data, callback);
+                        sendRequest("/actions/deletePost.php", dataDelete, callback_receive_upload);
                     }
 
                 }

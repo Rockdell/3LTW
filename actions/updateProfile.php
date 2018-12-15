@@ -42,9 +42,7 @@
         $bio = htmlspecialchars($_POST["bio"], ENT_QUOTES);
     }
 
-    $birthday = "1998-10-02";
-
-    if (updateUserInfo($_SESSION["userID"], $username, $mail, $bio, $birthday))
+    if (updateUserInfo($_SESSION["userID"], $username, $mail, $bio))
         echo "success";
     else
         echo "Failed to update profile!";

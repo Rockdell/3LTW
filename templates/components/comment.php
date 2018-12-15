@@ -1,13 +1,13 @@
 <?php
-    require_once($BASE_DIR."/database/timeAgo.php");
+    require_once($BASE_DIR."/database/utils.php");
     require_once($BASE_DIR."/database/comment.php");
     
     $userVote = null;
-
-    //TODO
+    if(isLoggedIn())
+        $userVote = getSingleUserCommentVote($_SESSION["userID"], $comment["commentID"])["vote"];
 ?>
 
-<article class="comment container">
+<article class="comment container" data-commentID="<?=$comment["commentID"]?>">
 
     <?php if (isSameUser($comment["userID"])) { ?>
         <i id="delete-comment" class="material-icons">delete</i>
@@ -20,20 +20,19 @@
     </section>
 
     <section id="comment-info">
-        <input type="checkbox" id="upvote<?=$comment["commentID"]?>"
-        <?php if(!isLoggedIn()) echo "disabled"; if($userVote === "1") echo "checked"?>>
-
-        <label for="upvote<?=$comment["commentID"]?>">
-            <i id="staticUp<?=$comment["commentID"]?>" class="material-icons">thumb_up_alt</i>
+        
+        <label>
+            <input type="checkbox" id="upvote"
+            <?php if(!isLoggedIn()) echo "disabled"; if($userVote === "1") echo "checked"?>>
+            <i id="staticUp" class="material-icons">arrow_upward</i>
         </label>
 
-        <p id="pp<?=$comment["commentID"]?>"><?=display_points($comment["points"])?></p>
-
-        <input type="checkbox" id="downvote<?=$comment["commentID"]?>"
-        <?php if(!isLoggedIn()) echo "disabled"; if($userVote === "0") echo "checked"?>>
-
-        <label for="downvote<?=$comment["commentID"]?>">
-            <i id="staticDown<?=$comment["commentID"]?>" class="material-icons">thumb_down_alt</i>
+        <p id="dp"><?=display_points($comment["points"])?></p>
+        
+        <label>
+            <input type="checkbox" id="downvote"
+            <?php if(!isLoggedIn()) echo "disabled"; if($userVote === "0") echo "checked"?>>
+            <i id="staticDown" class="material-icons">arrow_downward</i>
         </label>
 
         <div id="commentByTimeAgo">

@@ -124,7 +124,4 @@ function removeCommentVote($commentID, $userID) {
 		return -1;
 	}
 }
-
-
-
 ?>

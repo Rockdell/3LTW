@@ -49,18 +49,12 @@ function removeUser($userID) {
 }
 
 /* Updates a User's information */
-function updateUserInfo($userID, $username, $mail, $bio, $birthDay) {
+function updateUserInfo($userID, $username, $mail, $bio) {
 	global $dbh;
 
-	//Date must be in format "YYYY-MM-DD"
-	if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $birthDay)) {
-		echo "Error updating User's info! : birthDay INCORRECT FORMAT!";
-		return -1;
-	}
-
 	try {
-		$stmt = $dbh->prepare("UPDATE User SET username = ?, mail = ?, bio = ?, birthDay = ? WHERE userID = ?");
-		$stmt->execute(array($username, $mail, $bio, $birthDay, $userID));
+		$stmt = $dbh->prepare("UPDATE User SET username = ?, mail = ?, bio = ? WHERE userID = ?");
+		$stmt->execute(array($username, $mail, $bio, $userID));
 		return 1;
 	} catch(PDOException $e) {
 		echo $e->getMessage();
@@ -87,6 +81,19 @@ function getSingleUserPostVote($userID, $postID) {
 	try {
 		$stmt = $dbh->prepare("SELECT * FROM PostVote WHERE userID = ? AND postID = ?");
 		$stmt->execute(array($userID, $postID));
+		return $stmt->fetch();
+	} catch(PDOException $e) {
+		echo $e->getMessage();
+		return null;
+	}
+}
+
+/* Returns the vote on a current post if the user has already done so */
+function getSingleUserCommentVote($userID, $commentID) {
+	global $dbh;
+	try {
+		$stmt = $dbh->prepare("SELECT * FROM CommentVote WHERE userID = ? AND commentID = ?");
+		$stmt->execute(array($userID, $commentID));
 		return $stmt->fetch();
 	} catch(PDOException $e) {
 		echo $e->getMessage();
