@@ -254,7 +254,7 @@ document.querySelectorAll(".switch-btn").forEach((switchButton) => {
     }
 });
 
-// New Post
+// New Story Post
 
 let openCloseNewStory = () => {
 
@@ -300,6 +300,8 @@ let openCloseNewStory = () => {
     }
 }
 
+// New Image Post
+
 let openCloseNewImage = () => {
 
     let newpost_bar = document.querySelector("#newpost-bar");
@@ -343,6 +345,19 @@ let openCloseNewImage = () => {
         newpost_bar.classList.add("newImage-open");
     }
 }
+
+// Reply
+
+document.querySelectorAll("#reply-comment").forEach((reply) => {
+    reply.onclick = (e) => {
+        e.preventDefault();
+        let form = reply.parentElement.querySelector("#reply-form");
+        
+        form.style.display = "block";
+        form.classList.add("pop");
+        document.querySelector("#dim-mask").classList.add("dim");
+    }
+})
 
 // Search
 
@@ -776,20 +791,6 @@ if (updatePassword) {
     }
 }
 
-// Error
-let errorInput = (element) => {
-
-    element.value = "";
-
-    if (!element.classList.contains("shake-pulse")) {
-        element.classList.add("shake-pulse");
-
-        setTimeout(() => { 
-            element.classList.remove("shake-pulse");
-        }, 750);
-    }
-}
-
 // Delete Confirmation
 
 let deleteConfirmation = (component, postID, commentID) => {
@@ -876,6 +877,18 @@ let warnUser = (message) => {
             warning.style.display = "none";
             warning.textContent = "";
         }, 2000);
+    }
+}
+
+// Error
+let errorInput = (element) => {
+    
+    if (!element.classList.contains("shake-pulse")) {
+        element.classList.add("shake-pulse");
+
+        setTimeout(() => { 
+            element.classList.remove("shake-pulse");
+        }, 750);
     }
 }
 

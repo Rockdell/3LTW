@@ -1,8 +1,14 @@
 <section id="list-comments">
     <?php
-        require_once($BASE_DIR."/database/comment.php");
 
-        $comments = getCommentsByPost($_GET["id"]);
+        function cmp_comment_points($a, $b) {
+            if ($a["points"] == $b["points"])
+                return 0;
+
+            return ($a["points"] > $b["points"]) ? -1 : 1;
+        }
+
+        usort($comments, "cmp_comment_points");
 
         if (empty($comments)) { ?>
             <h1>No comments to show</h1>

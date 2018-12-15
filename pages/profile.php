@@ -10,7 +10,7 @@
 
     $posts = getPostByUser($_GET["user"]);
     
-    include_once($BASE_DIR."/actions/sort.php");
+    include_once($BASE_DIR."/actions/sortPosts.php");
 
     include_once($BASE_DIR."/templates/common/header.php");
 ?>

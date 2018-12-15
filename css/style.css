@@ -501,7 +501,7 @@ footer {
 	display: block;
 }
 
-/* COMMENT SIMPLIFY/MERGE COMMON CSS WITH POST LATER */
+/* COMMENT */
 
 .comment {
 	max-width: inherit;
@@ -509,7 +509,7 @@ footer {
 	box-shadow: var(--box-shadow);
 	display: grid;
 	grid-template-columns: 20fr 1fr;
-	grid-template-areas: "comment-content reply-delete-comment" "comment-info comment-info" "sub-comments sub-comments";
+	grid-template-areas: "comment-content reply-delete-comment" "comment-info comment-info" "reply-form reply-form" "sub-comments sub-comments";
 }
 
 .comment #delete-comment, .comment #reply-comment {
@@ -528,6 +528,17 @@ footer {
 
 .comment #reply-comment:hover {
 	filter: contrast(50%);
+}
+
+.comment #reply-form {
+	width: 24em;
+	text-align: center;
+	background: var(--main-container-bg-color);
+	box-shadow: var(--selected-box-shadow);
+}
+
+.comment #reply-form h1 {
+	margin-bottom: 1em;
 }
 
 .comment #comment-content {
@@ -563,7 +574,6 @@ footer {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-
 
 /* PICTURE MODAL */
 
@@ -673,6 +683,11 @@ input[type=text], input[type=password], input[type=search], input[type=email], t
 textarea[name=postContent] {
 	margin-top: 0em;
 	height: 65%;
+}
+
+textarea[name=replyContent] {
+	width: 25em;
+	height: 10em;
 }
 
 /* BUTTON */

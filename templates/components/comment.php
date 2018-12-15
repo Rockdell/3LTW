@@ -9,6 +9,14 @@
 
 <article class="comment container" data-commentID="<?=$comment["commentID"]?>">
 
+    <aside id="reply-form" class="container modal">
+        <form>
+            <h1>New Comment</h1>
+            <textarea name="replyContent" placeholder="You can write your Comment here!" required></textarea>
+            <button type="submit" class="fill">Reply</button>
+        </form>        
+    </aside>
+
     <?php if (isSameUser($comment["userID"])) { ?>
         <i id="delete-comment" class="material-icons">delete</i>
     <?php } else if (isLoggedIn()) { ?>
@@ -48,6 +56,7 @@
     <section id="sub-comments">
         <?php
             $subComments = getChildComments($comment["commentID"]);
+            usort($subComments, "cmp_comment_points");
 
             foreach($subComments as $comment) {
                 include($BASE_DIR."/templates/components/comment.php");
