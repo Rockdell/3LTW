@@ -7,12 +7,12 @@
         $userVote = getSingleUserCommentVote($_SESSION["userID"], $comment["commentID"])["vote"];
 ?>
 
-<article class="comment container" data-commentID="<?=$comment["commentID"]?>">
+<article class="comment container" data-commentid="<?=$comment["commentID"]?>">
 
     <aside id="reply-form" class="container modal">
         <form>
             <h1>New Comment</h1>
-            <textarea name="replyContent" placeholder="You can write your Comment here!" required></textarea>
+            <textarea name="replyContent" placeholder="You can write your comment here!" required></textarea>
             <button type="submit" class="fill">Reply</button>
         </form>        
     </aside>
@@ -57,6 +57,8 @@
         <?php
             $subComments = getChildComments($comment["commentID"]);
             usort($subComments, "cmp_comment_points");
+
+            echo "<script>console.log(".json_encode($subComments).");</script>";
 
             foreach($subComments as $comment) {
                 include($BASE_DIR."/templates/components/comment.php");

@@ -77,7 +77,7 @@ function getCommentsByPost($postID) {
 function getChildComments($fatherCommentID) {
 	global $dbh;
 	try {
-		$stmt = $dbh->prepare("SELECT * FROM Comment WHERE commentID IS (SELECT commentSon FROM ChildComment WHERE commentFather = ?)");
+		$stmt = $dbh->prepare("SELECT * FROM Comment WHERE commentID IN (SELECT commentSon FROM ChildComment WHERE commentFather = ?)");
 		$stmt->execute(array($fatherCommentID));
 		return $stmt->fetchAll();
 	} catch(PDOException $e) {

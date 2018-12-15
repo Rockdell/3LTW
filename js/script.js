@@ -27,7 +27,7 @@ function upvoteAction(up, type) {
     if (type === "post")
         componentID = up.closest("article").getAttribute("data-id");
     else if (type === "comment")
-        componentID = up.closest("article").getAttribute("data-commentID");
+        componentID = up.closest("article").getAttribute("data-commentid");
 
     if (up.checked) {
 
@@ -63,7 +63,7 @@ function downvoteAction(down, type) {
     if (type === "post")
         componentID = down.closest("article").getAttribute("data-id");
     else if (type === "comment")
-        componentID = down.closest("article").getAttribute("data-commentID");
+        componentID = down.closest("article").getAttribute("data-commentid");
 
     if (down.checked) {
         if (type === "post")
@@ -121,7 +121,7 @@ function commentVote(action, commentID, value) {
         if (response == "NOT SIGNED IN!" || response == "failure")
             console.log(response);
         else
-            document.querySelector("article[data-commentID=\'" + commentID + "\'] #comment-info #dp").innerHTML = response;
+            document.querySelector("article[data-commentid=\'" + commentID + "\'] #comment-info #dp").innerHTML = response;
     }
 
     sendRequest("/actions/commentVote.php", data, callback);
@@ -154,8 +154,8 @@ document.querySelectorAll("#list-comments .comment").forEach((comment) => {
     // let colors = ["firebrick", "#001f3f", "#0074D9", "green", "#FFDC00", "#FF851B", "#FF4136"];
     // comment.style.borderLeft = "2px " + colors[colorIndex] + " solid";
     // comment.style.borderTop = "1px " + colors[colorIndex++] + " solid";
-    comment.style.borderLeft = "2px " + "black" + " solid";
-    comment.style.borderTop = "1px " + "black" + " solid";
+    comment.style.borderLeft = "2px " + "#ffadad" + " solid";
+    comment.style.borderTop = "1px " + "#ffadad" + " solid";
 
     // if (colorIndex >= colors.length) colorIndex = 0;
 })
@@ -345,19 +345,6 @@ let openCloseNewImage = () => {
         newpost_bar.classList.add("newImage-open");
     }
 }
-
-// Reply
-
-document.querySelectorAll("#reply-comment").forEach((reply) => {
-    reply.onclick = (e) => {
-        e.preventDefault();
-        let form = reply.parentElement.querySelector("#reply-form");
-        
-        form.style.display = "block";
-        form.classList.add("pop");
-        document.querySelector("#dim-mask").classList.add("dim");
-    }
-})
 
 // Search
 
@@ -664,7 +651,53 @@ if (deletePost) {
     }
 }
 
-// Delete Comment
+// Reply comment
+
+document.querySelectorAll("#reply-comment").forEach((reply) => {
+
+    let form = reply.parentElement.querySelector("#reply-form");
+
+    reply.onclick = (e) => {
+        e.preventDefault();
+        
+        form.style.display = "block";
+        form.classList.add("pop");
+        document.querySelector("#dim-mask").classList.add("dim");
+    }
+
+    form.onsubmit = (e) => {
+        e.preventDefault();
+
+        let button = form.querySelector("button");
+        let comment = form.querySelector("textarea");
+
+        let data = {
+            postID: document.querySelector(".post").getAttribute("data-id"),
+            content: comment.value,
+            fatherCommentID: form.closest("article").getAttribute("data-commentid")
+        }
+
+        let callback = (response) => {
+            if (response === "success") {
+                setTimeout(window.location.reload(), 1000);
+            }
+            else {
+                errorInput(comment);
+            }
+        }
+
+        button.disabled = true;
+        sendRequest("/actions/createComment.php", data, callback);
+        button.disabled = false;
+    }
+})
+
+// Delete comment
+
+document.querySelectorAll("#reply-form button").forEach((comment) => {
+
+})
+
 
 let deleteComment = document.querySelector("#delete-comment");
 
