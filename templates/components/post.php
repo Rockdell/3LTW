@@ -8,7 +8,7 @@
         $userVote = getSingleUserPostVote($_SESSION["userID"], $post["postID"])["vote"];
 ?>
 
-<article class="post container <?=$post["postID"]?>">
+<article class="post container" data-id="<?=$post["postID"]?>">
 
     <?php if(isSameUser($post["userID"])) { ?>
         <span id="delete-post-confirmation" class="modal container open-btn">
@@ -37,20 +37,19 @@
     </section>
 
     <section id="post-info">
-        <input type="checkbox" id="upvote<?=$post["postID"]?>"
-        <?php if(!isLoggedIn()) echo "disabled"; if($userVote === "1") echo "checked"?>>
-
-        <label for="upvote<?=$post["postID"]?>">
-            <i id="staticUp<?=$post["postID"]?>" class="material-icons">thumb_up_alt</i>
+        
+        <label>
+            <input type="checkbox" id="upvote"
+            <?php if(!isLoggedIn()) echo "disabled"; if($userVote === "1") echo "checked"?>>
+            <i id="staticUp" class="material-icons">thumb_up_alt</i>
         </label>
 
-        <p id="pp<?=$post["postID"]?>"><?=display_points($post["points"])?></p>
+        <p id="dp"><?=display_points($post["points"])?></p>
 
-        <input type="checkbox" id="downvote<?=$post["postID"]?>"
-        <?php if(!isLoggedIn()) echo "disabled"; if($userVote === "0") echo "checked"?>>
-
-        <label for="downvote<?=$post["postID"]?>">
-            <i id="staticDown<?=$post["postID"]?>" class="material-icons">thumb_down_alt</i>
+        <label>
+            <input type="checkbox" id="downvote"
+            <?php if(!isLoggedIn()) echo "disabled"; if($userVote === "0") echo "checked"?>>
+            <i id="staticDown" class="material-icons">thumb_down_alt</i>
         </label>
 
         <p id="nrComments"><?=getNumberComments($post["postID"])["nrComments"]?></p>
@@ -68,12 +67,3 @@
         </div>
     </section>
 </article>
-
-<!-- TODO -->
-<?php if (isset($comments) && !empty($comments)) { ?>
-        <section id="post-comments">
-            <?php foreach($comments as $comment) { ?>
-                <h1><?=$comment["content"]?></h1>
-            <?php } ?>
-        </section>
-<?php } ?>

@@ -427,32 +427,32 @@ footer {
 	-webkit-appearance: none;
 }
 
-.post #post-info label {
+.post #post-info i {
 	cursor: pointer;
 	transition: color 1s;
 }
 
-.post #post-info input[id^="upvote"]:checked ~ label[for^="upvote"] {
+.post #post-info input[id="upvote"]:checked + i {
 	color: green;
 }
 
-.post #post-info input[id^="downvote"]:checked ~ label[for^="downvote"] {
+.post #post-info input[id="downvote"]:checked + i {
 	color: crimson;
 }
 
-.post #post-info label[for^="upvote"] i:hover, label[for^="downvote"] i:hover {	
+.post #post-info label i:hover {	
 	filter: contrast(50%);
 }
 
-.post #post-info label[for^="upvote"] i[id^="movingUp"] {
+.post #post-info label i[id="movingUp"] {
 	animation: jumpUp 0.5s 0s ease;
 }
 
-.post #post-info label[for^="downvote"] i[id^="movingDown"] {
+.post #post-info label i[id="movingDown"] {
 	animation: jumpDown 0.5s 0s ease;
 }
 
-.post #post-info p[id^="pp"], .post #nrComments {
+.post #post-info p[id="dp"], .post #nrComments {
 	font-weight: bold;
 	display: inline;
 	position: relative;

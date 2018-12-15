@@ -1,44 +1,74 @@
-function upvoteAction(doc) {
+let upvotes = document.querySelectorAll('#post-info input[id="upvote"]');
+let downvotes = document.querySelectorAll('#post-info input[id="downvote"]');
 
-    postID = this.id.match(/upvote(\d+)/)[1];
+upvotes.forEach((upvote) => {
+    upvote.onclick = () => { upvoteAction(upvote, "post") };
+});
 
-    if (this.checked) {
-        postVote("add", postID, 1);
+downvotes.forEach((downvote) => {
+    downvote.onclick = () => { downvoteAction(downvote, "post"); };
+});
 
-        doc.getElementById("staticUp" + postID).id = "movingUp" + postID;
+function upvoteAction(up, type) {
 
-        if((mvDown = doc.getElementById("movingDown" + postID)) != null)
-            mvDown.id = "staticDown" + postID;
+    let parent = up.parentElement.parentElement;
+    let postID = up.closest("article").getAttribute("data-id");
 
-        let associatedDownvote = doc.getElementById("downvote" + postID);
-        associatedDownvote.checked = false;
+    if (up.checked) {
+
+        if (type === "post")
+            postVote("add", postID, 1);
+        else if (type === "comment")
+            console.log("comment");
+
+        parent.querySelector("i[id='staticUp']").id = "movingUp";
+
+        //Associated Downvote
+        if ((mvDown = parent.querySelector("i[id='movingDown']")) != null)
+            mvDown.id = "staticDown";
+
+        // Uncheck the associated downvote
+        parent.querySelector("label input[id='downvote']").checked = false;
     }
     else {
-        postVote("del", postID, 1);
-        if (doc.getElementById("movingUp" + postID) !== null)
-            doc.getElementById("movingUp" + postID).id = "staticUp" + postID;
+        if (type === "post")
+            postVote("del", postID, 1);
+        else if (type === "comment")
+            console.log("comment");
+
+        if ((mvUp = parent.querySelector("i[id='movingUp']")) != null)
+            mvUp.id = "staticUp";
     }
 }
 
-function downvoteAction(doc) {
+function downvoteAction(down, type) {
 
-    postID = this.id.match(/downvote(\d+)/)[1];
+    let parent = down.parentElement.parentElement;
+    let postID = down.closest("article").getAttribute("data-id");
 
-    if (this.checked) {
-        postVote("add", postID, 0);
+    if (down.checked) {
+        if (type === "post")
+            postVote("add", postID, 0);
+        else if (type === "comment")
+            console.log("comment");
 
-        doc.getElementById("staticDown" + postID).id = "movingDown" + postID;
+        parent.querySelector("i[id='staticDown']").id = "movingDown";
 
-        if((mvUp = doc.getElementById("movingUp" + postID)) != null)
-            mvUp.id = "staticUp" + postID;
+        //Associated Upvote
+        if ((mvUp = parent.querySelector("i[id='movingUp']")) != null)
+            mvUp.id = "staticUp";
 
-        let associatedUpvote = doc.getElementById("upvote" + postID);
-        associatedUpvote.checked = false;
+        // Uncheck the associated upvote
+        parent.querySelector("label input[id='upvote']").checked = false;
     }
     else {
-        postVote("del", postID, 0);
-        if (doc.getElementById("movingDown" + postID) !== null)
-            doc.getElementById("movingDown" + postID).id = "staticDown" + postID;
+        if (type === "post")
+            postVote("del", postID, 0);
+        else if (type === "comment")
+            console.log("comment");
+
+        if ((mvDown = parent.querySelector("i[id='movingDown']")) != null)
+            mvDown.id = "staticDown";
     }
 }
 
@@ -54,21 +84,10 @@ function postVote(action, postID, value) {
         if (response == "NOT SIGNED IN!" || response == "failure")
             console.log(response);
         else
-            document.querySelector("#post-info #pp" + postID).innerHTML = response;
+            document.querySelector("article[data-id=\'" + postID + "\'] #post-info #dp").innerHTML = response;
     }
-    
+
     sendRequest("/actions/postVote.php", data, callback);
-}
-
-let upvotes = document.querySelectorAll('#post-info input[id^="upvote"]');
-let downvotes = document.querySelectorAll('#post-info input[id^="downvote"]');
-
-for (let i = 0; i < upvotes.length; i++) {
-    upvotes[i].addEventListener('click', upvoteAction.bind(upvotes[i], document));
-}
-
-for (let i = 0; i < downvotes.length; i++) {
-    downvotes[i].addEventListener('click', downvoteAction.bind(downvotes[i], document));
 }
 
 // Media queries
@@ -574,7 +593,8 @@ if (createNewImagePost) {
 let deletePost = document.querySelector("#delete-post");
 
 if (deletePost) {
-    let postID = deletePost.closest("article").classList[2];
+    let postID = deletePost.closest("article").getAttribute("data-id");
+    console.log(postID);
     deletePost.onclick = (e) => {
         e.preventDefault();
         deleteConfirmation("post", postID);
