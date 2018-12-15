@@ -8,6 +8,13 @@
 ?>
 
 <article class="comment container">
+
+    <?php if (isSameUser($comment["userID"])) { ?>
+        <i id="delete-comment" class="material-icons">delete</i>
+    <?php } else if (isLoggedIn()) { ?>
+        <i id="reply-comment" class="material-icons">reply</i>
+    <?php } ?>
+
     <section id="comment-content">
         <p><?=$comment["content"]?></p>
     </section>

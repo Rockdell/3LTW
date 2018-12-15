@@ -382,8 +382,8 @@ footer {
 }
 
 .post #delete-post {
-	cursor: pointer;
 	grid-area: delete-post;
+	cursor: pointer;
 	display: none;
 	color: var(--main-text-color);
 	text-align: right;
@@ -482,6 +482,25 @@ footer {
 	text-decoration: underline;
 }
 
+/* POST PAGE */
+
+#post-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+#post-page .post {
+	width: 70%;
+	grid-template-columns: 20fr 1fr;
+	grid-template-areas: "post-title delete-post" "post-content post-content" "post-info post-info";
+}
+
+#post-page .post #delete-post {
+	display: block;
+}
+
 /* COMMENT SIMPLIFY/MERGE COMMON CSS WITH POST LATER */
 
 .comment {
@@ -489,8 +508,26 @@ footer {
 	background: var(--main-container-bg-color);
 	box-shadow: var(--box-shadow);
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas: "comment-content comment-content" "comment-info comment-info" "sub-comments sub-comments";
+	grid-template-columns: 20fr 1fr;
+	grid-template-areas: "comment-content reply-delete-comment" "comment-info comment-info" "sub-comments sub-comments";
+}
+
+.comment #delete-comment, .comment #reply-comment {
+	grid-area: reply-delete-comment;
+	cursor: pointer;
+	color: var(--main-text-color);
+	text-align: right;
+	transition: color 0.5s;
+	align-self: center;
+	margin-left: 1em;
+}
+
+.comment #delete-comment:hover {
+	color: crimson;
+}
+
+.comment #reply-comment:hover {
+	filter: contrast(50%);
 }
 
 .comment #comment-content {
@@ -514,25 +551,6 @@ footer {
 
 .comment #sub-comments {
 	grid-area: sub-comments;
-}
-
-/* POST PAGE */
-
-#post-page {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: center;
-}
-
-#post-page .post {
-	width: 70%;
-	grid-template-columns: 20fr 1fr;
-	grid-template-areas: "post-title delete-post" "post-content post-content" "post-info post-info";
-}
-
-#post-page .post #delete-post {
-	display: block;
 }
 
 /* 404 PAGE */
@@ -900,7 +918,7 @@ button {
 		margin-right: 0;
 	}
 
-	.post #postByTimeAgo {
+	.post #postByTimeAgo, .comment #commentByTimeAgo {
 		float: initial;
 	}
 
