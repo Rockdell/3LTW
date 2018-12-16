@@ -19,6 +19,7 @@
     <?php 
         include_once($BASE_DIR."/templates/components/post.php"); 
         include_once($BASE_DIR."/templates/components/list-comments.php");
+        include_once($BASE_DIR."/templates/components/newComment-bar.php");
     ?>
 </div>
 

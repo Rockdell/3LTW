@@ -9,18 +9,14 @@
 
 <article class="comment container" data-commentid="<?=$comment["commentID"]?>">
 
-    <aside id="reply-form" class="container modal">
-        <form>
-            <h1>New Comment</h1>
-            <textarea name="replyContent" placeholder="You can write your comment here!" required></textarea>
-            <button type="submit" class="fill">Reply</button>
-        </form>        
-    </aside>
-
     <?php if (isSameUser($comment["userID"])) { ?>
+        <span id="delete-comment-confirmation" class="modal container open-btn">
+            <p id="confirm-question">Are you sure you want to delete this comment kind human?</p>
+            <button type="button" class="fill" id="yes"><i class="material-icons">check</i></button>
+            <button type="button" class="fill" id="no"><i class="material-icons">close</i></button>
+        </span>
+
         <i id="delete-comment" class="material-icons">delete</i>
-    <?php } else if (isLoggedIn()) { ?>
-        <i id="reply-comment" class="material-icons">reply</i>
     <?php } ?>
 
     <section id="comment-content">
@@ -43,6 +39,10 @@
             <i id="staticDown" class="material-icons">arrow_downward</i>
         </label>
 
+        <?php if (isLoggedIn()) { ?>
+            <i id="reply-comment" class="material-icons">reply</i>
+        <?php } ?>
+
         <div id="commentByTimeAgo">
             <p id="commentBy">
                 Posted by
@@ -57,8 +57,6 @@
         <?php
             $subComments = getChildComments($comment["commentID"]);
             usort($subComments, "cmp_comment_points");
-
-            echo "<script>console.log(".json_encode($subComments).");</script>";
 
             foreach($subComments as $comment) {
                 include($BASE_DIR."/templates/components/comment.php");

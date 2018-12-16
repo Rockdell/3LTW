@@ -644,37 +644,53 @@ let deletePost = document.querySelector("#delete-post");
 
 if (deletePost) {
     let postID = deletePost.closest("article").getAttribute("data-id");
-    console.log(postID);
+    
     deletePost.onclick = (e) => {
         e.preventDefault();
         deleteConfirmation("post", postID);
     }
 }
 
+let commentBar = document.querySelector("#newcomment-bar");
+
 // Reply comment
 
-document.querySelectorAll("#reply-comment").forEach((reply) => {
+document.querySelectorAll("#reply-comment").forEach((reply_btn) => {
 
-    let form = reply.parentElement.querySelector("#reply-form");
-
-    reply.onclick = (e) => {
+    reply_btn.onclick = (e) => {
         e.preventDefault();
         
-        form.style.display = "block";
-        form.classList.add("pop");
+        commentBar.setAttribute("data-fathercommentid", reply_btn.closest("article").getAttribute("data-commentid"));
+        commentBar.style.display = "block";
+        commentBar.classList.add("pop");
         document.querySelector("#dim-mask").classList.add("dim");
     }
+});
 
-    form.onsubmit = (e) => {
+// Delete comment
+
+document.querySelectorAll("#delete-comment").forEach((delete_btn) => {
+
+    delete_btn.onclick = (e) => {
+        e.preventDefault();
+        let commentID = delete_btn.closest("article").getAttribute("data-commentid");
+        deleteConfirmation("comment", null, commentID);
+    }
+});
+
+// Submit comment
+
+if (commentBar) {
+    commentBar.onsubmit = (e) => {
         e.preventDefault();
 
-        let button = form.querySelector("button");
-        let comment = form.querySelector("textarea");
+        let comment = commentBar.querySelector("textarea");
+        let button = commentBar.querySelector("button");
 
         let data = {
             postID: document.querySelector(".post").getAttribute("data-id"),
             content: comment.value,
-            fatherCommentID: form.closest("article").getAttribute("data-commentid")
+            fatherCommentID: commentBar.getAttribute("data-fathercommentid")
         }
 
         let callback = (response) => {
@@ -689,23 +705,6 @@ document.querySelectorAll("#reply-comment").forEach((reply) => {
         button.disabled = true;
         sendRequest("/actions/createComment.php", data, callback);
         button.disabled = false;
-    }
-})
-
-// Delete comment
-
-document.querySelectorAll("#reply-form button").forEach((comment) => {
-
-})
-
-
-let deleteComment = document.querySelector("#delete-comment");
-
-if (deleteComment) {
-    // let commentID = deletePost.closest("article").classList[2]; TODO alter to fit comments needs
-    deleteComment.onclick = (e) => {
-        e.preventDefault();
-        // deleteConfirmation("comment", commentID);
     }
 }
 
@@ -861,8 +860,9 @@ let deleteConfirmation = (component, postID, commentID) => {
                     if (response === "failure" || response === "NOT SIGNED IN!")
                         console.log(response);
                     else
-                        setTimeout(window.location.replace("/pages/post.php?id=" + postID), 1000);
+                        setTimeout(window.location.reload(), 1000);
                 }
+
                 sendRequest("/actions/deleteComment.php", data, callback);
 
             } else if (component === "user") {

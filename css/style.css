@@ -227,7 +227,7 @@ footer {
 	margin-bottom: 1em;
 }
 
-#sign-bar span, #settings-bar span, #newpost-bar span, .post span {
+#sign-bar span, #settings-bar span, #newpost-bar span, .post span, .comment span {
 	color: var(--alt-text-color);
 	background: var(--warning-bg-color);
 	box-shadow: var(--selected-box-shadow);
@@ -346,6 +346,19 @@ footer {
 	height: 80%;
 }
 
+/* NEW COMMENT BAR */
+
+#newcomment-bar {
+	width: 24em;
+	text-align: center;
+	background: var(--main-container-bg-color);
+	box-shadow: var(--selected-box-shadow);
+}
+
+#newcomment-bar h1 {
+	margin-bottom: 1em;
+}
+
 /* POST */
 
 .post {
@@ -363,7 +376,7 @@ footer {
 	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-.post span {
+.post span, .comment span {
 	color: var(--main-text-color);
 	width: 16em;
 }
@@ -509,17 +522,23 @@ footer {
 	box-shadow: var(--box-shadow);
 	display: grid;
 	grid-template-columns: 20fr 1fr;
-	grid-template-areas: "comment-content reply-delete-comment" "comment-info comment-info" "reply-form reply-form" "sub-comments sub-comments";
+	grid-template-areas: "comment-content delete-comment" "comment-info comment-info" "sub-comments sub-comments";
 }
 
-.comment #delete-comment, .comment #reply-comment {
-	grid-area: reply-delete-comment;
+.comment #reply-comment, #delete-comment {
 	cursor: pointer;
 	color: var(--main-text-color);
-	text-align: right;
 	transition: color 0.5s;
 	align-self: center;
+}
+
+.comment #delete-comment {
+	grid-area: delete-comment;
 	margin-left: 1em;
+}
+
+.comment #reply-comment {
+	margin-left: 0.2em;
 }
 
 .comment #delete-comment:hover {
@@ -528,17 +547,6 @@ footer {
 
 .comment #reply-comment:hover {
 	filter: contrast(50%);
-}
-
-.comment #reply-form {
-	width: 24em;
-	text-align: center;
-	background: var(--main-container-bg-color);
-	box-shadow: var(--selected-box-shadow);
-}
-
-.comment #reply-form h1 {
-	margin-bottom: 1em;
 }
 
 .comment #comment-content {
@@ -685,7 +693,7 @@ textarea[name=postContent] {
 	height: 65%;
 }
 
-textarea[name=replyContent] {
+textarea[name=commentContent] {
 	width: 25em;
 	height: 10em;
 }
