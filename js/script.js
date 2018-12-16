@@ -653,7 +653,7 @@ if (deletePost) {
 
 let commentBar = document.querySelector("#newcomment-bar");
 
-// Replay Post
+// Reply post
 
 document.querySelectorAll("#reply-post").forEach((reply_btn) => {
 
@@ -714,6 +714,7 @@ if (commentBar) {
                 setTimeout(window.location.reload(), 1000);
             }
             else {
+                warnUser(response);
                 errorInput(comment);
             }
         }
@@ -933,6 +934,8 @@ let warnUser = (message) => {
 
 // Error
 let errorInput = (element) => {
+
+    element.value = "";
     
     if (!element.classList.contains("shake-pulse")) {
         element.classList.add("shake-pulse");

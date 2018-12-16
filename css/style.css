@@ -227,7 +227,7 @@ footer {
 	margin-bottom: 1em;
 }
 
-#sign-bar span, #settings-bar span, #newpost-bar span, .post span, .comment span {
+#sign-bar span, #settings-bar span, #newpost-bar span, #newcomment-bar span, .post span, .comment span {
 	color: var(--alt-text-color);
 	background: var(--warning-bg-color);
 	box-shadow: var(--selected-box-shadow);
