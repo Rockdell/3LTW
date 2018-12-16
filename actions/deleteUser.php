@@ -2,6 +2,10 @@
     require_once("../includes/init.php");
     require_once($BASE_DIR."/database/user.php");
 
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && realpath(__FILE__) == realpath( $_SERVER["SCRIPT_FILENAME"] )) {
+        header("Location: ../pages/error-404.php");
+    }
+
     if(isLoggedIn()) {
 
         $userID = $_SESSION["userID"];
@@ -18,6 +22,7 @@
         else
             echo "failure";
     }
-    else
+    else {
         echo "NOT SIGNED IN!";
+    }
 ?>

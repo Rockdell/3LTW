@@ -46,7 +46,7 @@
         <div id="commentByTimeAgo">
             <p id="commentBy">
                 Posted by
-                <a id="commentByLink" href="/pages/profile.php?user=<?=$comment["userID"]?>"><?=$comment["userID"]?></a>
+                <a id="commentByLink" href="profile.php?user=<?=$comment["userID"]?>"><?=$comment["userID"]?></a>
                 &minus;
                 <?=time_ago($comment["commentDate"])?>
             </p>

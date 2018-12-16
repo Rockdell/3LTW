@@ -1,6 +1,10 @@
 <?php
     require_once("../includes/init.php");
 
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && realpath(__FILE__) == realpath( $_SERVER["SCRIPT_FILENAME"] )) {
+        header("Location: ../pages/error-404.php");
+    }
+
     $args = explode(".", $_FILES["picture"]["name"], 3);
     $target_dir = $BASE_DIR."/img/".$args[0]."/";
 
@@ -22,32 +26,8 @@
     if (!empty($old))
         unlink($old[0]);
 
-    if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
-
-        // Crop picture of user
-        // if ($args[0] === "users") {
-        //     $openImage = "imagecreatefrom".$args[2];
-        //     $image = $openImage($target_file);
-        //     $width = imagesx($image);
-        //     $height = imagesy($image);
-
-        //     if ($width > $height)
-        //         $crop = imagecrop($image, ["x" => ($width - $height) / 2, "y" => 0, "width" => $height, "height" => $height]);
-        //     else
-        //         $crop = imagecrop($image, ["x" => 0, "y" => ($height - $width) / 2, "width" => $width, "height" => $width]);
-
-        //     if ($crop) {
-        //         $saveImage = "image".$args[2];
-        //         $saveImage($crop, $target_file);
-        //         imagedestroy($crop);
-        //     }
-
-        //     imagedestroy($image);
-        // }
-
+    if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file))
         echo "success";
-    } 
-    else {
+    else
         echo "Failed to upload!";
-    }
 ?>

@@ -20,7 +20,7 @@ commentDownvotes.forEach((commentDownvote) => {
     commentDownvote.onclick = () => { downvoteAction(commentDownvote, "comment"); };
 });
 
-function upvoteAction(up, type) {
+let upvoteAction = (up, type) => {
 
     let parent = up.parentElement.parentElement;
     let componentID;
@@ -56,7 +56,7 @@ function upvoteAction(up, type) {
     }
 }
 
-function downvoteAction(down, type) {
+let downvoteAction = (down, type) => {
 
     let parent = down.parentElement.parentElement;
     let componentID;
@@ -91,12 +91,12 @@ function downvoteAction(down, type) {
     }
 }
 
-function postVote(action, postID, value) {
+let postVote = (action, postID, value) => {
 
     let data = {
         action: action,
         postID: postID,
-        value: value,
+        value: value
     }
 
     let callback = (response) => {
@@ -106,15 +106,15 @@ function postVote(action, postID, value) {
             document.querySelector("article[data-id=\'" + postID + "\'] #post-info #dp").innerHTML = response;
     }
 
-    sendRequest("/actions/postVote.php", data, callback);
+    sendRequest("../actions/postVote.php", data, callback);
 }
 
-function commentVote(action, commentID, value) {
+let commentVote = (action, commentID, value) => {
 
     let data = {
         action: action,
         commentID: commentID,
-        value: value,
+        value: value
     }
 
     let callback = (response) => {
@@ -124,7 +124,7 @@ function commentVote(action, commentID, value) {
             document.querySelector("article[data-commentid=\'" + commentID + "\'] #comment-info #dp").innerHTML = response;
     }
 
-    sendRequest("/actions/commentVote.php", data, callback);
+    sendRequest("../actions/commentVote.php", data, callback);
 }
 
 // Media queries
@@ -149,29 +149,16 @@ if (maxWidth.matches) {
 }
 
 // Comment colors
-// let colorIndex = 0;
 document.querySelectorAll("#list-comments .comment").forEach((comment) => {
-    // let colors = ["firebrick", "#001f3f", "#0074D9", "green", "#FFDC00", "#FF851B", "#FF4136"];
-    // comment.style.borderLeft = "2px " + colors[colorIndex] + " solid";
-    // comment.style.borderTop = "1px " + colors[colorIndex++] + " solid";
-    comment.style.borderLeft = "2px " + "#ffadad" + " solid";
     comment.style.borderTop = "1px " + "#ffadad" + " solid";
-
-    // if (colorIndex >= colors.length) colorIndex = 0;
 })
 
 document.querySelectorAll("#list-comments #sub-comments .comment").forEach((comment) => {
-    // let colors = ["firebrick", "#001f3f", "#0074D9", "green", "#FFDC00", "#FF851B", "#FF4136"];
-    // comment.style.borderLeft = "2px " + colors[colorIndex] + " solid";
-    // comment.style.borderTop = "1px " + colors[colorIndex++] + " solid";
     comment.style.borderLeft = "2px " + "gray" + " solid";
     comment.style.borderTop = "1px " + "gray" + " solid";
-
-    // if (colorIndex >= colors.length) colorIndex = 0;
 })
 
 // Sub comments depth
-
 document.querySelectorAll(".comment").forEach((comment) => {
 
     let element = comment;
@@ -184,8 +171,10 @@ document.querySelectorAll(".comment").forEach((comment) => {
             i++;
     }
 
-    if (i > 5)
-        comment.querySelector("#reply-comment").style.display = "none";
+    if (i > 5) {
+        let reply_btn =  comment.querySelector("#reply-comment");
+        if (reply_btn) reply_btn.style.display = "none";
+    }
 })
 
 
@@ -444,7 +433,7 @@ if (loginForm) {
             }
         }
     
-        sendRequest("/actions/login.php", data, callback);
+        sendRequest("../actions/login.php", data, callback);
         loginForm.querySelector("button[type=submit]").disabled = false;
     }
 }
@@ -460,10 +449,10 @@ logoutButtons.forEach((logoutButton) => {
 
         let callback = (response) => {
             if (response === "success")
-                setTimeout(window.location.replace("/pages/feed.php"), 1000);
+                setTimeout(window.location.replace("feed.php"), 1000);
         }
 
-        sendRequest("/actions/logout.php", {}, callback);
+        sendRequest("../actions/logout.php", {}, callback);
     }
 });
 
@@ -531,7 +520,7 @@ if (registerForm) {
             }
         }
 
-        sendRequest("/actions/register.php", data, callback);
+        sendRequest("../actions/register.php", data, callback);
         registerForm.querySelector("button[type=submit]").disabled = false;
     }
 }
@@ -582,7 +571,7 @@ if (createNewStoryPost) {
                 setTimeout(window.location.reload(), 1000);
         }
 
-        sendRequest("/actions/createNewStoryPost.php", data, callback);
+        sendRequest("../actions/createNewStoryPost.php", data, callback);
         createNewStoryPost.querySelector("button[type=submit]").disabled = false;
     }
 }
@@ -639,7 +628,7 @@ if (createNewImagePost) {
                                 warnUser(response);
                             }
                         }
-                        sendRequest("/actions/deletePost.php", dataDelete, callback_receive_upload);
+                        sendRequest("../actions/deletePost.php", dataDelete, callback_receive_upload);
                     }
 
                 }
@@ -651,7 +640,7 @@ if (createNewImagePost) {
             }
         }
 
-        sendRequest("/actions/createNewImagePost.php", data, callback);
+        sendRequest("../actions/createNewImagePost.php", data, callback);
         createNewImagePost.querySelector("button[type=submit]").disabled = false;
     }
 }
@@ -738,9 +727,9 @@ if (commentBar) {
         }
 
         if (commentBar.getAttribute("data-fathercommentid") == -1)
-            sendRequest("/actions/createMainComment.php", data, callback);
+            sendRequest("../actions/createMainComment.php", data, callback);
         else
-            sendRequest("/actions/createComment.php", data, callback);
+            sendRequest("../actions/createComment.php", data, callback);
         button.disabled = false;
     }
 }
@@ -817,7 +806,7 @@ if (updateProfile) {
             }
         }
 
-        sendRequest("/actions/updateProfile.php", data, callback);
+        sendRequest("../actions/updateProfile.php", data, callback);
         updateProfile.querySelector("button[type=submit]").disabled = false;
     }
 }
@@ -855,7 +844,7 @@ if (updatePassword) {
             }
         }
 
-        sendRequest("/actions/updatePassword.php", data, callback);
+        sendRequest("../actions/updatePassword.php", data, callback);
         updatePassword.querySelector("button[type=submit]").disabled = false;
     }
 }
@@ -885,9 +874,9 @@ let deleteConfirmation = (component, postID, commentID) => {
                     if (response === "failure" || response === "NOT SIGNED IN!")
                         console.log(response);
 
-                    setTimeout(window.location.replace("/pages/feed.php"), 1000);
+                    setTimeout(window.location.replace("feed.php"), 1000);
                 }
-                sendRequest("/actions/deletePost.php", data, callback);
+                sendRequest("../actions/deletePost.php", data, callback);
 
             } else if (component === "comment") {
 
@@ -900,7 +889,7 @@ let deleteConfirmation = (component, postID, commentID) => {
                         setTimeout(window.location.reload(), 1000);
                 }
 
-                sendRequest("/actions/deleteComment.php", data, callback);
+                sendRequest("../actions/deleteComment.php", data, callback);
 
             } else if (component === "user") {
 
@@ -911,14 +900,14 @@ let deleteConfirmation = (component, postID, commentID) => {
                     else {
                         let callback = (response) => {
                             if (response === "success") {
-                                setTimeout(window.location.replace("/pages/feed.php"), 1000);
+                                setTimeout(window.location.replace("feed.php"), 1000);
                             }
                         }
-                        sendRequest("/actions/logout.php", {}, callback);
+                        sendRequest("../actions/logout.php", {}, callback);
                     }
                 }
 
-                sendRequest("/actions/deleteUser.php", {}, callback);
+                sendRequest("../actions/deleteUser.php", {}, callback);
             }
 
             confirmation.style.display = "none";
@@ -972,7 +961,7 @@ let uploadPicture = (picture, name, callback) => {
     let formData = new FormData();
     formData.append("picture", picture, name);
 
-    request.open("post", "/actions/upload.php", true);
+    request.open("post", "../actions/upload.php", true);
     request.send(formData);
 
     request.addEventListener("load", () => callback(request.responseText));

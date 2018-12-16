@@ -24,7 +24,7 @@
             <input type="text" name="postTitle" placeholder="Enter Post Title" required>
             <div id="picture-preview-enclosure">
                 <label for="picture-preview">
-                    <img src="/img/posts/insertImage.png" class="newPost-picture">
+                    <img src="../img/posts/insertImage.png" class="newPost-picture">
                     <input id="picture-preview" type="file" name="picture" accept="image/*" required>
                 </label>
             </div>

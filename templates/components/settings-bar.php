@@ -6,7 +6,7 @@
         <h1>Profile settings</h1>
         <div>
             <label for="picture-preview">
-                <img src="/img/users/unknown.png" class="profile-picture">
+                <img src="../img/users/unknown.png" class="profile-picture">
                 <input id="picture-preview" type="file" name="picture" accept="image/*">
             </label>
         </div>

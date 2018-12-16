@@ -1,16 +1,13 @@
 <?php
     require_once("../includes/init.php");
     require_once($BASE_DIR."/database/post.php");
-    require_once($BASE_DIR."/database/comment.php");
 
-    $post = getPostById($_GET['id']);
+    include_once($BASE_DIR."/templates/common/header.php");
+
+    $post = getPostById($_GET["id"]);
 
     if ($post == NULL)
-        header("Location: /pages/error-404.php");
-
-    $comments = getCommentsByPost($_GET["id"]);
-    
-    include_once($BASE_DIR."/templates/common/header.php");
+        header("Location: error-404.php");
 ?>
 
 <?php if (!isLoggedIn()) include_once($BASE_DIR."/templates/components/sign-bar.php"); ?>

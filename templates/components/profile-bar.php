@@ -15,7 +15,7 @@
         <img class="profile-picture" src=
         <?php
             $image = glob($BASE_DIR."/img/users/".sha1($user["userID"]).".{png,jpeg,jpg,gif}", GLOB_BRACE);
-            echo (!empty($image) ? str_replace($BASE_DIR, "", $image[0]) : "/img/users/unknown.png");
+            echo (!empty($image) ? str_replace($BASE_DIR, "", "../".$image[0]) : "../img/users/unknown.png");
         ?>>
         <h1><?=$user["username"]?></h1>
     </section>

@@ -1,8 +1,18 @@
 <?php
-    include_once("../includes/init.php");
+    require_once("../includes/init.php");
 
-    session_destroy();
-    session_start();
+    if ($_SERVER["REQUEST_METHOD"] == "GET" && realpath(__FILE__) == realpath( $_SERVER["SCRIPT_FILENAME"] )) {
+        header("Location: ../pages/error-404.php");
+    }
 
-    echo "success";
+    if (isLoggedIn()) {
+        
+        session_destroy();
+        session_start();
+
+        echo "success";
+    }    
+    else {
+        echo "NOT SIGNED IN!";
+    }
 ?>

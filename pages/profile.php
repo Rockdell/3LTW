@@ -3,16 +3,15 @@
     require_once($BASE_DIR."/database/user.php");
     require_once($BASE_DIR."/database/post.php");
 
+    include_once($BASE_DIR."/templates/common/header.php");
+
     $user =  getUserById($_GET["user"]);
 
     if ($user == NULL)
-        header("Location: /pages/error-404.php");
+        header("Location: error-404.php");
 
     $posts = getPostByUser($_GET["user"]);
-    
     include_once($BASE_DIR."/actions/sortPosts.php");
-
-    include_once($BASE_DIR."/templates/common/header.php");
 ?>
 
 <?php 

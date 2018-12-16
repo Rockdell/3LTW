@@ -1,5 +1,5 @@
         <footer>
-            &copy; 2019 Redditter
+            &copy; 2018 Redditter
         </footer>
     </body>
 </html>

@@ -1,12 +1,11 @@
 <?php 
 	require_once("../includes/init.php");
 	require_once($BASE_DIR."/database/post.php");
-	require_once($BASE_DIR."/database/comment.php");
-
-	$posts = getAllPosts();
-	include_once($BASE_DIR."/actions/sortPosts.php");
 
 	include_once($BASE_DIR."/templates/common/header.php");
+
+    $posts = getAllPosts();
+	include_once($BASE_DIR."/actions/sortPosts.php");
 ?>
 
 <?php if (!isLoggedIn()) include_once($BASE_DIR."/templates/components/sign-bar.php"); ?>
@@ -16,12 +15,10 @@
 		include_once($BASE_DIR."/templates/components/search-bar.php");
 		include_once($BASE_DIR."/templates/components/list-posts.php");
 
-		if (isLoggedIn()) {
+		if (isLoggedIn())
 			include_once($BASE_DIR."/templates/components/newPost-bar.php");
-		}
-		else {
+		else
 			echo "<div class=\"free-space container\"></div>";
-		}
 	?>
 </div>
 
