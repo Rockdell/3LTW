@@ -157,30 +157,3 @@ WHEN (old.vote = 1)
 BEGIN
     UPDATE Comment SET points = points - 1 WHERE Comment.commentID = old.commentID;
 END;
-
--- Rockdell:vidal
-INSERT INTO User VALUES ('Rockdell', 'Pedro Pinho', '7c8045a66fcb89d3099f8faff3e8058d788982a2d3cb88db73b3aada9f32fd8c', 'xavi@gmail.com', 'This is bio');
--- kick0ut:ltwftw
-INSERT INTO User VALUES ('kick0ut', 'Miguel Teixeira', '657eaa9e4fc3cccb0cb352eba782f0ae6d7ea8c73688a44421c95c9c9533582e', 'miguel@gmail.com', 'Je suis très jolie');
-
-INSERT INTO Post VALUES (1, 'Rockdell', 'First Post!', 'Hello there, glad to be your first post! :D', strftime('%s', 'now'), 420);
-INSERT INTO Post VALUES (2, 'kick0ut', 'Second Post!', 'Oh Hi Mark, glad to be your second post! xD', '1517355738', 1);
-INSERT INTO Post VALUES (3, 'Rockdell', 'Third Post!', 'IDK This is supposed to be a realllllllllllllllllllllllllllllllllllllly big post ahahahahahahahahhahahahahahahhahahahahahahahha', '912469338', 999);
-
-INSERT INTO Comment VALUES (1, 'kick0ut', "This is a comment!", '1515351638', 3);
-INSERT INTO Comment VALUES (2, 'Rockdell', "Oh another one!", '1517355710', 100);
-INSERT INTO Comment VALUES (3, 'Rockdell', "Okie", '1517311738', 384);
-INSERT INTO Comment VALUES (4, 'kick0ut', "t1!", '1515351638', 123);
-INSERT INTO Comment VALUES (5, 'Rockdell', "t2!", '1517355710', 1200);
-INSERT INTO Comment VALUES (6, 'Rockdell', "t3!", '1517311738', 84);
-
-INSERT INTO PostComment VALUES (1,1);
-INSERT INTO PostComment VALUES (1,2);
-INSERT INTO PostComment VALUES (1,4);
-INSERT INTO PostComment VALUES (1,5);
-
-INSERT INTO PostComment VALUES (2,3);
-INSERT INTO PostComment VALUES (2,6);
-
-INSERT INTO ChildComment VALUES (2,4);
-INSERT INTO ChildComment VALUES (4,5);

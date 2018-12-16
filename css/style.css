@@ -552,6 +552,7 @@ footer {
 .comment #delete-comment {
 	grid-area: delete-comment;
 	margin-left: 1em;
+	margin-right: 0.5em;
 }
 
 .comment #reply-comment {
@@ -575,6 +576,7 @@ footer {
 .comment #comment-info {
 	grid-area: comment-info;
 	margin-top: 1em;
+	padding-right: 1em;
 }
 
 .comment #comment-info p[id="dp"] {
@@ -592,7 +594,7 @@ footer {
 
 .comment #sub-comments .comment {
 	margin-right: 0;
-	padding-right: 2px;
+	padding-right: 0;
 }
 
 /* 404 PAGE */
@@ -600,45 +602,12 @@ footer {
 #error-404-page {
 	color: var(--main-text-color);
 	position: absolute;
+	width: 15em;
+	text-align: center;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-
-#error-404-page i {
-	position: fixed;
-	font-size: 2em;
-	animation: fly 4s infinite;
-	left: -300%;
-	bottom: -800%;
-	color: crimson;
-}
-
-@keyframes fly {
-	0% {
-		color: crimson;
-		left: -300%;
-		bottom: -800%;
-	}
-	15% {
-		color: crimson;
-	}
-	30% {
-		color: gold;
-	}
-	50% {
-		color: darkgreen;
-	}
-	80% {
-		color: blue;
-	}
-	100% {
-		color: blue;
-		left: 500%;
-		bottom: 800%;
-	}
-}
-
 
 /* PICTURE MODAL */
 
@@ -658,14 +627,6 @@ footer {
 	max-width: 100%;
 	height: auto;
 }
-
-/* MINIATURE POST PICTURE */
-
-/* .miniature-post-picture {
-	height: 35px;
-	width: 35px;
-	vertical-align: middle;
-} */
 
 /* PROFILE PICTURE */
 
