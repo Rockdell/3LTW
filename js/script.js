@@ -151,11 +151,12 @@ if (maxWidth.matches) {
 // Comment colors
 document.querySelectorAll("#list-comments .comment").forEach((comment) => {
     comment.style.borderTop = "1px " + "#ffadad" + " solid";
+    comment.style.borderLeft = "2px " + "#ffadad" + " solid";
 })
 
 document.querySelectorAll("#list-comments #sub-comments .comment").forEach((comment) => {
-    comment.style.borderLeft = "2px " + "gray" + " solid";
     comment.style.borderTop = "1px " + "gray" + " solid";
+    comment.style.borderLeft = "2px " + "gray" + " solid";
 })
 
 // Sub comments depth
