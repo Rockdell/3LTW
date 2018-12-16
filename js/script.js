@@ -167,14 +167,24 @@ document.querySelectorAll(".comment").forEach((comment) => {
 
     while (element.id !== "list-comments") {
         element = element.parentElement;
-        
-        if (element.id === "sub-comments")
+
+        if (element.id === "sub-comments") {
             i++;
+        }
     }
 
     if (i > 5) {
-        let reply_btn =  comment.querySelector("#reply-comment");
-        if (reply_btn) reply_btn.style.display = "none";
+        comment.style.display = "none";
+    } else if (i == 5 && comment.querySelector(".comment") != null) {
+
+        let continueCommentsLink = document.createElement('a');
+        let continueCommentsLinkText = document.createTextNode("Continue thread...");
+        continueCommentsLink.setAttribute("id", "continue-comments");
+        continueCommentsLink.setAttribute('href', "/pages/post.php?id=" + document.querySelector(".post").getAttribute("data-id") + "&commentid=" + comment.getAttribute("data-commentid"));
+        continueCommentsLink.appendChild(continueCommentsLinkText);
+
+        // comment.querySelector("#comment-info").insertBefore(continueCommentsLink, comment.querySelector("#comment-info").querySelector("#commentByTimeAgo"));
+        comment.querySelector("#continueThread").appendChild(continueCommentsLink);
     }
 })
 

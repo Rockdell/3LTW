@@ -43,6 +43,9 @@
             <i id="reply-comment" class="material-icons">reply</i>
         <?php } ?>
 
+        <div id="continueThread">
+        </div>
+
         <div id="commentByTimeAgo">
             <p id="commentBy">
                 Posted by

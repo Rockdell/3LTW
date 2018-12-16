@@ -504,7 +504,7 @@ footer {
 	font-size: 0.8em;
 }
 
-.post #postBy, .comment #commentBy {
+.post #postBy, .comment #commentBy, .comment #continueThread {
 	display: inline;
 }
 
@@ -586,6 +586,15 @@ footer {
 	position: relative;
 	left: 0.1em;
 	bottom: 0.5em;
+}
+
+.comment #comment-info #continue-comments {
+	display: inline;
+	position: relative;
+	font-size: 0.8em;
+	left: 0.3em;
+	bottom: 0.5em;
+	text-decoration: underline;
 }
 
 .comment #sub-comments {
@@ -962,6 +971,10 @@ button {
 
 	.post #postByTimeAgo, .comment #commentByTimeAgo {
 		float: initial;
+	}
+
+	.comment #continueThread {
+		display: block;
 	}
 
 	#post-page .post {
