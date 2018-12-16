@@ -231,7 +231,7 @@ footer {
 	color: var(--alt-text-color);
 	background: var(--warning-bg-color);
 	box-shadow: var(--selected-box-shadow);
-	position: absolute;
+	position: fixed;
 	width: 55%;
 	margin: 0em;
 	z-index: 4;
@@ -434,6 +434,10 @@ footer {
 	color: var(--main-text-color);
 }
 
+.comment #comment-content {
+	word-break: break-word;
+}
+
 .post #post-info input, .comment #comment-info input {
 	margin: 0;
 	padding: 0;
@@ -477,7 +481,20 @@ footer {
 	left: 1em;
 }
 
-.post #nrCommentsLink {
+.post #reply-post {
+	left: 1.3em;
+	bottom: 0.1em;
+}
+
+#list-posts .post #reply-post {
+	display: none;
+}
+
+#post-page .post #replay-post {
+	display: inline;
+}
+
+.post #nrCommentsLink, .post #reply-post {
 	position: relative;
 }
 
@@ -545,7 +562,7 @@ footer {
 	color: crimson;
 }
 
-.comment #reply-comment:hover {
+.comment #reply-comment:hover, .post #reply-post:hover {
 	filter: contrast(50%);
 }
 

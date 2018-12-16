@@ -56,6 +56,10 @@
             <i class="material-icons">textsms</i>
         </a>
 
+        <?php if (isLoggedIn()) { ?>
+            <i id="reply-post" class="material-icons">reply</i>
+        <?php } ?>
+
         <div id="postByTimeAgo">
             <p id="postBy">
                 Posted by

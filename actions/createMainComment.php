@@ -9,7 +9,7 @@
         } else {
             if (strlen($_POST["content"]) > 300)
                 echo "Keep it short, will ya?";
-            else if (bindCommentToComment($_POST["postID"], $_SESSION["userID"], htmlspecialchars($_POST["content"]), $_POST["fatherCommentID"]))
+            else if (bindCommentToPost($_POST["postID"], $_SESSION["userID"], htmlspecialchars($_POST["content"])))
                 echo "success";
             else
                 echo "failure";

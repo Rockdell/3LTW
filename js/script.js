@@ -653,13 +653,28 @@ if (deletePost) {
 
 let commentBar = document.querySelector("#newcomment-bar");
 
+// Replay Post
+
+document.querySelectorAll("#reply-post").forEach((reply_btn) => {
+
+    reply_btn.onclick = (e) => {
+        e.preventDefault();
+
+        commentBar.setAttribute("data-fathercommentid", -1);
+        commentBar.style.display = "block";
+        commentBar.classList.add("pop");
+        document.querySelector("#dim-mask").classList.add("dim");
+    }
+});
+
+
 // Reply comment
 
 document.querySelectorAll("#reply-comment").forEach((reply_btn) => {
 
     reply_btn.onclick = (e) => {
         e.preventDefault();
-        
+
         commentBar.setAttribute("data-fathercommentid", reply_btn.closest("article").getAttribute("data-commentid"));
         commentBar.style.display = "block";
         commentBar.classList.add("pop");
@@ -686,6 +701,7 @@ if (commentBar) {
 
         let comment = commentBar.querySelector("textarea");
         let button = commentBar.querySelector("button");
+        button.disabled = true;
 
         let data = {
             postID: document.querySelector(".post").getAttribute("data-id"),
@@ -702,8 +718,10 @@ if (commentBar) {
             }
         }
 
-        button.disabled = true;
-        sendRequest("/actions/createComment.php", data, callback);
+        if (commentBar.getAttribute("data-fathercommentid") == -1)
+            sendRequest("/actions/createMainComment.php", data, callback);
+        else
+            sendRequest("/actions/createComment.php", data, callback);
         button.disabled = false;
     }
 }
