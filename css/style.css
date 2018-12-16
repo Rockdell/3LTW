@@ -590,6 +590,11 @@ footer {
 	grid-area: sub-comments;
 }
 
+.comment #sub-comments .comment {
+	margin-right: 0;
+	padding-right: 2px;
+}
+
 /* 404 PAGE */
 
 #error-404-page {
@@ -711,7 +716,7 @@ textarea[name=postContent] {
 }
 
 textarea[name=commentContent] {
-	width: 25em;
+	width: 22em;
 	height: 10em;
 }
 

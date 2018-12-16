@@ -170,6 +170,24 @@ document.querySelectorAll("#list-comments #sub-comments .comment").forEach((comm
     // if (colorIndex >= colors.length) colorIndex = 0;
 })
 
+// Sub comments depth
+
+document.querySelectorAll(".comment").forEach((comment) => {
+
+    let element = comment;
+    let i = 0;
+
+    while (element.id !== "list-comments") {
+        element = element.parentElement;
+        
+        if (element.id === "sub-comments")
+            i++;
+    }
+
+    if (i > 5)
+        comment.querySelector("#reply-comment").style.display = "none";
+})
+
 
 // Handle click
 window.onclick = (e) => {
