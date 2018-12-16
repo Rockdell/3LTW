@@ -1,4 +1,5 @@
 PRAGMA foreign_keys = ON;
+PRAGMA recursive_triggers = ON;
 .mode columns
 .headers on
 .nullvalue NULL
@@ -54,10 +55,23 @@ CREATE TABLE ChildComment (
     PRIMARY KEY (commentFather, commentSon)
 );
 
+CREATE TRIGGER deletePostsComment
+AFTER DELETE on Post
+BEGIN
+    DELETE FROM PostComment WHERE postID = old.postID;
+END;
+
 CREATE TRIGGER deleteUnusedComment
 AFTER DELETE ON PostComment
+FOR EACH ROW
 BEGIN
     DELETE FROM Comment WHERE commentID = old.commentID;
+END;
+
+CREATE TRIGGER deleteCommentChildren
+BEFORE DELETE on Comment
+BEGIN
+    DELETE FROM Comment WHERE commentID IN (SELECT commentSon FROM ChildComment WHERE commentFather = old.commentID);
 END;
 
 -- For easy insertion of votes

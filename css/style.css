@@ -605,6 +605,41 @@ footer {
 	transform: translate(-50%, -50%);
 }
 
+#error-404-page i {
+	position: fixed;
+	font-size: 2em;
+	animation: fly 4s infinite;
+	left: -300%;
+	bottom: -800%;
+	color: crimson;
+}
+
+@keyframes fly {
+	0% {
+		color: crimson;
+		left: -300%;
+		bottom: -800%;
+	}
+	15% {
+		color: crimson;
+	}
+	30% {
+		color: gold;
+	}
+	50% {
+		color: darkgreen;
+	}
+	80% {
+		color: blue;
+	}
+	100% {
+		color: blue;
+		left: 500%;
+		bottom: 800%;
+	}
+}
+
+
 /* PICTURE MODAL */
 
 #picture-modal #popup-picture {
