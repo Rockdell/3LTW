@@ -9,7 +9,7 @@
 	--alt2-container-bg-color: #ffadad;
 
 	--radio-color: #aaaaaa;
-	--radio-selected-color: #0dff92;
+	--radio-selected-color: #ffadad;
 	--radio-hover-color: white;
 
 	--warning-bg-color: #ff6262;
@@ -302,8 +302,7 @@ footer {
 }
   
 #search-bar input[type=radio]:checked ~ label{
-	/* color: var(--radio-selected-color); */
-	color: var(--alt2-container-bg-color);
+	color: var(--radio-selected-color);
 }
 
 /* NEW POST BAR */

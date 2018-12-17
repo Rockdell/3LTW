@@ -41,7 +41,7 @@
         
             // Valid bio
             if (strlen($_POST["bio"]) > 60) {
-                echo "Bio is not valid!";
+                echo "Bio is not valid, 60 words or less mate!";
                 return;
             }
 

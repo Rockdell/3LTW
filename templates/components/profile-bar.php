@@ -24,7 +24,7 @@
         <?php if (strcmp($user["bio"], "")) { ?>
             <p><?=nl2br($user["bio"])?></p>
         <?php } else { ?>
-            <p>Nothing to show</p>
+            <p>I have no bio yet! But just so you know... I'm awesome.</p>
         <?php } ?>
     </section>
 
