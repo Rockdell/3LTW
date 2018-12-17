@@ -1,8 +1,3 @@
-<?php
-    require_once($BASE_DIR."/database/comment.php");
-    $comments = getCommentsByPost($_GET["id"]);
-?>
-
 <section id="list-comments">
     <?php
 

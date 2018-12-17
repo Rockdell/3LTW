@@ -1,6 +1,7 @@
 <?php
     require_once("../includes/init.php");
     require_once($BASE_DIR."/database/post.php");
+    require_once($BASE_DIR."/database/comment.php");
 
     include_once($BASE_DIR."/templates/common/header.php");
 
