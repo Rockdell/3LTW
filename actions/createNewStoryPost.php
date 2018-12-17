@@ -7,6 +7,11 @@
         return;
     }
 
+    if ($_POST["csfr"] != $_SESSION["csfr"]) {
+        header("Location: ../pages/error-404.php");
+        return;
+    }
+
     if(isLoggedIn()) {
         
         if ($_POST["title"] === null || strlen(trim($_POST["title"])) === 0 || $_POST["content"] === null || strlen(trim($_POST["content"])) == 0)

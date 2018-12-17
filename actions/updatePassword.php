@@ -6,6 +6,11 @@
         header("Location: ../pages/error-404.php");
         return;
     }
+
+    if ($_POST["csfr"] != $_SESSION["csfr"]) {
+        header("Location: ../pages/error-404.php");
+        return;
+    }
     
     if(isLoggedIn()) {
         if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/", $_POST["password"])) {

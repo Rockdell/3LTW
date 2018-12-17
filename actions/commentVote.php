@@ -8,6 +8,11 @@
         return;
     }
 
+    if ($_POST["csfr"] != $_SESSION["csfr"]) {
+        header("Location: ../pages/error-404.php");
+        return;
+    }
+
     if(isLoggedIn()) {
 
         if($_POST["action"] == "add") {

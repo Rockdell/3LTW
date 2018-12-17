@@ -7,6 +7,11 @@
         return;
     }
 
+    if ($_POST["csfr"] != $_SESSION["csfr"]) {
+        header("Location: ../pages/error-404.php");
+        return;
+    }
+
     if (isLoggedIn()) {
             
         if ($_POST["content"] == null || strlen(trim($_POST["content"])) === 0) {
@@ -15,7 +20,7 @@
         else {
             if (strlen($_POST["content"]) > 280)
                 echo "Keep it short, will ya?";
-            else if (bindCommentToPost($_POST["postID"], $_SESSION["userID"], htmlspecialchars($_POST["content"])))
+            else if (bindCommentToPost($_POST["postID"], $_SESSION["userID"], htmlspecialchars($_POST["content"], ENT_QUOTES)))
                 echo "success";
             else
                 echo "failure";

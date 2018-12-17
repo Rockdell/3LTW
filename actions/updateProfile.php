@@ -7,6 +7,11 @@
         return;
     }
 
+    if ($_POST["csfr"] != $_SESSION["csfr"]) {
+        header("Location: ../pages/error-404.php");
+        return;
+    }
+
     if(isLoggedIn()) {
         $user = getUserById($_SESSION["userID"]);
 
@@ -23,7 +28,7 @@
                 return;
             }
     
-            $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
+            $username = $_POST["username"];
         }
 
         if ($_POST["mail"] !== "") {
@@ -45,10 +50,10 @@
                 return;
             }
 
-            $bio = htmlspecialchars($_POST["bio"], ENT_QUOTES);
+            $bio = $_POST["bio"];
         }
 
-        if (updateUserInfo($_SESSION["userID"], $username, $mail, $bio))
+        if (updateUserInfo($_SESSION["userID"], htmlspecialchars($username, ENT_QUOTES), $mail, htmlspecialchars($bio, ENT_QUOTES)))
             echo "success";
         else
             echo "Failed to update profile!";

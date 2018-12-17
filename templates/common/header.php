@@ -12,6 +12,7 @@
         <script src="../js/script.js" defer></script>
     </head>
     <body>
+        <div type="hidden" id="csfr" value="<?=$_SESSION["csfr"]?>"><div>
         <div id="dim-mask"></div>
         <header>
             <i id="search-btn" class="open-btn icon1 fas fa-search mobile"></i>

@@ -1,3 +1,5 @@
+let csfr = document.querySelector("#csfr").getAttribute("value");
+
 let postUpvotes = document.querySelectorAll('#post-info input[id="upvote"]');
 let postDownvotes = document.querySelectorAll('#post-info input[id="downvote"]');
 
@@ -96,7 +98,8 @@ let postVote = (action, postID, value) => {
     let data = {
         action: action,
         postID: postID,
-        value: value
+        value: value,
+        csfr: csfr
     }
 
     let callback = (response) => {
@@ -114,7 +117,8 @@ let commentVote = (action, commentID, value) => {
     let data = {
         action: action,
         commentID: commentID,
-        value: value
+        value: value,
+        csfr: csfr
     }
 
     let callback = (response) => {
@@ -429,7 +433,8 @@ if (loginForm) {
 
         let data = {
             userID: userID,
-            password: password
+            password: password,
+            csfr: csfr
         }
 
         let callback = (response) => {
@@ -464,7 +469,7 @@ logoutButtons.forEach((logoutButton) => {
                 setTimeout(window.location.replace("feed.php"), 1000);
         }
 
-        sendRequest("../actions/logout.php", {}, callback);
+        sendRequest("../actions/logout.php", { csfr: csfr }, callback);
     }
 });
 
@@ -502,7 +507,8 @@ if (registerForm) {
             username: username,
             mail: mail,
             password: password,
-            chkpassword: chkpassword
+            chkpassword: chkpassword,
+            csfr: csfr
         }
 
         let callback = (response) => {
@@ -569,7 +575,8 @@ if (createNewStoryPost) {
 
         let data = {
             title: title.value,
-            content: content.value
+            content: content.value,
+            csfr: csfr
         }
 
         let callback = (response) => {
@@ -614,7 +621,8 @@ if (createNewImagePost) {
 
         let data = {
             title: title.value,
-            content: ""
+            content: "",
+            csfr: csfr
         }
 
         let callback = (response) => {
@@ -633,7 +641,10 @@ if (createNewImagePost) {
                         errorInput(title);
                         warnUser(response);
 
-                        let dataDelete = { postID: newPostID }
+                        let dataDelete = { 
+                            postID: newPostID,
+                            csfr: csfr
+                         }
 
                         let callback_receive_upload = (response) => {
                             if (response === "failure" || response === "NOT SIGNED IN!") {
@@ -723,7 +734,8 @@ if (commentBar) {
         let data = {
             postID: document.querySelector(".post").getAttribute("data-id"),
             content: comment.value,
-            fatherCommentID: commentBar.getAttribute("data-fathercommentid")
+            fatherCommentID: commentBar.getAttribute("data-fathercommentid"),
+            csfr: csfr
         }
 
         let callback = (response) => {
@@ -785,7 +797,8 @@ if (updateProfile) {
         let data = {
             username: username,
             mail: mail,
-            bio: bio
+            bio: bio,
+            csfr: csfr
         }
 
         let callback = (response) => {
@@ -837,7 +850,8 @@ if (updatePassword) {
 
         let data = {
             password: password,
-            chkpassword: chkpassword
+            chkpassword: chkpassword,
+            csfr: csfr
         }
 
         let callback = (response) => {
@@ -878,7 +892,10 @@ let deleteConfirmation = (component, postID, commentID) => {
 
             if (component === "post") {
 
-                let data = { postID: postID }
+                let data = { 
+                    postID: postID,
+                    csfr: csfr
+                }
 
                 let callback = (response) => {
                     if (response === "failure" || response === "NOT SIGNED IN!")
@@ -890,7 +907,10 @@ let deleteConfirmation = (component, postID, commentID) => {
 
             } else if (component === "comment") {
 
-                let data = { commentID: commentID }
+                let data = { 
+                    commentID: commentID,
+                    csfr: csfr 
+                }
 
                 let callback = (response) => {
                     if (response === "failure" || response === "NOT SIGNED IN!")
@@ -913,11 +933,11 @@ let deleteConfirmation = (component, postID, commentID) => {
                                 setTimeout(window.location.replace("feed.php"), 1000);
                             }
                         }
-                        sendRequest("../actions/logout.php", {}, callback);
+                        sendRequest("../actions/logout.php", { csfr: csfr }, callback);
                     }
                 }
 
-                sendRequest("../actions/deleteUser.php", {}, callback);
+                sendRequest("../actions/deleteUser.php", { csfr: csfr }, callback);
             }
 
             confirmation.style.display = "none";

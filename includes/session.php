@@ -1,8 +1,9 @@
 <?php
-
-    // session_set_cookie_params(0, "/", "", true, true);
     session_start();
     session_regenerate_id(true);
+
+    if (!isset($_SESSION["csfr"]))
+        $_SESSION["csfr"] = bin2hex(openssl_random_pseudo_bytes(32));
 
     function isLoggedIn() {
         if (isset($_SESSION["userID"]) && $_SESSION["userID"] !== "")
