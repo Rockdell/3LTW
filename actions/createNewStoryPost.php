@@ -14,8 +14,8 @@
         else {
             if (strlen($_POST["title"]) > 60)
                 echo "Title too long! We give you a budget of 60 words.";
-            else if (strlen($_POST["content"]) > 280)
-                echo "Content too long! Try less than 281 words.";
+            else if (strlen($_POST["content"]) > 500)
+                echo "Content too long! Try less than 501 words.";
             else if (($newPostID = addPost($_SESSION["userID"], htmlspecialchars($_POST["title"], ENT_QUOTES), htmlspecialchars($_POST["content"], ENT_QUOTES))) != -1)
                 echo $newPostID;
             else

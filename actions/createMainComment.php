@@ -13,7 +13,7 @@
             echo "Funny guy...";
         } 
         else {
-            if (strlen($_POST["content"]) > 120)
+            if (strlen($_POST["content"]) > 280)
                 echo "Keep it short, will ya?";
             else if (bindCommentToPost($_POST["postID"], $_SESSION["userID"], htmlspecialchars($_POST["content"])))
                 echo "success";

@@ -604,6 +604,7 @@ footer {
 
 .comment #sub-comments .comment {
 	margin-right: 0;
+	margin-left: 0;
 	padding-right: 0;
 }
 
@@ -722,7 +723,7 @@ textarea[name=postContent] {
 }
 
 textarea[name=commentContent] {
-	width: 22em;
+	width: 80%;
 	height: 10em;
 }
 

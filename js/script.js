@@ -149,6 +149,7 @@ if (maxWidth.matches) {
 }
 
 // Comment colors
+
 document.querySelectorAll("#list-comments .comment").forEach((comment) => {
     comment.style.borderTop = "1px " + "#ffadad" + " solid";
     comment.style.borderLeft = "2px " + "#ffadad" + " solid";
@@ -160,6 +161,7 @@ document.querySelectorAll("#list-comments #sub-comments .comment").forEach((comm
 })
 
 // Sub comments depth
+
 document.querySelectorAll(".comment").forEach((comment) => {
 
     let element = comment;
@@ -168,9 +170,7 @@ document.querySelectorAll(".comment").forEach((comment) => {
     while (element.id !== "list-comments") {
         element = element.parentElement;
 
-        if (element.id === "sub-comments") {
-            i++;
-        }
+        if (element.id === "sub-comments") i++;
     }
 
     if (i > 5) {
@@ -180,16 +180,15 @@ document.querySelectorAll(".comment").forEach((comment) => {
         let continueCommentsLink = document.createElement('a');
         let continueCommentsLinkText = document.createTextNode("Continue thread...");
         continueCommentsLink.setAttribute("id", "continue-comments");
-        continueCommentsLink.setAttribute('href', "/pages/post.php?id=" + document.querySelector(".post").getAttribute("data-id") + "&commentid=" + comment.getAttribute("data-commentid"));
+        continueCommentsLink.setAttribute('href', "../pages/post.php?id=" + document.querySelector(".post").getAttribute("data-id") + "&commentid=" + comment.getAttribute("data-commentid"));
         continueCommentsLink.appendChild(continueCommentsLinkText);
 
-        // comment.querySelector("#comment-info").insertBefore(continueCommentsLink, comment.querySelector("#comment-info").querySelector("#commentByTimeAgo"));
         comment.querySelector("#continueThread").appendChild(continueCommentsLink);
     }
 })
 
-
 // Handle click
+
 window.onclick = (e) => {
     if (e.target.id == "dim-mask") {
         document.querySelectorAll(".modal").forEach((modal) => {
@@ -207,6 +206,7 @@ window.onclick = (e) => {
 }
 
 // Open buttons
+
 document.querySelectorAll(".open-btn").forEach((openButton) => {
     openButton.onclick = (e) => {
         e.preventDefault();
@@ -249,6 +249,7 @@ document.querySelectorAll(".open-btn").forEach((openButton) => {
 });
 
 // Switch buttons
+
 document.querySelectorAll(".switch-btn").forEach((switchButton) => {
     switchButton.onclick = (e) => {
         e.preventDefault();
@@ -641,7 +642,6 @@ if (createNewImagePost) {
                         }
                         sendRequest("../actions/deletePost.php", dataDelete, callback_receive_upload);
                     }
-
                 }
 
                 if (picture.files.length > 0) {
@@ -684,7 +684,6 @@ document.querySelectorAll("#reply-post").forEach((reply_btn) => {
         document.querySelector("#dim-mask").classList.add("dim");
     }
 });
-
 
 // Reply comment
 
@@ -933,6 +932,7 @@ let deleteConfirmation = (component, postID, commentID) => {
 }
 
 // Warning
+
 let warnUser = (message) => {
 
     let warning = document.querySelector("#warning");
@@ -951,6 +951,7 @@ let warnUser = (message) => {
 }
 
 // Error
+
 let errorInput = (element) => {
 
     element.value = "";
@@ -965,6 +966,7 @@ let errorInput = (element) => {
 }
 
 // Upload
+
 let uploadPicture = (picture, name, callback) => {
 
     let request = new XMLHttpRequest();
@@ -979,6 +981,7 @@ let uploadPicture = (picture, name, callback) => {
 }
 
 // Request
+
 let sendRequest = (url, data, callback) => {
 
     let request = new XMLHttpRequest();
@@ -990,6 +993,7 @@ let sendRequest = (url, data, callback) => {
 }
 
 // Encode
+
 let encodeForAjax = (data) => {
     return Object.keys(data).map(function(k) {
         return encodeURIComponent(k) + "=" + encodeURIComponent(data[k])
