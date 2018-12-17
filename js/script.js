@@ -973,8 +973,6 @@ let warnUser = (message) => {
 // Error
 
 let errorInput = (element) => {
-
-    element.value = "";
     
     if (!element.classList.contains("shake-pulse")) {
         element.classList.add("shake-pulse");
