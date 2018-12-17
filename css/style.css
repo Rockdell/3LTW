@@ -80,6 +80,7 @@ footer {
 	color: var(--alt-text-color);
 	background: var(--alt1-container-bg-color);
 	text-align: center;
+	z-index: 5;
 }
 
 /* DIM MASK */

@@ -3,6 +3,7 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && realpath(__FILE__) == realpath( $_SERVER["SCRIPT_FILENAME"] )) {
         header("Location: ../pages/error-404.php");
+        return;
     }
 
     $args = explode(".", $_FILES["picture"]["name"], 3);
@@ -16,7 +17,7 @@
     $target_file = $file_path.".".$args[2];
 
     // Check if it's valid
-    if ($_FILES["picture"]["tmp_name"] == null || !preg_match("/(png|jpeg|jpg|gif)/", $args[2]) || !preg_match("/image\/".$args[2]."/", mime_content_type($_FILES["picture"]["tmp_name"]))) {
+    if ($_FILES["picture"]["tmp_name"] == null || !preg_match("/(png|jpeg|jpg|gif)/", $args[2]) || !preg_match("/image\/(png|jpeg|jpg|gif)/", mime_content_type($_FILES["picture"]["tmp_name"]))) {
         echo "Image is not valid.";
         return;
     }
