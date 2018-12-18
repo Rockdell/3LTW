@@ -1,6 +1,7 @@
 <?php
     require_once("../includes/init.php");
     require_once($BASE_DIR."/database/user.php");
+    require_once($BASE_DIR."/database/post.php");
 
     if ($_SERVER["REQUEST_METHOD"] == "GET" && realpath(__FILE__) == realpath( $_SERVER["SCRIPT_FILENAME"] )) {
         header("Location: ../pages/error-404.php");
@@ -20,6 +21,12 @@
 
         if (!empty($image))
             unlink($image[0]);
+
+        //Delete all images from user posts
+        foreach(getPostByUser($_SESSION["userID"]) as $post) {
+            if ($post["content"] === "")
+                unlink(glob($BASE_DIR."/img/posts/".sha1($post["postID"]).".{png,jpeg,jpg,gif}", GLOB_BRACE)[0]);
+        }
 
         if (removeUser($userID)) {
             unlink($BASE_DIR."/img/users/".$userID.".png");
