@@ -1,5 +1,5 @@
 # 3LTW
-A discussion website where users can post stories.   
+**A discussion website where users can post stories.**   
 Project for the Web Languages and Technologies (LTW) class of the Master in Informatics and Computer Engineering (MIEIC) at the Faculty of Engineering of the University of Porto (FEUP).
 
 ## Work done by:
