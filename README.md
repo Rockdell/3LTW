@@ -5,7 +5,6 @@ Project for the Web Languages and Technologies (LTW) class of the Master in Info
 ## Work done by:
 - Miguel Teixeira ([@miguelalexbt](https://github.com/miguelalexbt))
 - Pedro Pinho ([@Rockdell](https://github.com/Rockdell))
-- André Lázaro ([@Andre12Lazaro](https://github.com/Andre12Lazaro))
 
 ## Snapshots
 ### Main Page Logged Out
